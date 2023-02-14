@@ -1,30 +1,28 @@
-import Navbar from './components/Navbar/Navbar';
-import Sidebar from './components/Sidebar/Sidebar';
+import Navbar from "./components/Navbar/Navbar";
+import Sidebar from "./components/Sidebar/Sidebar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Widget from './pages/Widget/Widget';
+import Widget from "./pages/Widget/Widget";
 
-import Profile from './pages/Profile/Profile';
-
-// import logo from './logo.svg';
-// import './App.css';
+import Profile from "./pages/Profile/Profile";
+import Dashboard from "./pages/Dashboard/Dashboard"
 
 function App() {
-  return (  <BrowserRouter>
-    <div className="flex max-w-[100%]  ">
-    <Sidebar/>
-    {/* <Navbar/> */}
-    <div className="min-w-[85%] ">
-      <Navbar/>
-      {/* home container */}
-    
-      <Routes >
-            <Route path = "/widget" element = {<Widget/>}/> 
-            <Route path = "/admin" element = {<Profile/>}/> 
+  return (
+    <BrowserRouter>
+      <div className="flex max-w-[100%]  ">
+        <Sidebar />
+        {/* <Navbar/> */}
+        <div className="min-w-[85%] ">
+          <Navbar />
+          {/* home container */}
 
-            </Routes>
-
-    </div>
-    </div>
+          <Routes>
+          <Route path="/" element={<Dashboard />} />
+            <Route path="/widget" element={<Widget />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </div>
+      </div>
     </BrowserRouter>
   );
 }

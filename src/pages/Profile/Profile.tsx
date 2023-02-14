@@ -5,7 +5,8 @@ import Widget from '../Widget/Widget'
 const Profile = () => {
   return (
     <div>
-      <Widget id='fef' count={3} />
+      {/* <Widget id='fef' count={3} /> */}
+      <p>your profile</p>
     </div>
   )
 }
