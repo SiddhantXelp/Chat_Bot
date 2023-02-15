@@ -159,31 +159,31 @@ const Widget = () => {
             <div className="border border-slate-200 " >
 
                 <div className="pl-[30px] mt-4 border py-4 border-slate-200">
-                    <h1 className="text-[30px] font-semi-bold">Chat Widget</h1>
+                    <h1 className="text-[28px] font-semi-bold">Chat Widget</h1>
                 </div>
 
-                <div className='flex gap-[200px] min-h-[300px]'>
-                    <div className="flex flex-col  w-[930px]">
+                <div className='flex  gap-6 min-h-[300px]'>
+                    <div className="flex flex-col   min-w-[770px]">
 
-                    <div onClick={() => setSettingVisible(!settingVisible)} className=" flex items-center justify-between py-9 border max-w-[900px] ml-6 border-slate-200 px-4 mt-5 ">
+                    <div onClick={() => setSettingVisible(!settingVisible)} className=" flex items-center justify-between py-[22px] border max-w-[710px] ml-6 border-slate-200 px-4 mt-5 ">
                         <div className="flex items-center">
                             <i className="fa-solid fa-sliders text-[#7451f8] text-[30px]"></i>
-                            <h1 className="text-[21px] font-semibold ml-6  ">General Settings</h1>
+                            <h1 className="text-[19px] font-semibold ml-6  ">General Settings</h1>
                         </div>
                         <i onClick={() => setSettingVisible(!settingVisible)} className="fa-solid fa-angle-right  text-[20px]"></i>
 
 
 
                     </div>
-                    {settingVisible ? <div className="max-w-[900px] h-[600px] ml-6 border border-slate-200 mb-6">
+                    {settingVisible ? <div className="max-w-[710px] h-[480px] ml-6 border border-slate-200 mb-6">
                         <div className="pl-4 pr-4  mt-3">
                             <h3 className="text-[20px]">Bot Name</h3>
-                            <input type="text" value={botName} onChange={(e) => setBotName(e.target.value)} className="min-w-[800px] mt-2 py-[8px] border rounded-[6px] border-zinc-300" />
+                            <input type="text" value={botName} onChange={(e) => setBotName(e.target.value)} className="min-w-[680px] mt-2 py-[8px] border rounded-[6px] border-zinc-300" />
                         </div>
 
                         <div className="pl-4 mt-3">
                             <h3 className="">Description</h3>
-                            <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="min-w-[800px] mt-2 py-[8px] border rounded-[6px] border-zinc-300" />
+                            <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="min-w-[680px] mt-2 py-[8px] border rounded-[6px] border-zinc-300" />
                         </div>
 
                         <div className="pl-4 mt-3">
@@ -191,18 +191,18 @@ const Widget = () => {
                         </div>
                     </div> : null}
 
-                    <div onClick={() => setVisible(!visible)} className=" flex items-center justify-between py-9 border max-w-[900px] ml-6 border-slate-200 px-4 mt-5 ">
+                    <div onClick={() => setVisible(!visible)} className=" flex items-center justify-between py-[22px] border max-w-[710px] ml-6 border-slate-200 px-4 mt-5 ">
                         <div className="flex items-center">
                             <i className="fa-sharp fa-solid fa-pencil text-[#7451f8] text-[30px]"></i>
-                            <h1 className="text-[21px] font-semibold ml-6  ">Appearance</h1>
+                            <h1 className="text-[19px] font-semibold ml-6  ">Appearance</h1>
                         </div>
                         <i className="fa-solid fa-angle-right text-[20px]"></i>
 
 
 
                     </div>
-                    {visible ? <div className="max-w-[900px] h-[990px] ml-6 border border-slate-200 mb-6">
-                        <h1 className="text-[24px] text-[#9ba6b3] pl-4 my-3">MINIMIZED WIDGET</h1>
+                    {visible ? <div className="max-w-[710px] h-[990px] ml-6 border border-slate-200 mb-6">
+                        <h1 className="text-[21px] text-[#9ba6b3] pl-4 my-3">MINIMIZED WIDGET</h1>
                         <div className="flex  items-center  gap-8">
 
                             <div className="pl-4 pr-4  mt-3 " >
@@ -264,7 +264,7 @@ const Widget = () => {
                             </div>
                         </div>
 
-                        <h1 className="text-[24px] text-[#9ba6b3] pl-4 mt-11">WELCOME SCREEN</h1>
+                        <h1 className="text-[21px] text-[#9ba6b3] pl-4 mt-11">WELCOME SCREEN</h1>
 
                         <div className="flex  items-center  gap-8">
 
@@ -422,7 +422,7 @@ const Widget = () => {
 
                         {/* Third */}
 
-                        <h1 className="text-[24px] text-[#9ba6b3] pl-4 mt-11 ">CHAT SCREEN</h1>
+                        <h1 className="text-[21px] text-[#9ba6b3] pl-4 mt-11 ">CHAT SCREEN</h1>
                         <div className="flex  items-center  gap-8">
 
                             <div className="pl-4 pr-4  mt-3 " >

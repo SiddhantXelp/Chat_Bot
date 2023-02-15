@@ -8,27 +8,27 @@ import 'react-tabs/style/react-tabs.css';
 const Preview = ({botName,description,chatHeaderBackground,headerBackground}) => {
     return (
         <>
-            <div>
-                <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-[15px]  text-center overflow-hidden"></div>
+            <div className=" w-[480px] ">
+                <div className="  h-48 lg:h-auto lg:w-48  flex-none bg-cover rounded-t lg:rounded-[15px]  text-center overflow-hidden"></div>
 
                 <Tabs>
                     <TabList>
-                        <Tab>Minimized</Tab>
-                        <Tab>welcome</Tab>
-                        <Tab>Chat</Tab>
+                        <Tab>Minimized Screen</Tab>
+                        <Tab>Welcome Screen</Tab>
+                        <Tab>Chat Screen</Tab>
                     </TabList>
                     <TabPanel>
-                        <div >
+                        <div className=" min-h-[480px] p-3 flex justify-end items-end" >
                             <img
-                                className="inline-block h-12 w-12 rounded-full  bg-indigo-500"
+                                className=" h-12 w-12 rounded-full absolute  bg-indigo-500"
                                 src="{user.avatarUrl}"
                                 alt="bot"
                             />
                         </div>
                     </TabPanel>
                     <TabPanel>
-                        <div className="max-w-sm w-full flex items-center justify-center   lg:max-w-full lg:flex    h-[540px]">
-                              <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-[15px]  text-center overflow-hidden"></div>  
+                        <div className="max-w-sm w-full flex items-center justify-center    lg:max-w-full lg:flex    h-[500px]">
+                     
                             <div className=" w-[350px] border-r border-b border-l border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white rounded-[15px] lg:rounded-[15px] leading-normal overflow-hidden">
                                 <div style={{backgroundColor:headerBackground}} className=" text-gray-900 font-bold text-xl   w-auto  h-[190px] bottom-0 ">
                                     <div className="pt-[160px] pl-10">
@@ -60,9 +60,9 @@ const Preview = ({botName,description,chatHeaderBackground,headerBackground}) =>
                         </div>
                     </TabPanel>
                     <TabPanel>
-                        <div className="max-w-sm w-full  lg:max-w-full lg:flex mt-[30px] mr-[30px] h-[540px]">
-                            <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-[15px]  text-center overflow-hidden"></div>
-                            <div className=" w-[350px] border-r border-b border-l border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white rounded-[15px] lg:rounded-[15px] leading-normal overflow-hidden">
+                        <div className="max-w-sm w-full flex items-center justify-center lg:max-w-full lg:flex h-[500px]">
+                            
+                            <div className=" w-[350px] max-h-[480px] border-r border-b border-l border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white rounded-[15px] lg:rounded-[15px] leading-normal overflow-hidden">
                                 <div style={{backgroundColor:chatHeaderBackground}} className="flex ">
                                     <div className="flex items-center m-[15px] ">
                                         <img
@@ -89,7 +89,7 @@ const Preview = ({botName,description,chatHeaderBackground,headerBackground}) =>
                                     </span>
                                 </div>
 
-                                <div className="flex pt-[320px]">
+                                <div className="flex pt-[300px] ">
                                     <div className=" ">
                                         <input
                                             type="text"
