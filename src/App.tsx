@@ -19,7 +19,7 @@ function App() {
     
       <Routes >
             <Route path = "/widget" element = {<Widget/>}/> 
-            <Route path = "/admin" element = {<Profile/>}/> 
+            <Route path = "/profile" element = {<Profile/>}/> 
 
             </Routes>
 

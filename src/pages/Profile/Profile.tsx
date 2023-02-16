@@ -4,8 +4,8 @@ import Widget from '../Widget/Widget'
 
 const Profile = () => {
   return (
-    <div>
-      <Widget  />
+    <div className="my-[1000px] w-full bg-slate-200 ml-[228px]">
+   <h1>hello</h1>
     </div>
   )
 }

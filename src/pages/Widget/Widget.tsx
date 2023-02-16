@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect,useRef } from 'react'
 import { SketchPicker } from 'react-color'
 import Preview from '../../components/Preview/Preview';
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+
+
 
 
 
@@ -32,40 +34,41 @@ const Widget = () => {
 
     // Color UseState
 
-    const [bubbleBackground, setBubbleBackground] = useState("#000000");
-    const [iconColor, setIconColor] = useState("#000000");
-    const [headerBackground, setHeaderBackground] = useState("#000000");
+    const [bubbleBackground, setBubbleBackground] = useState("#7451f8");
+    const [iconColor, setIconColor] = useState("#ffffff");
+    const [headerBackground, setHeaderBackground] = useState("#7451f8");
     const [headerText, setHeaderText] = useState("#000000");
-    const [screenBackground, setScreenBackground] = useState("#000000");
+    const [screenBackground, setScreenBackground] = useState("#ffffff");
     const [titleColor, setTitleColor] = useState("#000000");
-    const [startButtonColor, setStartButtonColor] = useState("#000000");
-    const [chatHeaderBackground, setChatHeaderBackground] = useState("#000000");
-    const [chatBackground, setChatBackground] = useState("#000000");
+    const [startButtonColor, setStartButtonColor] = useState("#7451f8");
+    const [chatHeaderBackground, setChatHeaderBackground] = useState("#7451f8");
+    const [chatBackground, setChatBackground] = useState("#ffffff");
     const [chatTitleColor, setChatTitleColor] = useState("#000000");
     const [chatStartButtonColor, setChatStartButtonColor] = useState("#000000");
-    const [welMsgBgColor, setWelMsgBgColor] = useState("#000000");
-    const [welMsgTextColor, setWelMsgTextColor] = useState("#000000");
-    const [userResponseBgColor, setUserResponseBgColor] = useState("#000000");
-    const [userResponseColor, setUserResponseColor] = useState("#000000");
+    const [welMsgBgColor, setWelMsgBgColor] = useState("#7451f8");
+    const [welMsgTextColor, setWelMsgTextColor] = useState("#ffffff");
+    const [userResponseBgColor, setUserResponseBgColor] = useState("#7451f8");
+    const [userResponseColor, setUserResponseColor] = useState("#ffffff");
 
 
 
     // Input Value
 
-    const [botName, setBotName] = useState("");
-    const [description, setDescription] = useState("");
-
+    const [botName, setBotName] = useState("Airbot");
+    const [description, setDescription] = useState("Airbot is the powerfull chatbot");
+    const [logo,setLogo] = useState("https://uselooper.com/assets/images/avatars/profile.jpg");
+    const [bubbleIcon,setBubbleIcon] = useState("");
  
 
     const handleOnChange = (color) => {
         setBubbleBackground(color.hex)
-        console.log(bubbleBackground)
+    
 
     }
 
     const handleOnChange2 = (color) => {
         setIconColor(color.hex)
-        console.log(bubbleBackground)
+      
 
     }
 
@@ -144,26 +147,137 @@ const Widget = () => {
 
     const userResponseColorFunc = (color) => {
         setUserResponseColor(color.hex)
-        console.log(bubbleBackground)
+  
 
     }
 
+//  useEffect(() => {
+      
+//           document.body.style.overflow = 'hidden';
+       
+      
+//       }, );
 
 
 
+let bubbleColorPicker = useRef();
+let iconColorPicker = useRef();
+let welHbColorPicker = useRef();
+let welHtColorPicker = useRef();
+let welSbColorPicker = useRef();
+let welTcColorPicker = useRef();
+let welSbcColorPicker = useRef();
+let chatHbColorPicker = useRef();
+let chatBcColorPicker = useRef();
+let chatTcColorPicker = useRef();
+let chatSbcColorPicker = useRef();
+let chatMbcColorPicker = useRef();
+let chatMcColorPicker = useRef();
+let chatRbColorPicker = useRef();
+let chatRcColorPicker = useRef();
+
+
+useEffect(() => {
+  var handler = (e)=>{
+    if(!bubbleColorPicker.current.contains(e.target) ) setColorPickerVisible(false);
+
+  };
+
+  var handler2 = (e)=>{
+    if(!iconColorPicker.current.contains(e.target) ) setColorPickerVisible2(false);
+  };
+
+  var handler3 = (e)=>{
+    if(!welHbColorPicker.current.contains(e.target) ) setColorPickerVisible3(false);
+  };
+  var handler4 = (e)=>{
+    if(!welHtColorPicker.current.contains(e.target) ) setColorPickerVisible4(false);
+  };
+
+  var handler5 = (e)=>{
+    if(!welSbColorPicker.current.contains(e.target) ) setColorPickerVisible5(false);
+  };
+  var handler6 = (e)=>{
+    if(!welTcColorPicker.current.contains(e.target) ) setColorPickerVisible6(false);
+  };
+
+  var handler7 = (e)=>{
+    if(! welSbcColorPicker.current.contains(e.target) ) setColorPickerVisible7(false);
+  };
+
+  var handler8 = (e)=>{
+    if(!chatHbColorPicker.current.contains(e.target) ) setColorPickerVisible8(false);
+  };
+  var handler9 = (e)=>{
+    if(!chatBcColorPicker.current.contains(e.target) ) setColorPickerVisible9(false);
+  };
+  var handler10 = (e)=>{
+    if(!chatTcColorPicker.current.contains(e.target) ) setColorPickerVisible10(false);
+  };
+  var handler12 = (e)=>{
+    if(!chatSbcColorPicker.current.contains(e.target) ) setColorPickerVisible12(false);
+  };
+
+  var handler13 = (e)=>{
+    if(!chatMbcColorPicker.current.contains(e.target) ) setColorPickerVisible13(false);
+  };
+
+  var handler14 = (e)=>{
+    if(!chatMcColorPicker.current.contains(e.target) ) setColorPickerVisible14(false);
+  };
+
+  var handler15 = (e)=>{
+    if(!chatRbColorPicker.current.contains(e.target) ) setColorPickerVisible15(false);
+  };
+
+  var handler16 = (e)=>{
+    if(!chatRcColorPicker.current.contains(e.target) ) setColorPickerVisible16(false);
+  };
+
+  document.addEventListener("mousedown", handler);
+  document.addEventListener("mousedown", handler2);
+  document.addEventListener("mousedown", handler3);
+  document.addEventListener("mousedown", handler4);
+  document.addEventListener("mousedown", handler5);
+  document.addEventListener("mousedown", handler6);
+  document.addEventListener("mousedown", handler7);
+  document.addEventListener("mousedown", handler8);
+  document.addEventListener("mousedown", handler9);
+  document.addEventListener("mousedown", handler10);
+  document.addEventListener("mousedown", handler12);
+  document.addEventListener("mousedown", handler13);
+  document.addEventListener("mousedown", handler14);
+  document.addEventListener("mousedown", handler15);
+  document.addEventListener("mousedown", handler16);
+});
+
+
+const imgFilePreview = (e) =>{
+
+    if(e.target.files.length !== 0){
+        setLogo(URL.createObjectURL(e.target.files[0]))
+    }
+}
+
+const bubblePreview = (e) =>{
+
+    if(e.target.files.length !== 0){
+        setBubbleIcon(URL.createObjectURL(e.target.files[0]))
+    }
+}
 
 
     return (
         <>
 
-            <div className="border border-slate-200 " >
+            <div className=" w-full  mt-[60px]   ml-[228px] " >
 
-                <div className="pl-[30px] mt-4 border py-4 border-slate-200">
+                <div className="pl-[30px] mt-4 border py-4 border-slate-200 border-l-0">
                     <h1 className="text-[28px] font-semi-bold">Chat Widget</h1>
                 </div>
 
-                <div className='flex  gap-6 min-h-[300px]'>
-                    <div className="flex flex-col   min-w-[770px]">
+                <div className='flex relative gap-6 min-h-[300px]'>
+                    <div  className="flex flex-col overflow-y-auto min-w-[770px]">
 
                     <div onClick={() => setSettingVisible(!settingVisible)} className=" flex items-center justify-between py-[22px] border max-w-[710px] ml-6 border-slate-200 px-4 mt-5 ">
                         <div className="flex items-center">
@@ -175,19 +289,29 @@ const Widget = () => {
 
 
                     </div>
-                    {settingVisible ? <div className="max-w-[710px] h-[480px] ml-6 border border-slate-200 mb-6">
+                    {settingVisible ? <div className="max-w-[710px] h-[460px] ml-6 border border-slate-200 mb-6">
                         <div className="pl-4 pr-4  mt-3">
                             <h3 className="text-[20px]">Bot Name</h3>
                             <input type="text" value={botName} onChange={(e) => setBotName(e.target.value)} className="min-w-[680px] mt-2 py-[8px] border rounded-[6px] border-zinc-300" />
                         </div>
 
                         <div className="pl-4 mt-3">
-                            <h3 className="">Description</h3>
+                            <h3 className="text-[20px]">Description</h3>
                             <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="min-w-[680px] mt-2 py-[8px] border rounded-[6px] border-zinc-300" />
                         </div>
 
                         <div className="pl-4 mt-3">
                             <h3 className="text-[20px]">Powered by</h3>
+                        </div>
+
+                        <div className="pl-4 mt-3">
+                        <h3 className="text-[20px] mb-2">Bot Logo</h3>
+                        <input onChange={imgFilePreview}  type="file"/>
+                        </div>
+
+                        <div className="pl-4 mt-3">
+                        <h3 className="text-[20px] mb-2">Bubble Icon</h3>
+                        <input onChange={bubblePreview}  type="file"/>
                         </div>
                     </div> : null}
 
@@ -223,7 +347,7 @@ const Widget = () => {
                                     </div>
 
                                     {
-                                        colorPickerVisible ? <div className="fixed top-[140px] z-99"> <SketchPicker
+                                        colorPickerVisible ? <div ref={bubbleColorPicker} id="func" className="fixed top-[140px] z-99"> <SketchPicker
 
                                             color={bubbleBackground}
                                             onChangeComplete={handleOnChange}
@@ -252,7 +376,7 @@ const Widget = () => {
                                     </div>
 
                                     {
-                                        colorPickerVisible2 ? <div className="fixed top-[140px] z-99"> <SketchPicker
+                                        colorPickerVisible2 ? <div ref={iconColorPicker} className="fixed top-[140px] z-99"> <SketchPicker
 
                                             color={bubbleBackground}
                                             onChangeComplete={handleOnChange2}
@@ -286,7 +410,7 @@ const Widget = () => {
                                     </div>
 
                                     {
-                                        colorPickerVisible3 ? <div className="fixed top-[300px] z-99"> <SketchPicker
+                                        colorPickerVisible3 ? <div ref={welHbColorPicker} className="fixed top-[300px] z-99"> <SketchPicker
 
                                             color={bubbleBackground}
                                             onChangeComplete={headerBackgroundFunc}
@@ -315,7 +439,7 @@ const Widget = () => {
                                     </div>
 
                                     {
-                                        colorPickerVisible4 ? <div className="fixed top-[300px] z-99"> <SketchPicker
+                                        colorPickerVisible4 ? <div ref={welHtColorPicker} className="fixed top-[300px] z-99"> <SketchPicker
 
                                             color={bubbleBackground}
                                             onChangeComplete={headerTextFunc}
@@ -347,7 +471,7 @@ const Widget = () => {
                                     </div>
 
                                     {
-                                        colorPickerVisible5 ? <div className="fixed top-[390px] z-99"> <SketchPicker
+                                        colorPickerVisible5 ? <div ref={welSbColorPicker} className="fixed top-[340px] z-99"> <SketchPicker
 
                                             color={bubbleBackground}
                                             onChangeComplete={screenBackgroundFunc}
@@ -376,7 +500,7 @@ const Widget = () => {
                                     </div>
 
                                     {
-                                        colorPickerVisible6 ? <div className="fixed top-[390px] z-99"> <SketchPicker
+                                        colorPickerVisible6 ? <div ref={welTcColorPicker} className="fixed top-[390px] z-99"> <SketchPicker
 
                                             color={bubbleBackground}
                                             onChangeComplete={titleColorFunc}
@@ -408,7 +532,7 @@ const Widget = () => {
                                 </div>
 
                                 {
-                                    colorPickerVisible7 ? <div className="fixed top-[490px] z-99"> <SketchPicker
+                                    colorPickerVisible7 ? <div ref={welSbcColorPicker} className="fixed top-[250px] z-99"> <SketchPicker
 
                                         color={bubbleBackground}
                                         onChangeComplete={startButtonColorFunc}
@@ -443,7 +567,7 @@ const Widget = () => {
                                     </div>
 
                                     {
-                                        colorPickerVisible8 ? <div className="fixed top-[370px] z-99"> <SketchPicker
+                                        colorPickerVisible8 ? <div ref={chatHbColorPicker} className="fixed top-[330px] z-99"> <SketchPicker
 
                                             color={bubbleBackground}
                                             onChangeComplete={chatHeaderBackgroundFunc}
@@ -472,7 +596,7 @@ const Widget = () => {
                                     </div>
 
                                     {
-                                        colorPickerVisible9 ? <div className="fixed top-[370px] z-99"> <SketchPicker
+                                        colorPickerVisible9 ? <div ref={chatBcColorPicker} className="fixed top-[330px] z-99"> <SketchPicker
 
                                             color={bubbleBackground}
                                             onChangeComplete={chatBackgroundFunc}
@@ -504,7 +628,7 @@ const Widget = () => {
                                     </div>
 
                                     {
-                                        colorPickerVisible10 ? <div className="fixed top-[470px] z-99"> <SketchPicker
+                                        colorPickerVisible10 ? <div ref={chatTcColorPicker} className="fixed top-[90px] z-99"> <SketchPicker
 
                                             color={bubbleBackground}
                                             onChangeComplete={chatTitleColorFunc}
@@ -533,7 +657,7 @@ const Widget = () => {
                                     </div>
 
                                     {
-                                        colorPickerVisible12 ? <div className="fixed top-[470px] z-99"> <SketchPicker
+                                        colorPickerVisible12 ? <div ref={chatSbcColorPicker} className="fixed top-[90px] z-99"> <SketchPicker
 
                                             color={bubbleBackground}
                                             onChangeComplete={chatStartButtonColorFunc}
@@ -565,7 +689,7 @@ const Widget = () => {
                                     </div>
 
                                     {
-                                        colorPickerVisible13 ? <div className="fixed top-[470px] z-99"> <SketchPicker
+                                        colorPickerVisible13 ? <div ref={chatMbcColorPicker} className="fixed top-[180px] z-99"> <SketchPicker
 
                                             color={bubbleBackground}
                                             onChangeComplete={welMsgBgColorFunc}
@@ -594,7 +718,7 @@ const Widget = () => {
                                     </div>
 
                                     {
-                                        colorPickerVisible14 ? <div className="fixed top-[470px] z-99"> <SketchPicker
+                                        colorPickerVisible14 ? <div ref={chatMcColorPicker} className="fixed top-[180px] z-99"> <SketchPicker
 
                                             color={bubbleBackground}
                                             onChangeComplete={welMsgTextColorFunc}
@@ -626,7 +750,7 @@ const Widget = () => {
                                     </div>
 
                                     {
-                                        colorPickerVisible15 ? <div className="fixed top-[500px] z-99"> <SketchPicker
+                                        colorPickerVisible15 ? <div ref={chatRbColorPicker} className="fixed top-[260px] z-99"> <SketchPicker
 
                                             color={bubbleBackground}
                                             onChangeComplete={userResponseBgColorFunc}
@@ -655,9 +779,9 @@ const Widget = () => {
                                     </div>
 
                                     {
-                                        colorPickerVisible16 ? <div className="fixed top-[500px] z-99"> <SketchPicker
+                                        colorPickerVisible16 ? <div ref={chatRcColorPicker} className="fixed top-[260px] z-99"> <SketchPicker
 
-                                            color={bubbleBackground}
+                                            color={userResponseColor}
                                             onChangeComplete={userResponseColorFunc}
                                             width={280}
                                         /> </div> : null
@@ -670,8 +794,8 @@ const Widget = () => {
                     </div> : null}
                     </div>
 
-                        <div className='mt-[20px]'>
-                    <Preview botName ={botName} headerBackground={headerBackground} description={description}chatHeaderBackground={chatHeaderBackground}/>
+                        <div className='mt-[20px] fixed right-0 '>
+                    <Preview bubbleIcon={bubbleIcon} logo={logo} iconColor={iconColor} userResponseColor={userResponseColor} userResponseBgColor={userResponseBgColor} welMsgTextColor={welMsgTextColor} welMsgBgColor={welMsgBgColor} chatTitleColor={chatTitleColor} chatBackground={chatBackground} screenBackground={screenBackground} startButtonColor= {startButtonColor} headerText={headerText} bubbleBackground={bubbleBackground} botName ={botName} headerBackground={headerBackground} description={description}chatHeaderBackground={chatHeaderBackground}/>
                     </div>
                 </div>
 
