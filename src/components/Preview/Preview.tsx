@@ -70,7 +70,6 @@ const Preview: React.FC<Props> = (props) => {
                 </div>
             </div>
             <div className={openTab.index === 2 ? "block" : "hidden"}>
-              <div className="max-w-sm w-full flex items-center justify-center   lg:max-w-full lg:flex    h-[540px]">
                 <div className=" w-[350px] border-r border-b border-l border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white rounded-[15px] lg:rounded-[15px] leading-normal overflow-hidden">
                   <div
                     style={{ backgroundColor: props.headerBackground }}
@@ -105,10 +104,8 @@ const Preview: React.FC<Props> = (props) => {
                     </p>
                   </div>
                 </div>
-              </div>
             </div>
             <div className={openTab.index === 3 ? "block" : "hidden"}>
-              <div className="max-w-sm w-full  lg:max-w-full lg:flex mt-[30px] mr-[30px] h-[480px]">
                 <div className=" w-[350px] border-r border-b border-l border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white rounded-[15px] lg:rounded-[15px] leading-normal overflow-hidden">
                   <div
                     style={{ backgroundColor: props.chatHeaderBackground }}
@@ -168,7 +165,6 @@ const Preview: React.FC<Props> = (props) => {
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
