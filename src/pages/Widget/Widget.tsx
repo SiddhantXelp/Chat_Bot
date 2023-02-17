@@ -270,10 +270,10 @@ const bubblePreview = (e) =>{
     return (
         <>
 
-            <div className=" w-full  mt-[60px]   ml-[228px] " >
+            <div className=" w-full dark:bg-black min-h-screen mt-[60px]   ml-[228px] " >
 
                 <div className="pl-[30px] mt-4 border py-4 border-slate-200 border-l-0">
-                    <h1 className="text-[28px] font-semi-bold">Chat Widget</h1>
+                    <h1 className="text-[28px] dark:text-[#555] font-semi-bold">Chat Widget</h1>
                 </div>
 
                 <div className='flex relative gap-6 min-h-[300px]'>
@@ -281,31 +281,31 @@ const bubblePreview = (e) =>{
 
                     <div onClick={() => setSettingVisible(!settingVisible)} className=" flex items-center justify-between py-[22px] border max-w-[710px] ml-6 border-slate-200 px-4 mt-5 ">
                         <div className="flex items-center">
-                            <i className="fa-solid fa-sliders text-[#7451f8] text-[30px]"></i>
-                            <h1 className="text-[19px] font-semibold ml-6  ">General Settings</h1>
+                            <i className="fa-solid fa-sliders dark:text-[#555]  text-[#7451f8] text-[30px]"></i>
+                            <h1 className="text-[19px] font-semibold ml-6  dark:text-[#888] ">General Settings</h1>
                         </div>
-                        <i onClick={() => setSettingVisible(!settingVisible)} className="fa-solid fa-angle-right  text-[20px]"></i>
+                        <i onClick={() => setSettingVisible(!settingVisible)} className="fa-solid fa-angle-right dark:text-[#555]  text-[20px]"></i>
 
 
 
                     </div>
                     {settingVisible ? <div className="max-w-[710px] h-[460px] ml-6 border border-slate-200 mb-6">
                         <div className="pl-4 pr-4  mt-3">
-                            <h3 className="text-[20px]">Bot Name</h3>
-                            <input type="text" value={botName} onChange={(e) => setBotName(e.target.value)} className="min-w-[680px] mt-2 py-[8px] border rounded-[6px] border-zinc-300" />
+                            <h3 className="text-[20px] dark:text-[#888]">Bot Name</h3>
+                            <input type="text" value={botName} onChange={(e) => setBotName(e.target.value)} className="min-w-[680px] mt-2 py-[8px] px-2 border rounded-[6px] border-zinc-300" />
                         </div>
 
                         <div className="pl-4 mt-3">
-                            <h3 className="text-[20px]">Description</h3>
-                            <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="min-w-[680px] mt-2 py-[8px] border rounded-[6px] border-zinc-300" />
+                            <h3 className="text-[20px] dark:text-[#888]">Description</h3>
+                            <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="min-w-[680px] mt-2 px-2 py-[8px] border rounded-[6px] border-zinc-300" />
                         </div>
 
                         <div className="pl-4 mt-3">
-                            <h3 className="text-[20px]">Powered by</h3>
+                            <h3 className="text-[20px] dark:text-[#888]">Powered by</h3>
                         </div>
 
                         <div className="pl-4 mt-3">
-                        <h3 className="text-[20px] mb-2">Bot Logo</h3>
+                        <h3 className="text-[20px] mb-2 dark:text-[#888]">Bot Logo</h3>
                         <input onChange={imgFilePreview}  type="file"/>
                         </div>
 
@@ -317,20 +317,20 @@ const bubblePreview = (e) =>{
 
                     <div onClick={() => setVisible(!visible)} className=" flex items-center justify-between py-[22px] border max-w-[710px] ml-6 border-slate-200 px-4 mt-5 ">
                         <div className="flex items-center">
-                            <i className="fa-sharp fa-solid fa-pencil text-[#7451f8] text-[30px]"></i>
-                            <h1 className="text-[19px] font-semibold ml-6  ">Appearance</h1>
+                            <i className="fa-sharp fa-solid fa-pencil dark:text-[#555]  text-[#7451f8] text-[30px]"></i>
+                            <h1 className="text-[19px] dark:text-[#888] font-semibold ml-6  ">Appearance</h1>
                         </div>
-                        <i className="fa-solid fa-angle-right text-[20px]"></i>
+                        <i className="fa-solid fa-angle-right text-[20px] dark:text-[#555]"></i>
 
 
 
                     </div>
                     {visible ? <div className="max-w-[710px] h-[990px] ml-6 border border-slate-200 mb-6">
-                        <h1 className="text-[21px] text-[#9ba6b3] pl-4 my-3">MINIMIZED WIDGET</h1>
+                        <h1 className="text-[21px] text-[#9ba6b3] pl-4 my-3 dark:text-[#555] ">MINIMIZED WIDGET</h1>
                         <div className="flex  items-center  gap-8">
 
                             <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] text-[#516173]">Bubble Background</h3>
+                                <h3 className="text-[20px] text-[#516173] dark:text-[#555]">Bubble Background</h3>
 
                                 <div >
 
@@ -359,7 +359,7 @@ const bubblePreview = (e) =>{
                             </div>
 
                             <div className="pl-4 pr-4  mt-3" >
-                                <h3 className="text-[20px] text-[#516173]">Icon color</h3>
+                                <h3 className="text-[20px] text-[#516173] dark:text-[#555]">Icon color</h3>
 
                                 <div >
 
@@ -388,12 +388,12 @@ const bubblePreview = (e) =>{
                             </div>
                         </div>
 
-                        <h1 className="text-[21px] text-[#9ba6b3] pl-4 mt-11">WELCOME SCREEN</h1>
+                        <h1 className="text-[21px] text-[#9ba6b3] dark:text-[#555] pl-4 mt-11">WELCOME SCREEN</h1>
 
                         <div className="flex  items-center  gap-8">
 
                             <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] text-[#516173]">Header Background</h3>
+                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Header Background</h3>
 
                                 <div >
 
@@ -422,7 +422,7 @@ const bubblePreview = (e) =>{
                             </div>
 
                             <div className="pl-4 pr-4  mt-3" >
-                                <h3 className="text-[20px] text-[#516173]">Header Text</h3>
+                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Header Text</h3>
 
                                 <div >
 
@@ -454,7 +454,7 @@ const bubblePreview = (e) =>{
                         <div className="flex  items-center  gap-8">
 
                             <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] text-[#516173]">Screen Background</h3>
+                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Screen Background</h3>
 
                                 <div >
 
@@ -483,7 +483,7 @@ const bubblePreview = (e) =>{
                             </div>
 
                             <div className="pl-4 pr-4  mt-3" >
-                                <h3 className="text-[20px] text-[#516173]">Title Color</h3>
+                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Title Color</h3>
 
                                 <div >
 
@@ -515,7 +515,7 @@ const bubblePreview = (e) =>{
                         </div>
 
                         <div className="pl-4 pr-4  mt-3" >
-                            <h3 className="text-[20px] text-[#516173]">Start Button Color</h3>
+                            <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Start Button Color</h3>
 
                             <div >
 
@@ -546,11 +546,11 @@ const bubblePreview = (e) =>{
 
                         {/* Third */}
 
-                        <h1 className="text-[21px] text-[#9ba6b3] pl-4 mt-11 ">CHAT SCREEN</h1>
+                        <h1 className="text-[21px] text-[#9ba6b3] dark:text-[#555] pl-4 mt-11 ">CHAT SCREEN</h1>
                         <div className="flex  items-center  gap-8">
 
                             <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] text-[#516173]">Header Background</h3>
+                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Header Background</h3>
 
                                 <div >
 
@@ -579,7 +579,7 @@ const bubblePreview = (e) =>{
                             </div>
 
                             <div className="pl-4 pr-4  mt-3" >
-                                <h3 className="text-[20px] text-[#516173]">Background color</h3>
+                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Background color</h3>
 
                                 <div >
 
@@ -611,7 +611,7 @@ const bubblePreview = (e) =>{
                         <div className="flex  items-center  gap-8">
 
                             <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] text-[#516173]">Title Color</h3>
+                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Title Color</h3>
 
                                 <div >
 
@@ -640,7 +640,7 @@ const bubblePreview = (e) =>{
                             </div>
 
                             <div className="pl-4 pr-4  mt-3" >
-                                <h3 className="text-[20px] text-[#516173]">Start Button Color</h3>
+                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Start Button Color</h3>
 
                                 <div >
 
@@ -672,7 +672,7 @@ const bubblePreview = (e) =>{
                         <div className="flex  items-center  gap-8">
 
                             <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] text-[#516173]">Message Background</h3>
+                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Message Background</h3>
 
                                 <div >
 
@@ -701,7 +701,7 @@ const bubblePreview = (e) =>{
                             </div>
 
                             <div className="pl-4 pr-4  mt-3" >
-                                <h3 className="text-[20px] text-[#516173]">Message Color</h3>
+                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Message Color</h3>
 
                                 <div >
 
@@ -733,7 +733,7 @@ const bubblePreview = (e) =>{
                         <div className="flex  items-center  gap-8">
 
                             <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] text-[#516173]">Response Background</h3>
+                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Response Background</h3>
 
                                 <div >
 
@@ -762,7 +762,7 @@ const bubblePreview = (e) =>{
                             </div>
 
                             <div className="pl-4 pr-4  mt-3" >
-                                <h3 className="text-[20px] text-[#516173]">Response Color</h3>
+                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Response Color</h3>
 
                                 <div >
 

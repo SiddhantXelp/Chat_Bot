@@ -10,10 +10,11 @@ import Profile from './pages/Profile/Profile';
 
 function App() {
   return (  <BrowserRouter>
+
     <div className="flex max-w-[100%]  ">
     <Sidebar/>
     {/* <Navbar/> */}
-    <div className="min-w-[85%] ">
+    <div className="min-w-[85%]  ">
       <Navbar/>
       {/* home container */}
     
@@ -25,6 +26,7 @@ function App() {
 
     </div>
     </div>
+    
     </BrowserRouter>
   );
 }

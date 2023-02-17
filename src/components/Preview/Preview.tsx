@@ -11,13 +11,13 @@ const Preview = ({ bubbleIcon, iconColor, logo, userResponseColor, userResponseB
             <div className=" w-[480px] ">
                 <div className="  h-48 lg:h-auto lg:w-48  flex-none bg-cover rounded-t lg:rounded-[15px]  text-center overflow-hidden"></div>
 
-                <Tabs>
+                <Tabs className="dark:bg-black">
                     <TabList>
                         <Tab>Minimized Screen</Tab>
                         <Tab>Welcome Screen</Tab>
                         <Tab>Chat Screen</Tab>
                     </TabList>
-                    <TabPanel>
+                    <TabPanel  className="dark:bg-black">
                         <div className=" min-h-[480px] p-4  flex justify-end items-end" >
 
                             <div style={{backgroundColor:bubbleBackground}} className="h-[65px] w-[65px] bg-slate-300 flex items-center justify-center rounded-full">

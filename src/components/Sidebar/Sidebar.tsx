@@ -12,10 +12,10 @@ import { Outlet, Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="min-w-[15%] fixed min-h-screen border border-[2px] border-r-zinc-200 border-t-0 ">
+    <div className="min-w-[15%] dark:bg-black fixed min-h-screen border border-[2px] border-r-zinc-200 border-t-0 ">
       {/* top */}
-      <div className="h-[60px]  flex items-center justify-center  ">
-        <span className="text-[22px] font-bold text-[#7451f8]">ChatBot</span>
+      <div className="h-[60px] dark:bg-[#242526]  flex items-center justify-center  ">
+        <span className="text-[22px] font-bold text-[#7451f8] dark:text-[#888]">AirBot</span>
       </div>
       <hr className='h-0 border border-zinc-200 border-1' />
       {/* Center */}
@@ -25,7 +25,7 @@ const Sidebar = () => {
           <p className="text-[#999] font-bold text-[13px] mt-[15px] mb-[5px]">MAIN</p>
 
           <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
-            <DashboardIcon className="text-[18px] text-[#7451f8]" />
+            <DashboardIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
             <span className="text-[18px] text-[#888] font-normal ml-[20px]">Dashboard</span>
           </li>
 
@@ -33,42 +33,42 @@ const Sidebar = () => {
           <Link to="/Widget">
             <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
 
-              <StyleIcon className="text-[18px] text-[#7451f8]" />
+              <StyleIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
               <span className="text-[18px] text-[#888] font-normal ml-[20px]">Widget</span>
 
             </li>
           </Link>
 
           <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
-            <PersonIcon className="text-[18px] text-[#7451f8]" />
+            <PersonIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
             <span className="text-[18px] text-[#888] font-normal ml-[20px]">Users</span>
           </li>
 
           <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
-            <ShoppingBagIcon className="text-[18px] text-[#7451f8]" />
+            <ShoppingBagIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
             <span className="text-[18px] text-[#888] font-normal ml-[20px]">Responses</span>
           </li>
 
           <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
-            <NotificationsNoneOutlinedIcon className="text-[28px] text-[#7451f8]" />
+            <NotificationsNoneOutlinedIcon className="text-[28px] dark:text-[#555] text-[#7451f8]" />
             <span className="text-[18px] text-[#888] font-normal ml-[20px]">Activity Monitor</span>
           </li>
 
           <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
-            < BuildIcon className="text-[18px] text-[#7451f8]" />
+            < BuildIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
             <span className="text-[18px] text-[#888] font-normal ml-[20px]">Settings</span>
           </li>
 
           <p className="text-[#999] font-bold text-[13px] mt-[15px] mb-[5px]">ADMIN</p>
           <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
             <Link to="/profile">
-              <AccountCircleOutlinedIcon className="text-[18px] text-[#7451f8]" />
+              <AccountCircleOutlinedIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
               <span className="text-[18px] text-[#888] font-normal ml-[20px]">Profile</span>
             </Link>
           </li>
 
           <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
-            <LogoutOutlinedIcon className="text-[18px] text-[#7451f8]" />
+            <LogoutOutlinedIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
             <span className="text-[18px] text-[#888] font-normal ml-[20px]">Logout</span>
           </li>
         </ul>
