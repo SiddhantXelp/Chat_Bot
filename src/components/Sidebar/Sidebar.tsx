@@ -43,8 +43,10 @@ const Sidebar = () => {
             </li>
 
             <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
+              <Link to='/responses'>
                 <ShoppingBagIcon className="text-[18px] text-[#7451f8]"/>
                 <span className="text-[20px] text-[#888] font-normal ml-[20px]">Responses</span>
+                </Link>
             </li>
 
             <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">

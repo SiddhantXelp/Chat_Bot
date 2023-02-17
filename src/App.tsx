@@ -2,7 +2,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Widget from "./pages/Widget/Widget";
-
+import Responses from "./pages/Responses/Responses";
 import Profile from "./pages/Profile/Profile";
 import Dashboard from "./pages/Dashboard/Dashboard"
 
@@ -20,6 +20,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
             <Route path="/widget" element={<Widget />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/responses" element={<Responses />} />
           </Routes>
         </div>
       </div>
