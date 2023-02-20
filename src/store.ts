@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import allreducers from './reducers/index';
+import allreducers from './sliceReducer';
 import logger from 'redux-logger'
 
 export const store = configureStore({ 
