@@ -4,7 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Widget from "./pages/Widget/Widget";
 import Responses from "./pages/Responses/Responses";
 import Profile from "./pages/Profile/Profile";
-import Dashboard from "./pages/Dashboard/Dashboard"
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Signup from "./pages/Profile/Signup";
+import SignIn from "./pages/Profile/SignIn";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
             <Route path="/widget" element={<Widget />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/responses" element={<Responses />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/signin" element={<SignIn />} />
           </Routes>
         </div>
       </div>

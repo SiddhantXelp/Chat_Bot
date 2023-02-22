@@ -61,15 +61,17 @@ const Sidebar = () => {
 
             <p className="text-[#999] font-bold text-[13px] mt-[15px] mb-[5px]">ADMIN</p>
             <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
-            <Link to="/profile">
+            <Link to="/signup">
                 <AccountCircleOutlinedIcon className="text-[18px] text-[#7451f8]"/>
                 <span className="text-[20px] text-[#888] font-normal ml-[20px]">Profile</span>
                 </Link>
             </li>
 
             <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
+              <Link to="/signin">
                 <LogoutOutlinedIcon className="text-[18px] text-[#7451f8]"/>
                 <span className="text-[20px] text-[#888] font-normal ml-[20px]">Logout</span>
+                </Link>
             </li>
         </ul>
       </div>
