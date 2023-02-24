@@ -37,7 +37,7 @@ const Sidebar = () => {
           <p className="text-[#999] font-bold text-[13px] mt-[15px] mb-[5px]">
             SERVICES
           </p>
-          <Link to="/Widget">
+          <Link to="/root/Widget">
             <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
               <StyleIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
               <span className="text-[18px] text-[#888] font-normal ml-[20px]">
@@ -53,7 +53,7 @@ const Sidebar = () => {
             </span>
           </li>
 
-          <Link to="/Responses">
+          <Link to="/root/responses">
             <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
               <ShoppingBagIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
               <span className="text-[18px] text-[#888] font-normal ml-[20px]">
