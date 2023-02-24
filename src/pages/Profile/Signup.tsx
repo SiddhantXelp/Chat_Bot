@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [orgName, setOrgName] = useState("");
@@ -40,15 +42,20 @@ export default function Signup() {
       zipCode
     );
 
-    fetch("http://localhost:4011/auth/signup", {
+    fetch("http://localhost:4011/api/v1/auth/signup", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(adminData),
     })
       .then(async (res) => {
-        let result = await res.text();
-        console.log(result);
-        alert(result);
+        let result = await res.json();
+        if(!result["error"]){
+          alert(result["message"])
+          navigate("/")
+      }
+      else {
+          alert(result["error"])
+      }
       })
       .catch((err) => {
         console.log(err.message);
@@ -58,7 +65,7 @@ export default function Signup() {
   return (
     <>
       <div className=" flex justify-center">
-        <div className="lg:w-[950px] sm:w-[300px] h-auto ml-6 border-r border-l border-t border-b rounded-[10px] border-gray-400 mb-6">
+        <div className="lg:w-[950px] sm:w-[300px] h-auto ml-6 border-r border-l border-t border-b rounded-[10px] border-gray-400 mb-6 mt-6">
           <div className="text-center font-bold py-8 text-[28px]">SignUp</div>
           <form onSubmit={(e) => onSubmitform(e)}>
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-flow-row">
@@ -106,7 +113,7 @@ export default function Signup() {
                 <label className="text-[16px]">phoneNumber</label>
                 <br />
                 <input
-                  type="text"
+                  type="number"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   className="lg:w-[250px] sm:w-[300px]  mt-2 py-[6px] border rounded-[6px] border-gray-700"
@@ -156,7 +163,7 @@ export default function Signup() {
                 <label className="text-[16px]">zipCode</label>
                 <br />
                 <input
-                  type="text"
+                  type="number"
                   value={zipCode}
                   onChange={(e) => setZipCode(e.target.value)}
                   className="lg:w-[250px] sm:w-[300px]  mt-2 py-[6px] border rounded-[6px] border-gray-700"
