@@ -7,7 +7,7 @@ import BuildIcon from '@mui/icons-material/Build';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const Sidebar = () => {
@@ -31,7 +31,7 @@ const Sidebar = () => {
 
             <p className="text-[#999] font-bold text-[13px] mt-[15px] mb-[5px]">SERVICES</p>
             <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
-            <Link to="/Widget">
+            <Link to="/root/Widget">
                 <StyleIcon className="text-[18px] text-[#7451f8]"/>
                 <span className="text-[20px] text-[#888] font-normal ml-[20px]">Widget</span>
                 </Link>
@@ -43,7 +43,7 @@ const Sidebar = () => {
             </li>
 
             <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
-              <Link to='/responses'>
+              <Link to='/root/responses'>
                 <ShoppingBagIcon className="text-[18px] text-[#7451f8]"/>
                 <span className="text-[20px] text-[#888] font-normal ml-[20px]">Responses</span>
                 </Link>
@@ -61,17 +61,13 @@ const Sidebar = () => {
 
             <p className="text-[#999] font-bold text-[13px] mt-[15px] mb-[5px]">ADMIN</p>
             <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
-            <Link to="/signup">
                 <AccountCircleOutlinedIcon className="text-[18px] text-[#7451f8]"/>
                 <span className="text-[20px] text-[#888] font-normal ml-[20px]">Profile</span>
-                </Link>
             </li>
 
             <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
-              <Link to="/signin">
                 <LogoutOutlinedIcon className="text-[18px] text-[#7451f8]"/>
                 <span className="text-[20px] text-[#888] font-normal ml-[20px]">Logout</span>
-                </Link>
             </li>
         </ul>
       </div>
