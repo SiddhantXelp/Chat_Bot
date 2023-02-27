@@ -1,10 +1,7 @@
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
-import { Routes, Route } from "react-router-dom";
-import Widget from "./pages/Widget/Widget";
-import Responses from "./pages/Response/Responses";
-import Profile from "./pages/Profile/Profile";
-// import Dashboard from "./pages/Dashboard/Dashboard";
+import { Outlet } from "react-router-dom";
+
 
 function Root() {
   return (
@@ -13,14 +10,9 @@ function Root() {
         <Sidebar />
         <div className="min-w-[85%] ">
           <Navbar />
-          <Routes>
-            <Route path="/widget" element={<Widget />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/responses" element={<Responses />} />
-            {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-      </Routes>
       </div>
       </div>
+      <Outlet/>
       </>
   );
 }

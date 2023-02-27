@@ -913,7 +913,7 @@ const Widget = () => {
             ) : null}
           </div>
 
-          <div className="mt-[20px] fixed right-0 ">
+          <div className="mt-[20px] fixed right-20 ">
             <Preview
               bubbleIcon={bubbleIcon}
               logo={logo}
@@ -926,6 +926,7 @@ const Widget = () => {
               chatBackground={chatBackground}
               screenBackground={screenBackground}
               startButtonColor={startButtonColor}
+              titleColor={titleColor}
               headerText={headerText}
               bubbleBackground={bubbleBackground}
               botName={botName}

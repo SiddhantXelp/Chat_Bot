@@ -12,6 +12,7 @@ interface Props {
   chatBackground: string;
   screenBackground: string;
   startButtonColor: string;
+  titleColor: string;
   headerText: string;
   bubbleBackground: string;
   botName: string;
@@ -27,15 +28,15 @@ const Preview: React.FC<Props> = (props) => {
   const [openTab, setOpenTab] = useState<Tabs>({index:1});
   console.log("tabindex",openTab)
   return (
-    <div>
-      <div className="container mx-auto mt-12">
-        <div className="flex flex-col items-center justify-center max-w-xl">
+    <div className="dark:bg-black min-h-screen">
+      {/* <div className="container mx-auto mt-12"> */}
+        <div className="flex flex-col items-center justify-center max-w-xl dark:bg-black">
           <ul className="flex space-x-2">
             <li>
               <a
                 href="#"
                 onClick={() => setOpenTab({index:1})}
-                className={`inline-block px-4 py-2 text-black-600 bg-white rounded-full shadow 
+                className={`inline-block px-4 py-2 text-black-600 dark:bg-[#888] bg-white rounded-full shadow 
                   ${openTab.index === 1 ? "text-slate-600 bg-blue-500" : ""}
                   `}
               >
@@ -48,7 +49,7 @@ const Preview: React.FC<Props> = (props) => {
                 onClick={() => setOpenTab({index:2})}
                 className={` ${
                   openTab.index === 2 ? "bg-blue-500 text-slate-600" : ""
-                } inline-block px-4 py-2 text-black-600 bg-white rounded-full shadow`}
+                } inline-block px-4 py-2 text-black-600 dark:bg-[#888] bg-white rounded-full shadow`}
               >
                 Welcome
               </a>
@@ -59,19 +60,19 @@ const Preview: React.FC<Props> = (props) => {
                 onClick={() => setOpenTab({index:3})}
                 className={` ${
                   openTab.index === 3 ? "bg-blue-500 text-slate-600" : ""
-                } inline-block px-4 py-2 text-black-600 bg-white rounded-full shadow`}
+                } inline-block px-4 py-2 text-black-600 dark:bg-[#888] bg-white rounded-full shadow`}
               >
                 Chat
               </a>
             </li>
           </ul>
-          <div className="p-3 mt-6 bg-white border">
+          <div className="p-3 mt-6 bg-white dark:bg-black">
             <div className={openTab.index === 1 ? "block" : "hidden"}>
-                <div className=" w-[350px] border-r border-b border-l border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white rounded-[15px] lg:rounded-[15px] leading-normal overflow-hidden">
+                <div className="dark:bg-black w-[350px] border-r border-b border-l border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white rounded-[15px] lg:rounded-[15px] leading-normal overflow-hidden">
                   <div className="flex flex-col justify-end items-end text-gray-900 font-bold text-xl   w-auto  h-[440px] ">
                       <div className="h-[65px] w-[65px] flex justify-center items-center rounded-full"
                         style={{
-                          backgroundColor: "#514caf",
+                          backgroundColor: props.bubbleBackground,
                         }}
                       >
                         <img
@@ -105,7 +106,7 @@ const Preview: React.FC<Props> = (props) => {
                     online
                   </p>
 
-                  <p className="text-black-900 text-center p-[40px]  font-normal text-md w-[350px]">
+                  <p style={{color:props.titleColor}} className=" text-center p-[40px]  font-normal text-md w-[350px]">
                     {props.description}
                   </p>
                   <div className="text-center">
@@ -120,12 +121,12 @@ const Preview: React.FC<Props> = (props) => {
                 </div>
             </div>
             <div className={openTab.index === 3 ? "block" : "hidden"}>
-                <div style={{ backgroundColor: props.chatBackground }} className=" w-[350px] border-r border-b border-l border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white rounded-[15px] lg:rounded-[15px] leading-normal overflow-hidden">
+                <div className="dark:bg-black w-[350px] border-r border-b border-l border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white rounded-[15px] lg:rounded-[15px] leading-normal overflow-hidden" style={{ backgroundColor: props.chatBackground }} >
                   <div
                     style={{ backgroundColor: props.chatHeaderBackground }}
                     className="flex "
                   >
-                    <div className="flex items-center m-[15px] ">
+                    <div className="flex items-center m-[15px]">
                       <img
                         className="w-[50px] h-[50px] rounded-[50%]"
                         src={props.logo}
@@ -180,7 +181,7 @@ const Preview: React.FC<Props> = (props) => {
               </div>
             </div>
         </div>
-      </div>
+      {/* </div> */}
     </div>
   );
 };

@@ -41,22 +41,22 @@ const Responses = () => {
     setInputFields(list);
   };
   return (
-    <>
+    <div className="dark:bg-black min-h-screen  mt-[61px]">
       <div
-        className="flex items-center ml-[224px] mt-[81px] mb-[40px]"
+        className="flex items-center ml-[224px] mb-[40px] pt-[20px]"
         onClick={() => setAddData(!addData)}
       >
-        <h1 className="text-[19px] font-semibold  mr-7  ">Responses</h1>
+        <h1 className="text-[19px] font-semibold  mr-7 dark:text-[#888] ">Responses</h1>
         <i className="fa-solid fa-square-plus text-[#7451f8] text-[30px]"></i>
       </div>
       {addData ? (
         <div className=" flex justify-center " >
           <div className="lg:w-[510px] sm:w-[250px] h-auto ml-6 border-r border-l border-t border-b rounded-[10px] border-gray-400 mb-6">
-            <div className="text-center font-bold py-8 text-[18px]">
+            <div className="text-center font-bold py-8 text-[18px] dark:text-[#888] ">
               Queries & Responses
             </div>
             <form onSubmit={(e) => onSubmitform(e)}>
-                <label className="text-[16px] pl-[50px]">Add Query</label>
+                <label className="text-[16px] pl-[50px] dark:text-[#888] ">Add Query</label>
                 <div className="flex justify-center">
                 <input
                   type="text"
@@ -66,7 +66,7 @@ const Responses = () => {
                 />
                 </div>
               <div className="pl-[50px] pr-4  mt-3">
-                <label className="text-[16px]">Add Response</label>
+                <label className="text-[16px] dark:text-[#888] ">Add Response</label>
                 <i
                   className="fa-solid fa-square-plus text-[#7451f8] text-[20px] ml-6 mt-2"
                   onClick={() => addInputField()}
@@ -116,7 +116,7 @@ const Responses = () => {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 };
 
