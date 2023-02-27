@@ -1,46 +1,134 @@
-import React from "react";
+import { Box, Stack } from "@chakra-ui/layout";
+import {
+  CustomNodeElementProps,
+  RawNodeDatum,
+  TreeNodeDatum,
+} from "react-d3-tree/lib/types/types/common";
+
+import NodeModal from "../../components/AddFamilyModal";
 import Tree from "react-d3-tree";
+import { useState } from "react";
 
-const orgChart = {
-  name: "AirBot",
-  children: [
-    {
-      name: "ChatScreen",
+// import { v4 } from "uuid";
 
-      children: [
-        {
-          name: "Greeting",
-        },
-        {
-          name: "Postpaid",
+export function bfs(
+  id: string,
+  tree: RawNodeDatum | RawNodeDatum[],
+  node: RawNodeDatum
+) {
+  const queue: RawNodeDatum[] = [];
 
-          children: [
-            {
-              name: "Internet",
-            },
-          ],
-        },
-        {
-          name: "Prepaid",
+  queue.unshift(tree as RawNodeDatum);
 
-          children: [
-            {
-              name: "Broadband",
-            },
-          ],
-        },
-      ],
+  while (queue.length > 0) {
+    const curNode = queue.pop();
+
+    if (curNode.attributes?.id === id) {
+      curNode.children.push(node);
+
+      return { ...tree };
+    }
+
+    const len = curNode.children.length;
+
+    for (let i = 0; i < len; i++) {
+      queue.unshift(curNode.children[i]);
+    }
+  }
+}
+
+export default function App() {
+  const [tree, setTree] = useState<RawNodeDatum | RawNodeDatum[]>({
+    name: "Root",
+    attributes: {
+      id: "411d9783-85ba-41e5-a6a3-5e1cca3d294f",
     },
-  ],
-};
-const Responses = () => {
-  return (
-    <div className=" w-full dark:bg-black min-h-screen mt-[60px]   ml-[214px] ">
-      <div id="treeWrapper" style={{ width: "100em", height: "200em" }}>
-        <Tree data={orgChart} />
-      </div>
-    </div>
-  );
-};
+    children: [
+      {
+        name: "Root 1.1",
+        attributes: {
+          id: "411d9783-85ba-41e5-a6a3-5e1cca3d294f2",
+        },
+        children: [],
+      },
+      {
+        name: "Root 1.2",
+        attributes: {
+          id: "411d9783-85ba-41e5-a6a3-5e1cca3d294f3",
+        },
+        children: [],
+      },
+    ],
+  });
+  const [node, setNode] = useState<TreeNodeDatum | undefined>();
 
-export default Responses;
+  const close = () => setNode(undefined);
+
+  const handleNodeClick = (datum: TreeNodeDatum) => {
+    setNode(datum);
+  };
+
+  const handleSubmit = (familyMemberName: string) => {
+    const newTree = bfs(node.attributes?.id, tree, {
+      name: familyMemberName,
+      attributes: {
+        id: Math.random(),
+      },
+      children: [],
+    });
+
+    if (newTree) {
+      setTree(newTree);
+    }
+
+    setNode(undefined);
+  };
+
+  const renderRectSvgNode = (
+    customProps: CustomNodeElementProps,
+    click: (datum: TreeNodeDatum) => void
+  ) => {
+    const { nodeDatum } = customProps;
+
+    return (
+      <g>
+        <rect
+          x={"-50"}
+          y={"-15"}
+          width="80"
+          height="30"
+          rx="15"
+          fill={"white"}
+          onClick={() => click(nodeDatum)}
+        />
+        <text fill="#7451f8" strokeWidth="0.5" x="-40" y="1">
+          {nodeDatum.name}
+        </text>
+      </g>
+    );
+  };
+
+  return (
+    <Stack direction="row" spacing="md">
+      <Box w="100vw" h="100vh">
+        <Tree
+          data={tree}
+          zoomable={true}
+          onNodeClick={handleNodeClick}
+          translate={{
+            x: 200,
+            y: 200,
+          }}
+          renderCustomNodeElement={(nodeInfo) =>
+            renderRectSvgNode(nodeInfo, handleNodeClick)
+          }
+        />
+        <NodeModal
+          onSubmit={(familyMemberName) => handleSubmit(familyMemberName)}
+          onClose={close}
+          isOpen={Boolean(node)}
+        />
+      </Box>
+    </Stack>
+  );
+}
