@@ -1,123 +1,134 @@
-import React, { useState } from "react";
+import { Box, Stack } from "@chakra-ui/layout";
+import {
+  CustomNodeElementProps,
+  RawNodeDatum,
+  TreeNodeDatum,
+} from "react-d3-tree/lib/types/types/common";
 
-const Responses = () => {
-  const [addData, setAddData] = useState(false);
-  const [addQuery, setAddQuery] = useState("");
-  const [getData, setGetData] = useState({});
-  const [inputFields, setInputFields] = useState([
-    {
-      res: "",
+import NodeModal from "../../components/AddFamilyModal";
+import Tree from "react-d3-tree";
+import { useState } from "react";
+
+// import { v4 } from "uuid";
+
+export function bfs(
+  id: string,
+  tree: RawNodeDatum | RawNodeDatum[],
+  node: RawNodeDatum
+) {
+  const queue: RawNodeDatum[] = [];
+
+  queue.unshift(tree as RawNodeDatum);
+
+  while (queue.length > 0) {
+    const curNode: any = queue.pop();
+
+    if (curNode.attributes?.id === id) {
+      curNode.children.push(node);
+
+      return { ...tree };
+    }
+
+    const len = curNode.children.length;
+
+    for (let i = 0; i < len; i++) {
+      queue.unshift(curNode.children[i]);
+    }
+  }
+}
+
+export default function App() {
+  const [tree, setTree] = useState<RawNodeDatum | RawNodeDatum[]>({
+    name: "Root",
+    attributes: {
+      id: "411d9783-85ba-41e5-a6a3-5e1cca3d294f",
     },
-  ]);
-  const onSubmitform = (e) => {
-    e.preventDefault();
-    setAddQuery("");
-    setAddData(false);
-
-    console.log("addbtn", addQuery, inputFields);
-    setInputFields([
+    children: [
       {
-        res: "",
+        name: "Root 1.1",
+        attributes: {
+          id: "411d9783-85ba-41e5-a6a3-5e1cca3d294f2",
+        },
+        children: [],
       },
-    ]);
-    let data = { addQuery, inputFields };
-    localStorage.setItem("dataKey", JSON.stringify(data));
-    setGetData(JSON.parse(localStorage.getItem("dataKey")));
-  };
-
-  const addInputField = () => {
-    setInputFields([
-      ...inputFields,
       {
-        res: "",
+        name: "Root 1.2",
+        attributes: {
+          id: "411d9783-85ba-41e5-a6a3-5e1cca3d294f3",
+        },
+        children: [],
       },
-    ]);
+    ],
+  });
+  const [node, setNode] = useState<TreeNodeDatum | undefined>();
+
+  const close = () => setNode(undefined);
+
+  const handleNodeClick = (datum: TreeNodeDatum) => {
+    setNode(datum);
   };
 
-  const handleChange = (index, evnt) => {
-    const { name, value } = evnt.target;
-    const list = [...inputFields];
-    list[index][name] = value;
-    setInputFields(list);
+  const handleSubmit = (familyMemberName: string) => {
+    const newTree = bfs(node.attributes?.id, tree, {
+      name: familyMemberName,
+      attributes: {
+        id: Math.random(),
+      },
+      children: [],
+    });
+
+    if (newTree) {
+      setTree(newTree);
+    }
+
+    setNode(undefined);
   };
+
+  const renderRectSvgNode = (
+    customProps: CustomNodeElementProps,
+    click: (datum: TreeNodeDatum) => void
+  ) => {
+    const { nodeDatum } = customProps;
+
+    return (
+      <g>
+        <rect
+          x={"-50"}
+          y={"-15"}
+          width="80"
+          height="30"
+          rx="15"
+          fill={"white"}
+          onClick={() => click(nodeDatum)}
+        />
+        <text fill="#7451f8" strokeWidth="0.5" x="-40" y="1">
+          {nodeDatum.name}
+        </text>
+      </g>
+    );
+  };
+
   return (
-    <div className="dark:bg-black min-h-screen  mt-[61px]">
-      <div
-        className="flex items-center ml-[224px] mb-[40px] pt-[20px]"
-        onClick={() => setAddData(!addData)}
-      >
-        <h1 className="text-[19px] font-semibold  mr-7 dark:text-[#888] ">Responses</h1>
-        <i className="fa-solid fa-square-plus text-[#7451f8] text-[30px]"></i>
-      </div>
-      {addData ? (
-        <div className=" flex justify-center " >
-          <div className="lg:w-[510px] sm:w-[250px] h-auto ml-6 border-r border-l border-t border-b rounded-[10px] border-gray-400 mb-6">
-            <div className="text-center font-bold py-8 text-[18px] dark:text-[#888] ">
-              Queries & Responses
-            </div>
-            <form onSubmit={(e) => onSubmitform(e)}>
-                <label className="text-[16px] pl-[50px] dark:text-[#888] ">Add Query</label>
-                <div className="flex justify-center">
-                <input
-                  type="text"
-                  value={addQuery}
-                  onChange={(e) => setAddQuery(e.target.value)}
-                  className="lg:w-[410px] sm:w-[200px]  mt-2 py-[6px] border rounded-[6px] border-gray-700"
-                />
-                </div>
-              <div className="pl-[50px] pr-4  mt-3">
-                <label className="text-[16px] dark:text-[#888] ">Add Response</label>
-                <i
-                  className="fa-solid fa-square-plus text-[#7451f8] text-[20px] ml-6 mt-2"
-                  onClick={() => addInputField()}
-                ></i>
-              </div>
-              {inputFields.map((data, index) => {
-                const { res } = data;
-                return (
-                  <div className="flex justify-center" key={index}>
-                    <input
-                       className="lg:w-[410px] sm:w-[200px]  mt-2 py-[6px] border rounded-[6px] border-gray-700"
-                      type="text"
-                      onChange={(evnt) => handleChange(index, evnt)}
-                      value={res}
-                      name="res"
-                    />
-                  </div>
-                );
-              })}
-              <div className="my-6 flex justify-center">
-                <input
-                  type="submit"
-                  className="mt-2 py-[6px] border rounded-full bg-[#7451f8] text-white w-[200px]"
-                />
-              </div>
-            </form>
-          </div>
-        </div>
-      ) : null}
-      <div className="flex justify-center ml-[214px]">
-        <table className="border-collapse w-[80%]">
-          <tbody>
-          <tr>
-            <th className="border border-gray-700 py-2 bg-[#7451f8] text-white">
-              Queries
-            </th>
-            <th className="border border-gray-700  bg-[#7451f8] text-white">
-              Responses
-            </th>
-          </tr>
-          <tr>
-            <td className="border border-gray-700 py-2">{getData.addQuery}</td>
-            <td className="border border-gray-700">
-              
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <Stack direction="row" spacing="md">
+      <Box w="100vw" h="100vh">
+        <Tree
+          data={tree}
+          zoomable={true}
+          onNodeClick={handleNodeClick}
+          translate={{
+            x: 200,
+            y: 200,
+          }}
+          renderCustomNodeElement={(nodeInfo) =>
+            renderRectSvgNode(nodeInfo, handleNodeClick)
+          }
+        />
+        <NodeModal
+          onSubmit={(familyMemberName) => handleSubmit(familyMemberName)}
+          onClose={close}
+          isOpen={Boolean(node)}
+        />
+      </Box>
+    </Stack>
   );
-};
-
-export default Responses;
+}

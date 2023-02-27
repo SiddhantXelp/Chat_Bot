@@ -3,6 +3,7 @@ import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import App from "./App";
+import { ChakraProvider } from "@chakra-ui/react";
 import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   // <React.StrictMode>
   <Provider store={store}>
     <ThemeProvider>
-      <App />
+      <ChakraProvider>
+        <App />
+      </ChakraProvider>
     </ThemeProvider>
   </Provider>
 
