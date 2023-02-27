@@ -39,27 +39,21 @@ export function bfs(
 
 export default function App() {
   const [tree, setTree] = useState<RawNodeDatum | RawNodeDatum[]>({
-    name: "Root",
+    title: "Root",
     attributes: {
-      id: "411d9783-85ba-41e5-a6a3-5e1cca3d294f",
+      id: Math.random(),
     },
     children: [
       {
-        name: "Root 1.1",
+        title: "Root 1.1",
         attributes: {
-          id: "411d9783-85ba-41e5-a6a3-5e1cca3d294f2",
-        },
-        children: [],
-      },
-      {
-        name: "Root 1.2",
-        attributes: {
-          id: "411d9783-85ba-41e5-a6a3-5e1cca3d294f3",
+          id: Math.random(),
         },
         children: [],
       },
     ],
   });
+  console.log("tree", tree)
   const [node, setNode] = useState<TreeNodeDatum | undefined>();
 
   const close = () => setNode(undefined);
@@ -68,15 +62,39 @@ export default function App() {
     setNode(datum);
   };
 
-  const handleSubmit = (familyMemberName: string) => {
-    const newTree = bfs(node.attributes?.id, tree, {
-      name: familyMemberName,
+  const handleSubmit = (title: string, tags:string) => {
+    var newId = Math.random()
+    console.log("parent",node?.attributes?.id)
+    var parentId = node?.attributes?.id
+    const newTree = bfs(node?.attributes?.id, tree, {
+      title: title,
       attributes: {
-        id: Math.random(),
+        id: newId
       },
-      children: [],
+      tags: tags,
+      // children: [],
     });
-
+    var newTreeNode = {
+      title: title,
+      attributes: {
+        id: newId
+      },
+      tags: tags,
+      parentId : parentId
+    }
+    console.log("neetreeId",newTreeNode)
+    fetch("http://localhost:4011/request", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(newTreeNode),
+    })
+      .then(async (res) => {
+        let result = await res.json();
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
     if (newTree) {
       setTree(newTree);
     }
@@ -102,7 +120,7 @@ export default function App() {
           onClick={() => click(nodeDatum)}
         />
         <text fill="#7451f8" strokeWidth="0.5" x="-40" y="1">
-          {nodeDatum.name}
+          {nodeDatum.title}
         </text>
       </g>
     );
@@ -124,7 +142,7 @@ export default function App() {
           }
         />
         <NodeModal
-          onSubmit={(familyMemberName) => handleSubmit(familyMemberName)}
+          onSubmit={(title,tags) => handleSubmit(title,tags)}
           onClose={close}
           isOpen={Boolean(node)}
         />

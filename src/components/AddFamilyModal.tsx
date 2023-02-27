@@ -16,7 +16,7 @@ import React, { useState } from "react";
 interface AddFamilyModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (familyMemberName: string) => void;
+  onSubmit: (title: string, tags: string) => void;
 }
 
 const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
@@ -24,29 +24,35 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
   onClose,
   onSubmit,
 }) => {
-  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
+  const [tags, setTags] = useState("");
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add family member</ModalHeader>
+        <ModalHeader>Add</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <FormControl>
-            <FormLabel>Family Member</FormLabel>
+            <FormLabel>Title</FormLabel>
             <Input
-              value={name}
-              onChange={(event) => setName(event.target.value)}
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+            />
+            <FormLabel>Tags</FormLabel>
+            <Input
+              value={tags}
+              onChange={(event) => setTags(event.target.value)}
             />
           </FormControl>
         </ModalBody>
         <ModalFooter>
           <Button
             colorScheme="blue"
-            disabled={!name}
+            // disabled={!title}
             onClick={() => {
-              onSubmit(name);
+              onSubmit(title, tags);
               onClose();
             }}
           >
