@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import { WIDGET_DATA, WIDGET_MINIMIZED, WIDGET_THEME } from "../../data/widget";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 import Preview from "../../components/Preview/Preview";
 import { SketchPicker } from "react-color";
-// import { postWidget } from "./widgetSlice";
+import { postWidget } from "./widgetSlice";
 import { useDispatch } from "react-redux";
 
 const Widget = () => {
@@ -12,10 +12,8 @@ const Widget = () => {
 
   const [visible, setVisible] = useState<boolean>(false);
   const [settingVisible, setSettingVisible] = useState(false);
-  const [generalSetting, setGeneralSetting] = useState({});
-  const [theme, setTheme] = useState({});
 
-  const [colorPickerVisible, setColorPickerVisible] = useState("");
+  const [colorPickerVisible, setColorPickerVisible] = useState(false);
   const [colorPickerVisible2, setColorPickerVisible2] = useState(false);
   const [colorPickerVisible3, setColorPickerVisible3] = useState(false);
   const [colorPickerVisible4, setColorPickerVisible4] = useState(false);
@@ -31,8 +29,6 @@ const Widget = () => {
   const [colorPickerVisible14, setColorPickerVisible14] = useState(false);
   const [colorPickerVisible15, setColorPickerVisible15] = useState(false);
   const [colorPickerVisible16, setColorPickerVisible16] = useState(false);
-
-  console.log("General Settings", generalSetting);
 
   // Color UseState
 
@@ -51,7 +47,6 @@ const Widget = () => {
   const [welMsgTextColor, setWelMsgTextColor] = useState("#ffffff");
   const [userResponseBgColor, setUserResponseBgColor] = useState("#7451f8");
   const [userResponseColor, setUserResponseColor] = useState("#ffffff");
-  const [bubbleColor, setBubbleColor] = useState<any>({});
 
   // Input Value
 
@@ -59,18 +54,193 @@ const Widget = () => {
   const [description, setDescription] = useState(
     "Airbot is the powerfull chatbot"
   );
-  const [poweredBy, setPoweredBy] = useState("AirBot");
+  const [poweredBy, setPoweredBy] = useState("Airbot");
   const [logo, setLogo] = useState(
     "https://uselooper.com/assets/images/avatars/profile.jpg"
   );
   const [bubbleIcon, setBubbleIcon] = useState("");
 
-  const handleOnChange = (color, key) => {
-    setBubbleColor({
-      ...bubbleColor,
-      [`${key}`]: color,
-    });
+  const handleOnChange = (color) => {
+    setBubbleBackground(color.hex);
   };
+
+  const handleOnChange2 = (color) => {
+    setIconColor(color.hex);
+  };
+
+  const headerBackgroundFunc = (color) => {
+    setHeaderBackground(color.hex);
+    console.log(bubbleBackground);
+  };
+
+  const headerTextFunc = (color) => {
+    setHeaderText(color.hex);
+    console.log(bubbleBackground);
+  };
+
+  const screenBackgroundFunc = (color) => {
+    setScreenBackground(color.hex);
+    console.log(bubbleBackground);
+  };
+
+  const titleColorFunc = (color) => {
+    setTitleColor(color.hex);
+    console.log(bubbleBackground);
+  };
+
+  const startButtonColorFunc = (color) => {
+    setStartButtonColor(color.hex);
+    console.log(bubbleBackground);
+  };
+
+  const chatHeaderBackgroundFunc = (color) => {
+    setChatHeaderBackground(color.hex);
+    console.log(bubbleBackground);
+  };
+
+  const chatBackgroundFunc = (color) => {
+    setChatBackground(color.hex);
+    console.log(bubbleBackground);
+  };
+
+  const chatTitleColorFunc = (color) => {
+    setChatTitleColor(color.hex);
+    console.log(bubbleBackground);
+  };
+
+  const chatStartButtonColorFunc = (color) => {
+    setChatStartButtonColor(color.hex);
+    console.log(bubbleBackground);
+  };
+
+  const welMsgBgColorFunc = (color) => {
+    setWelMsgBgColor(color.hex);
+    console.log(bubbleBackground);
+  };
+
+  const welMsgTextColorFunc = (color) => {
+    setWelMsgTextColor(color.hex);
+    console.log(bubbleBackground);
+  };
+
+  const userResponseBgColorFunc = (color) => {
+    setUserResponseBgColor(color.hex);
+    console.log(bubbleBackground);
+  };
+
+  const userResponseColorFunc = (color) => {
+    setUserResponseColor(color.hex);
+  };
+
+  //  useEffect(() => {
+
+  //           document.body.style.overflow = 'hidden';
+
+  //       }, );
+
+  let bubbleColorPicker = useRef();
+  let iconColorPicker = useRef();
+  let welHbColorPicker = useRef();
+  let welHtColorPicker = useRef();
+  let welSbColorPicker = useRef();
+  let welTcColorPicker = useRef();
+  let welSbcColorPicker = useRef();
+  let chatHbColorPicker = useRef();
+  let chatBcColorPicker = useRef();
+  let chatTcColorPicker = useRef();
+  let chatSbcColorPicker = useRef();
+  let chatMbcColorPicker = useRef();
+  let chatMcColorPicker = useRef();
+  let chatRbColorPicker = useRef();
+  let chatRcColorPicker = useRef();
+
+  useEffect(() => {
+    var handler = (e) => {
+      if (!bubbleColorPicker.current.contains(e.target))
+        setColorPickerVisible(false);
+    };
+
+    var handler2 = (e) => {
+      if (!iconColorPicker.current.contains(e.target))
+        setColorPickerVisible2(false);
+    };
+
+    var handler3 = (e) => {
+      if (!welHbColorPicker.current.contains(e.target))
+        setColorPickerVisible3(false);
+    };
+    var handler4 = (e) => {
+      if (!welHtColorPicker.current.contains(e.target))
+        setColorPickerVisible4(false);
+    };
+
+    var handler5 = (e) => {
+      if (!welSbColorPicker.current.contains(e.target))
+        setColorPickerVisible5(false);
+    };
+    var handler6 = (e) => {
+      if (!welTcColorPicker.current.contains(e.target))
+        setColorPickerVisible6(false);
+    };
+
+    var handler7 = (e) => {
+      if (!welSbcColorPicker.current.contains(e.target))
+        setColorPickerVisible7(false);
+    };
+
+    var handler8 = (e) => {
+      if (!chatHbColorPicker.current.contains(e.target))
+        setColorPickerVisible8(false);
+    };
+    var handler9 = (e) => {
+      if (!chatBcColorPicker.current.contains(e.target))
+        setColorPickerVisible9(false);
+    };
+    var handler10 = (e) => {
+      if (!chatTcColorPicker.current.contains(e.target))
+        setColorPickerVisible10(false);
+    };
+    var handler12 = (e) => {
+      if (!chatSbcColorPicker.current.contains(e.target))
+        setColorPickerVisible12(false);
+    };
+
+    var handler13 = (e) => {
+      if (!chatMbcColorPicker.current.contains(e.target))
+        setColorPickerVisible13(false);
+    };
+
+    var handler14 = (e) => {
+      if (!chatMcColorPicker.current.contains(e.target))
+        setColorPickerVisible14(false);
+    };
+
+    var handler15 = (e) => {
+      if (!chatRbColorPicker.current.contains(e.target))
+        setColorPickerVisible15(false);
+    };
+
+    var handler16 = (e) => {
+      if (!chatRcColorPicker.current.contains(e.target))
+        setColorPickerVisible16(false);
+    };
+
+    document.addEventListener("mousedown", handler);
+    document.addEventListener("mousedown", handler2);
+    document.addEventListener("mousedown", handler3);
+    document.addEventListener("mousedown", handler4);
+    document.addEventListener("mousedown", handler5);
+    document.addEventListener("mousedown", handler6);
+    document.addEventListener("mousedown", handler7);
+    document.addEventListener("mousedown", handler8);
+    document.addEventListener("mousedown", handler9);
+    document.addEventListener("mousedown", handler10);
+    document.addEventListener("mousedown", handler12);
+    document.addEventListener("mousedown", handler13);
+    document.addEventListener("mousedown", handler14);
+    document.addEventListener("mousedown", handler15);
+    document.addEventListener("mousedown", handler16);
+  });
 
   const imgFilePreview = (e) => {
     if (e.target.files.length !== 0) {
@@ -83,24 +253,25 @@ const Widget = () => {
       setBubbleIcon(URL.createObjectURL(e.target.files[0]));
     }
   };
+
   const handleSubmit = async () => {
-    const data = {
+    let data = {
       uuid: "234567hbfvlkfds",
       title: botName,
-      description,
+      description: description,
       powered_by: poweredBy,
       theme: {
-        minimizeWidget: {
+        minimizedWidget: {
           bgColor: bubbleBackground,
-          iconColor,
+          iconColor: iconColor,
         },
         welcomeScreen: {
-          headerBackground,
-          headerText,
+          headerBackground: headerBackground,
+          headerText: headerText,
           bgColor: screenBackground,
           title: botName,
-          titleColor,
-          startButtonColor,
+          titleColor: titleColor,
+          startButtonColor: startButtonColor,
         },
         chatScreen: {
           headerBackground: chatHeaderBackground,
@@ -116,15 +287,26 @@ const Widget = () => {
       },
     };
 
-    console.log("Data", data);
+    await dispatch(postWidget(data));
 
-    const convertWidget = JSON.stringify(data);
-    dispatch(postWidget(convertWidget));
+    // fetch("http://localhost:4012/widget", {
+    //     method: "POST",
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body:JSON.stringify(data)
+    //   }).then((resp)=>{
+
+    //     resp.json().then((result)=>{
+    //       console.log("result",result)
+    //     })
+    //   })
   };
 
   return (
     <>
-      <div className=" w-[1614px] dark:bg-black min-h-screen mt-[60px]   ml-[214px] ">
+      <div className=" w-full dark:bg-black min-h-screen mt-[60px]   ml-[209px] ">
         <div className="pl-[30px] mt-4 border py-4 border-slate-200 border-l-0">
           <h1 className="text-[28px] dark:text-[#555] font-semi-bold">
             Chat Widget
@@ -150,26 +332,7 @@ const Widget = () => {
             </div>
             {settingVisible ? (
               <div className="max-w-[710px] h-[460px] ml-6 border border-slate-200 mb-6">
-                {WIDGET_DATA.map((item: any, index: number) => {
-                  return (
-                    <div className="pl-4 pr-4  mt-3">
-                      <h3 className="text-[20px] dark:text-[#888]">
-                        {item.placeholder}
-                      </h3>
-                      <input
-                        type="text"
-                        onChange={(e) =>
-                          setGeneralSetting({
-                            ...generalSetting,
-                            [`${item.key}`]: e.target.value,
-                          })
-                        }
-                        className="min-w-[680px] mt-2 py-[8px] px-2 border rounded-[6px] border-zinc-300"
-                      />
-                    </div>
-                  );
-                })}
-                {/* <div className="pl-4 pr-4  mt-3">
+                <div className="pl-4 pr-4  mt-3">
                   <h3 className="text-[20px] dark:text-[#888]">Bot Name</h3>
                   <input
                     type="text"
@@ -187,7 +350,7 @@ const Widget = () => {
                     onChange={(e) => setDescription(e.target.value)}
                     className="min-w-[680px] mt-2 px-2 py-[8px] border rounded-[6px] border-zinc-300"
                   />
-                </div> */}
+                </div>
 
                 <div className="pl-4 mt-3">
                   <h3 className="text-[20px] dark:text-[#888]">Powered by</h3>
@@ -197,10 +360,6 @@ const Widget = () => {
                     onChange={(e) => setPoweredBy(e.target.value)}
                     className="min-w-[680px] mt-2 px-2 py-[8px] border rounded-[6px] border-zinc-300"
                   />
-                </div>
-
-                <div className="pl-4 mt-3">
-                  <h3 className="text-[20px] dark:text-[#888]">Powered by</h3>
                 </div>
 
                 <div className="pl-4 mt-3">
@@ -235,54 +394,7 @@ const Widget = () => {
                   MINIMIZED WIDGET
                 </h1>
                 <div className="flex  items-center  gap-8">
-                  {WIDGET_MINIMIZED.map((item: any, index: number) => {
-                    return (
-                      <div className="pl-4 pr-4  mt-3 ">
-                        <h3 className="text-[20px] text-[#516173] dark:text-[#555]">
-                          {item.placeholder}
-                        </h3>
-
-                        <div>
-                          <div
-                            onClick={() => setColorPickerVisible(item.key)}
-                            className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                          >
-                            <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                              {bubbleColor[item.key]
-                                ? bubbleColor[item.key]
-                                : "#fff"}
-                            </div>
-                            <div
-                              style={{ backgroundColor: bubbleColor[item.key] }}
-                              className="px-[16px] my-1 mx-1 rounded-[5px]"
-                            ></div>
-                          </div>
-
-                          {colorPickerVisible === item.key ? (
-                            <div
-                              ref={bubbleColorPicker}
-                              id="func"
-                              className="fixed top-[140px] z-99"
-                            >
-                              {" "}
-                              <SketchPicker
-                                color={
-                                  bubbleColor[item.key]
-                                    ? bubbleColor[item.key]
-                                    : "#fff"
-                                }
-                                onChangeComplete={(color) =>
-                                  handleOnChange(color, item.key)
-                                }
-                                width={280}
-                              />{" "}
-                            </div>
-                          ) : null}
-                        </div>
-                      </div>
-                    );
-                  })}
-                  {/* <div className="pl-4 pr-4  mt-3 ">
+                  <div className="pl-4 pr-4  mt-3 ">
                     <h3 className="text-[20px] text-[#516173] dark:text-[#555]">
                       Bubble Background
                     </h3>
@@ -318,9 +430,9 @@ const Widget = () => {
                         </div>
                       ) : null}
                     </div>
-                  </div> */}
+                  </div>
 
-                  {/* <div className="pl-4 pr-4  mt-3">
+                  <div className="pl-4 pr-4  mt-3">
                     <h3 className="text-[20px] text-[#516173] dark:text-[#555]">
                       Icon color
                     </h3>
@@ -355,10 +467,10 @@ const Widget = () => {
                         </div>
                       ) : null}
                     </div>
-                  </div> */}
+                  </div>
                 </div>
 
-                {/* <h1 className="text-[21px] text-[#9ba6b3] dark:text-[#555] pl-4 mt-11">
+                <h1 className="text-[21px] text-[#9ba6b3] dark:text-[#555] pl-4 mt-11">
                   WELCOME SCREEN
                 </h1>
 
@@ -858,11 +970,11 @@ const Widget = () => {
                       ) : null}
                     </div>
                   </div>
-                </div> 
+                </div>
                 <div className="pl-4 pr-4  mt-3 ">
                   <button
                     onClick={handleSubmit}
-                    className="bg-[#242526] text-white px-[20px] py-[10px] rounded-[5px]"
+                    className="px-[18px] py-[7px] rounded-[8px] border border-[#c4c2c5] bg-[#fff] shadow-md font-semibold text-[#888]"
                   >
                     Publish your bot
                   </button>
@@ -871,7 +983,7 @@ const Widget = () => {
             ) : null}
           </div>
 
-          <div className="mt-[20px] fixed right-20 ">
+          <div className="mt-[20px] fixed right-0 ">
             <Preview
               poweredBy={poweredBy}
               bubbleIcon={bubbleIcon}

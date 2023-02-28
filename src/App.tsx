@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from "./pages/Profile/SignIn";
 import Signup from "./pages/Profile/Signup";
@@ -6,6 +7,19 @@ import Widget from "./pages/Widget/Widget";
 import Responses from "./pages/Response/Responses";
 import Profile from "./pages/Profile/Profile";
 import TableView from "./pages/Response/TableView"
+=======
+import Navbar from './components/Navbar/Navbar';
+import Sidebar from './components/Sidebar/Sidebar';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Widget from './pages/Widget/Widget';
+import Responses from "./pages/Response/Responses";
+
+
+import Profile from "./pages/Profile/Profile";
+
+// import logo from './logo.svg';
+// import './App.css';
+>>>>>>> development
 
 function App() {
   return (

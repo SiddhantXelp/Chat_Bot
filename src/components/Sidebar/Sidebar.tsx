@@ -27,7 +27,7 @@ const Sidebar = () => {
             MAIN
           </p>
 
-          <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
+          <li className="flex items-center p-[5px] hover:bg-[#ece8ff] cursor-pointer">
             <DashboardIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
             <span className="text-[18px] text-[#888] font-normal ml-[20px]">
               Dashboard
@@ -37,8 +37,14 @@ const Sidebar = () => {
           <p className="text-[#999] font-bold text-[13px] mt-[15px] mb-[5px]">
             SERVICES
           </p>
+<<<<<<< HEAD
           <Link to="/root/Widget">
             <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
+=======
+          <Link to="/Widget">
+            <li className="flex items-center p-[5px] hover:bg-[#ece8ff] cursor-pointer">
+
+>>>>>>> development
               <StyleIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
               <span className="text-[18px] text-[#888] font-normal ml-[20px]">
                 Widget
@@ -46,12 +52,13 @@ const Sidebar = () => {
             </li>
           </Link>
 
-          <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
+          <li className="flex items-center p-[5px] hover:bg-[#ece8ff] cursor-pointer">
             <PersonIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
             <span className="text-[18px] text-[#888] font-normal ml-[20px]">
               Users
             </span>
           </li>
+<<<<<<< HEAD
 
           <Link to="/root/responses">
             <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
@@ -63,23 +70,37 @@ const Sidebar = () => {
           </Link>
     <Link to="/root/tableview">
           <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
+=======
+          <Link to="/Responses">
+          <li className="flex items-center p-[5px] hover:bg-[#ece8ff] cursor-pointer">
+            <ShoppingBagIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
+            <span className="text-[18px] text-[#888] font-normal ml-[20px]">Responses</span>
+          </li>
+          </Link>
+          <li className="flex items-center p-[5px] hover:bg-[#ece8ff] cursor-pointer">
+>>>>>>> development
             <NotificationsNoneOutlinedIcon className="text-[28px] dark:text-[#555] text-[#7451f8]" />
             <span className="text-[18px] text-[#888] font-normal ml-[20px]">
               Activity Monitor
             </span>
           </li>
+<<<<<<< HEAD
 </Link>
           <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
             <BuildIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
             <span className="text-[18px] text-[#888] font-normal ml-[20px]">
               Settings
             </span>
+=======
+
+          <li className="flex items-center p-[5px] hover:bg-[#ece8ff] cursor-pointer">
+            < BuildIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
+            <span className="text-[18px] text-[#888] font-normal ml-[20px]">Settings</span>
+>>>>>>> development
           </li>
 
-          <p className="text-[#999] font-bold text-[13px] mt-[15px] mb-[5px]">
-            ADMIN
-          </p>
-          <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
+          <p className="text-[#999] font-bold text-[13px] mt-[15px] mb-[5px]">ADMIN</p>
+          <li className="flex items-center p-[5px] hover:bg-[#ece8ff] cursor-pointer">
             <Link to="/profile">
               <AccountCircleOutlinedIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
               <span className="text-[18px] text-[#888] font-normal ml-[20px]">
@@ -88,7 +109,7 @@ const Sidebar = () => {
             </Link>
           </li>
 
-          <li className="flex items-center p-[5px] hover:bg-[#ece8ff]">
+          <li className="flex items-center p-[5px] hover:bg-[#ece8ff] cursor-pointer">
             <LogoutOutlinedIcon className="text-[18px] dark:text-[#555] text-[#7451f8]" />
             <span className="text-[18px] text-[#888] font-normal ml-[20px]">
               Logout
