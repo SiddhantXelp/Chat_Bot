@@ -23,7 +23,7 @@ const initialState: WidgetState = {
 }
 
 const widgetSlice = createSlice({
-    name: 'widget',
+    name: 'user1',
     initialState,
     reducers: {
       setWidgetResponse: (state, action: PayloadAction<any>) => {
@@ -37,6 +37,7 @@ const widgetSlice = createSlice({
       },
      
     },
+  },
 });
 
 export const { setWidgetResponse, setWidgetLoading, setWidgetAPIErrors } = widgetSlice.actions

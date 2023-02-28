@@ -275,252 +275,376 @@ const handleSubmit =  async () => {
   };
 
 
-    return (
-        <>
+  return (
+    <>
 
-            <div className=" w-full dark:bg-black min-h-screen mt-[60px]  ml-[228px] " >
+        <div className=" w-full dark:bg-black min-h-screen mt-[60px]   ml-[228px] " >
 
-                <div className="pl-[30px] w-[full] mt-4 border py-4 border-slate-200 border-l-0 border-r-0">
-                    <h1 className="text-[28px] dark:text-[#555] font-semi-bold">Chat Widget</h1>
+            <div className="pl-[30px] mt-4 border py-4 border-slate-200 border-l-0">
+                <h1 className="text-[28px] dark:text-[#555] font-semi-bold">Chat Widget</h1>
+            </div>
+
+            <div className='flex relative gap-6 min-h-[300px]'>
+                <div  className="flex flex-col overflow-y-auto min-w-[770px]">
+
+                <div onClick={() => setSettingVisible(!settingVisible)} className=" flex items-center justify-between py-[22px] border max-w-[710px] ml-6 border-slate-200 px-4 mt-5 ">
+                    <div className="flex items-center">
+                        <i className="fa-solid fa-sliders dark:text-[#555]  text-[#7451f8] text-[30px]"></i>
+                        <h1 className="text-[19px] font-semibold ml-6  dark:text-[#888] ">General Settings</h1>
+                    </div>
+                    <i onClick={() => setSettingVisible(!settingVisible)} className="fa-solid fa-angle-right dark:text-[#555]  text-[20px]"></i>
+
+
+
                 </div>
+                {settingVisible ? <div className="max-w-[710px] h-[460px] ml-6 border border-slate-200 mb-6">
+                    <div className="pl-4 pr-4  mt-3">
+                        <h3 className="text-[20px] dark:text-[#888]">Bot Name</h3>
+                        <input type="text" value={botName} onChange={(e) => setBotName(e.target.value)} className="min-w-[680px] mt-2 py-[8px] px-2 border rounded-[6px] border-zinc-300" />
+                    </div>
 
-                <div className='flex relative gap-6 min-h-[300px]'>
-                    <div  className="flex flex-col overflow-y-auto min-w-[770px]">
+                    <div className="pl-4 mt-3">
+                        <h3 className="text-[20px] dark:text-[#888]">Description</h3>
+                        <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="min-w-[680px] mt-2 px-2 py-[8px] border rounded-[6px] border-zinc-300" />
+                    </div>
 
-                    <div onClick={() => setSettingVisible(!settingVisible)} className=" flex items-center justify-between py-[22px] border max-w-[710px] ml-6 border-slate-200 px-4 mt-5 ">
-                        <div className="flex items-center">
-                            <i className="fa-solid fa-sliders dark:text-[#555]  text-[#7451f8] text-[30px]"></i>
-                            <h1 className="text-[19px] font-semibold ml-6  dark:text-[#888] ">General Settings</h1>
+                    <div className="pl-4 mt-3">
+                        <h3 className="text-[20px] dark:text-[#888]">Powered by</h3>
+                    </div>
+
+                    <div className="pl-4 mt-3">
+                    <h3 className="text-[20px] mb-2 dark:text-[#888]">Bot Logo</h3>
+                    <input onChange={imgFilePreview}  type="file"/>
+                    </div>
+
+                    <div className="pl-4 mt-3">
+                    <h3 className="text-[20px] mb-2">Bubble Icon</h3>
+                    <input onChange={bubblePreview}  type="file"/>
+                    </div>
+                </div> : null}
+
+                <div onClick={() => setVisible(!visible)} className=" flex items-center justify-between py-[22px] border max-w-[710px] ml-6 border-slate-200 px-4 mt-5 ">
+                    <div className="flex items-center">
+                        <i className="fa-sharp fa-solid fa-pencil dark:text-[#555]  text-[#7451f8] text-[30px]"></i>
+                        <h1 className="text-[19px] dark:text-[#888] font-semibold ml-6  ">Appearance</h1>
+                    </div>
+                    <i className="fa-solid fa-angle-right text-[20px] dark:text-[#555]"></i>
+
+
+
+                </div>
+                {visible ? <div className="max-w-[710px] h-[990px] ml-6 border border-slate-200 mb-6">
+                    <h1 className="text-[21px] text-[#9ba6b3] pl-4 my-3 dark:text-[#555] ">MINIMIZED WIDGET</h1>
+                    <div className="flex  items-center  gap-8">
+
+                        <div className="pl-4 pr-4  mt-3 " >
+                            <h3 className="text-[20px] text-[#516173] dark:text-[#555]">Bubble Background</h3>
+
+                            <div >
+
+
+
+                                <div onClick={() => setColorPickerVisible(!colorPickerVisible)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                    <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
+                                        {bubbleBackground}
+                                    </div>
+                                    <div style={{ backgroundColor: bubbleBackground }} className="px-[16px] my-1 mx-1 rounded-[5px]">
+
+                                    </div>
+
+                                </div>
+
+                                {
+                                    colorPickerVisible ? <div ref={bubbleColorPicker} id="func" className="fixed top-[140px] z-99"> <SketchPicker
+
+                                        color={bubbleBackground}
+                                        onChangeComplete={handleOnChange}
+                                        width={280}
+                                    />  </div> : null
+                                }
+
+                            </div>
                         </div>
-                        <i onClick={() => setSettingVisible(!settingVisible)} className="fa-solid fa-angle-right dark:text-[#555]  text-[20px]"></i>
 
+                        <div className="pl-4 pr-4  mt-3" >
+                            <h3 className="text-[20px] text-[#516173] dark:text-[#555]">Icon color</h3>
+
+                            <div >
+
+
+
+                                <div onClick={() => setColorPickerVisible2(!colorPickerVisible2)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                    <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
+                                        {iconColor}
+                                    </div>
+                                    <div style={{ backgroundColor: iconColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
+
+                                    </div>
+
+                                </div>
+
+                                {
+                                    colorPickerVisible2 ? <div ref={iconColorPicker} className="fixed top-[140px] z-99"> <SketchPicker
+
+                                        color={bubbleBackground}
+                                        onChangeComplete={handleOnChange2}
+                                        width={280}
+                                    /> </div> : null
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1 className="text-[21px] text-[#9ba6b3] dark:text-[#555] pl-4 mt-11">WELCOME SCREEN</h1>
+
+                    <div className="flex  items-center  gap-8">
+
+                        <div className="pl-4 pr-4  mt-3 " >
+                            <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Header Background</h3>
+
+                            <div >
+
+
+
+                                <div onClick={() => setColorPickerVisible3(!colorPickerVisible3)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                    <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
+                                        {headerBackground}
+                                    </div>
+                                    <div style={{ backgroundColor: headerBackground }} className="px-[16px] my-1 mx-1 rounded-[5px]">
+
+                                    </div>
+
+                                </div>
+
+                                {
+                                    colorPickerVisible3 ? <div ref={welHbColorPicker} className="fixed top-[300px] z-99"> <SketchPicker
+
+                                        color={bubbleBackground}
+                                        onChangeComplete={headerBackgroundFunc}
+                                        width={280}
+                                    />  </div> : null
+                                }
+
+                            </div>
+                        </div>
+
+                        <div className="pl-4 pr-4  mt-3" >
+                            <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Header Text</h3>
+
+                            <div >
+
+
+
+                                <div onClick={() => setColorPickerVisible4(!colorPickerVisible4)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                    <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
+                                        {headerText}
+                                    </div>
+                                    <div style={{ backgroundColor: headerText }} className="px-[16px] my-1 mx-1 rounded-[5px]">
+
+                                    </div>
+
+                                </div>
+
+                                {
+                                    colorPickerVisible4 ? <div ref={welHtColorPicker} className="fixed top-[300px] z-99"> <SketchPicker
+
+                                        color={bubbleBackground}
+                                        onChangeComplete={headerTextFunc}
+                                        width={280}
+                                    /> </div> : null
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex  items-center  gap-8">
+
+                        <div className="pl-4 pr-4  mt-3 " >
+                            <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Screen Background</h3>
+
+                            <div >
+
+
+
+                                <div onClick={() => setColorPickerVisible5(!colorPickerVisible5)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                    <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
+                                        {screenBackground}
+                                    </div>
+                                    <div style={{ backgroundColor: screenBackground }} className="px-[16px] my-1 mx-1 rounded-[5px]">
+
+                                    </div>
+
+                                </div>
+
+                                {
+                                    colorPickerVisible5 ? <div ref={welSbColorPicker} className="fixed top-[340px] z-99"> <SketchPicker
+
+                                        color={bubbleBackground}
+                                        onChangeComplete={screenBackgroundFunc}
+                                        width={280}
+                                    />  </div> : null
+                                }
+
+                            </div>
+                        </div>
+
+                        <div className="pl-4 pr-4  mt-3" >
+                            <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Title Color</h3>
+
+                            <div >
+
+
+
+                                <div onClick={() => setColorPickerVisible6(!colorPickerVisible6)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                    <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
+                                        {titleColor}
+                                    </div>
+                                    <div style={{ backgroundColor: titleColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
+
+                                    </div>
+
+                                </div>
+
+                                {
+                                    colorPickerVisible6 ? <div ref={welTcColorPicker} className="fixed top-[390px] z-99"> <SketchPicker
+
+                                        color={bubbleBackground}
+                                        onChangeComplete={titleColorFunc}
+                                        width={280}
+                                    /> </div> : null
+                                }
+
+                            </div>
+                        </div>
 
 
                     </div>
-                    {settingVisible ? <div className="max-w-[710px] h-[460px] ml-6 border border-slate-200 mb-6">
-                        <div className="pl-4 pr-4  mt-3">
-                            <h3 className="text-[20px] dark:text-[#888]">Bot Name</h3>
-                            <input type="text" value={botName} onChange={(e) => setBotName(e.target.value)} className="min-w-[680px] mt-2 py-[8px] px-2 border rounded-[6px] border-zinc-300" />
+
+                    <div className="pl-4 pr-4  mt-3" >
+                        <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Start Button Color</h3>
+
+                        <div >
+
+
+
+                            <div onClick={() => setColorPickerVisible7(!colorPickerVisible7)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
+                                    {startButtonColor}
+                                </div>
+                                <div style={{ backgroundColor: startButtonColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
+
+                                </div>
+
+                            </div>
+
+                            {
+                                colorPickerVisible7 ? <div ref={welSbcColorPicker} className="fixed top-[250px] z-99"> <SketchPicker
+
+                                    color={bubbleBackground}
+                                    onChangeComplete={startButtonColorFunc}
+                                    width={280}
+                                /> </div> : null
+                            }
+
                         </div>
-
-                        <div className="pl-4 mt-3">
-                            <h3 className="text-[20px] dark:text-[#888]">Description</h3>
-                            <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="min-w-[680px] mt-2 px-2 py-[8px] border rounded-[6px] border-zinc-300" />
-                        </div>
-
-                        <div className="pl-4 mt-3">
-                            <h3 className="text-[20px] dark:text-[#888]">Powered by</h3>
-                            <input type="text" value={poweredBy} onChange={(e) => setPoweredBy(e.target.value)} className="min-w-[680px] mt-2 px-2 py-[8px] border rounded-[6px] border-zinc-300" />
-                        </div>
-
-                        <div className="pl-4 mt-3">
-                        <h3 className="text-[20px] mb-2 dark:text-[#888]">Bot Logo</h3>
-                        <input onChange={imgFilePreview}  type="file"/>
-                        </div>
-
-                        <div className="pl-4 mt-3">
-                        <h3 className="text-[20px] mb-2">Bubble Icon</h3>
-                        <input onChange={bubblePreview}  type="file"/>
-                        </div>
-                    </div> : null}
-
-                    <div onClick={() => setVisible(!visible)} className=" flex items-center justify-between py-[22px] border max-w-[710px] ml-6 border-slate-200 px-4 mt-5 ">
-                        <div className="flex items-center">
-                            <i className="fa-sharp fa-solid fa-pencil dark:text-[#555]  text-[#7451f8] text-[30px]"></i>
-                            <h1 className="text-[19px] dark:text-[#888] font-semibold ml-6  ">Appearance</h1>
-                        </div>
-                        <i className="fa-solid fa-angle-right text-[20px] dark:text-[#555]"></i>
-
-
-
                     </div>
-                    {visible ? <div className="max-w-[710px] h-[1040px] ml-6 border border-slate-200 mb-6">
-                        <h1 className="text-[21px] text-[#9ba6b3] pl-4 my-3 dark:text-[#555] ">MINIMIZED WIDGET</h1>
-                        <div className="flex  items-center  gap-8">
-
-                            <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] text-[#516173] dark:text-[#555]">Bubble Background</h3>
-
-                                <div >
 
 
+                    {/* Third */}
 
-                                    <div onClick={() => setColorPickerVisible(!colorPickerVisible)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
-                                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                            {bubbleBackground}
-                                        </div>
-                                        <div style={{ backgroundColor: bubbleBackground }} className="px-[16px] my-1 mx-1 rounded-[5px]">
+                    <h1 className="text-[21px] text-[#9ba6b3] dark:text-[#555] pl-4 mt-11 ">CHAT SCREEN</h1>
+                    <div className="flex  items-center  gap-8">
 
-                                        </div>
+                        <div className="pl-4 pr-4  mt-3 " >
+                            <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Header Background</h3>
+
+                            <div >
+
+
+
+                                <div onClick={() => setColorPickerVisible8(!colorPickerVisible8)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                    <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
+                                        {chatHeaderBackground}
+                                    </div>
+                                    <div style={{ backgroundColor: chatHeaderBackground }} className="px-[16px] my-1 mx-1 rounded-[5px]">
 
                                     </div>
 
-                                    {
-                                        colorPickerVisible ? <div ref={bubbleColorPicker} id="func" className="fixed top-[140px] z-99"> <SketchPicker
-
-                                            color={bubbleBackground}
-                                            onChangeComplete={handleOnChange}
-                                            width={280}
-                                        />  </div> : null
-                                    }
-
                                 </div>
-                            </div>
 
-                            <div className="pl-4 pr-4  mt-3" >
-                                <h3 className="text-[20px] text-[#516173] dark:text-[#555]">Icon color</h3>
+                                {
+                                    colorPickerVisible8 ? <div ref={chatHbColorPicker} className="fixed top-[330px] z-99"> <SketchPicker
 
-                                <div >
+                                        color={bubbleBackground}
+                                        onChangeComplete={chatHeaderBackgroundFunc}
+                                        width={280}
+                                    />  </div> : null
+                                }
 
-
-
-                                    <div onClick={() => setColorPickerVisible2(!colorPickerVisible2)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
-                                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                            {iconColor}
-                                        </div>
-                                        <div style={{ backgroundColor: iconColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
-
-                                        </div>
-
-                                    </div>
-
-                                    {
-                                        colorPickerVisible2 ? <div ref={iconColorPicker} className="fixed top-[140px] z-99"> <SketchPicker
-
-                                            color={bubbleBackground}
-                                            onChangeComplete={handleOnChange2}
-                                            width={280}
-                                        /> </div> : null
-                                    }
-
-                                </div>
                             </div>
                         </div>
 
-                        <h1 className="text-[21px] text-[#9ba6b3] dark:text-[#555] pl-4 mt-11">WELCOME SCREEN</h1>
+                        <div className="pl-4 pr-4  mt-3" >
+                            <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Background color</h3>
 
-                        <div className="flex  items-center  gap-8">
-
-                            <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Header Background</h3>
-
-                                <div >
+                            <div >
 
 
 
-                                    <div onClick={() => setColorPickerVisible3(!colorPickerVisible3)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
-                                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                            {headerBackground}
-                                        </div>
-                                        <div style={{ backgroundColor: headerBackground }} className="px-[16px] my-1 mx-1 rounded-[5px]">
-
-                                        </div>
+                                <div onClick={() => setColorPickerVisible9(!colorPickerVisible9)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                    <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
+                                        {chatBackground}
+                                    </div>
+                                    <div style={{ backgroundColor: chatBackground }} className="px-[16px] my-1 mx-1 rounded-[5px]">
 
                                     </div>
 
-                                    {
-                                        colorPickerVisible3 ? <div ref={welHbColorPicker} className="fixed top-[300px] z-99"> <SketchPicker
-
-                                            color={bubbleBackground}
-                                            onChangeComplete={headerBackgroundFunc}
-                                            width={280}
-                                        />  </div> : null
-                                    }
-
                                 </div>
-                            </div>
 
-                            <div className="pl-4 pr-4  mt-3" >
-                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Header Text</h3>
+                                {
+                                    colorPickerVisible9 ? <div ref={chatBcColorPicker} className="fixed top-[330px] z-99"> <SketchPicker
 
-                                <div >
+                                        color={bubbleBackground}
+                                        onChangeComplete={chatBackgroundFunc}
+                                        width={280}
+                                    /> </div> : null
+                                }
 
-
-
-                                    <div onClick={() => setColorPickerVisible4(!colorPickerVisible4)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
-                                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                            {headerText}
-                                        </div>
-                                        <div style={{ backgroundColor: headerText }} className="px-[16px] my-1 mx-1 rounded-[5px]">
-
-                                        </div>
-
-                                    </div>
-
-                                    {
-                                        colorPickerVisible4 ? <div ref={welHtColorPicker} className="fixed top-[300px] z-99"> <SketchPicker
-
-                                            color={bubbleBackground}
-                                            onChangeComplete={headerTextFunc}
-                                            width={280}
-                                        /> </div> : null
-                                    }
-
-                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div className="flex  items-center  gap-8">
+                    <div className="flex  items-center  gap-8">
 
-                            <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Screen Background</h3>
+                        <div className="pl-4 pr-4  mt-3 " >
+                            <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Title Color</h3>
 
-                                <div >
+                            <div >
 
 
 
-                                    <div onClick={() => setColorPickerVisible5(!colorPickerVisible5)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
-                                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                            {screenBackground}
-                                        </div>
-                                        <div style={{ backgroundColor: screenBackground }} className="px-[16px] my-1 mx-1 rounded-[5px]">
-
-                                        </div>
+                                <div onClick={() => setColorPickerVisible10(!colorPickerVisible10)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                    <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
+                                        {chatTitleColor}
+                                    </div>
+                                    <div style={{ backgroundColor: chatTitleColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
 
                                     </div>
 
-                                    {
-                                        colorPickerVisible5 ? <div ref={welSbColorPicker} className="fixed top-[340px] z-99"> <SketchPicker
-
-                                            color={bubbleBackground}
-                                            onChangeComplete={screenBackgroundFunc}
-                                            width={280}
-                                        />  </div> : null
-                                    }
-
                                 </div>
+
+                                {
+                                    colorPickerVisible10 ? <div ref={chatTcColorPicker} className="fixed top-[90px] z-99"> <SketchPicker
+
+                                        color={bubbleBackground}
+                                        onChangeComplete={chatTitleColorFunc}
+                                        width={280}
+                                    />  </div> : null
+                                }
+
                             </div>
-
-                            <div className="pl-4 pr-4  mt-3" >
-                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Title Color</h3>
-
-                                <div >
-
-
-
-                                    <div onClick={() => setColorPickerVisible6(!colorPickerVisible6)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
-                                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                            {titleColor}
-                                        </div>
-                                        <div style={{ backgroundColor: titleColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
-
-                                        </div>
-
-                                    </div>
-
-                                    {
-                                        colorPickerVisible6 ? <div ref={welTcColorPicker} className="fixed top-[390px] z-99"> <SketchPicker
-
-                                            color={bubbleBackground}
-                                            onChangeComplete={titleColorFunc}
-                                            width={280}
-                                        /> </div> : null
-                                    }
-
-                                </div>
-                            </div>
-
-
                         </div>
 
                         <div className="pl-4 pr-4  mt-3" >
@@ -530,1041 +654,170 @@ const handleSubmit =  async () => {
 
 
 
-                                <div onClick={() => setColorPickerVisible7(!colorPickerVisible7)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                <div onClick={() => setColorPickerVisible12(!colorPickerVisible12)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
                                     <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                        {startButtonColor}
+                                        {chatStartButtonColor}
                                     </div>
-                                    <div style={{ backgroundColor: startButtonColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
+                                    <div style={{ backgroundColor: chatStartButtonColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
 
                                     </div>
 
                                 </div>
 
                                 {
-                                    colorPickerVisible7 ? <div ref={welSbcColorPicker} className="fixed top-[250px] z-99"> <SketchPicker
+                                    colorPickerVisible12 ? <div ref={chatSbcColorPicker} className="fixed top-[90px] z-99"> <SketchPicker
 
                                         color={bubbleBackground}
-                                        onChangeComplete={startButtonColorFunc}
+                                        onChangeComplete={chatStartButtonColorFunc}
                                         width={280}
                                     /> </div> : null
                                 }
 
                             </div>
                         </div>
-
-
-                        {/* Third */}
-
-                        <h1 className="text-[21px] text-[#9ba6b3] dark:text-[#555] pl-4 mt-11 ">CHAT SCREEN</h1>
-                        <div className="flex  items-center  gap-8">
-
-                            <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Header Background</h3>
-
-                                <div >
-
-
-
-                                    <div onClick={() => setColorPickerVisible8(!colorPickerVisible8)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
-                                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                            {chatHeaderBackground}
-                                        </div>
-                                        <div style={{ backgroundColor: chatHeaderBackground }} className="px-[16px] my-1 mx-1 rounded-[5px]">
-
-                                        </div>
-
-                                    </div>
-
-                                    {
-                                        colorPickerVisible8 ? <div ref={chatHbColorPicker} className="fixed top-[330px] z-99"> <SketchPicker
-
-                                            color={bubbleBackground}
-                                            onChangeComplete={chatHeaderBackgroundFunc}
-                                            width={280}
-                                        />  </div> : null
-                                    }
-
-                                </div>
-                            </div>
-
-                            <div className="pl-4 pr-4  mt-3" >
-                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Background color</h3>
-
-                                <div >
-
-
-
-                                    <div onClick={() => setColorPickerVisible9(!colorPickerVisible9)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
-                                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                            {chatBackground}
-                                        </div>
-                                        <div style={{ backgroundColor: chatBackground }} className="px-[16px] my-1 mx-1 rounded-[5px]">
-
-                                        </div>
-
-                                    </div>
-
-                                    {
-                                        colorPickerVisible9 ? <div ref={chatBcColorPicker} className="fixed top-[330px] z-99"> <SketchPicker
-
-                                            color={bubbleBackground}
-                                            onChangeComplete={chatBackgroundFunc}
-                                            width={280}
-                                        /> </div> : null
-                                    }
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex  items-center  gap-8">
-
-                            <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Title Color</h3>
-
-                                <div >
-
-
-
-                                    <div onClick={() => setColorPickerVisible10(!colorPickerVisible10)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
-                                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                            {chatTitleColor}
-                                        </div>
-                                        <div style={{ backgroundColor: chatTitleColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
-
-                                        </div>
-
-                                    </div>
-
-                                    {
-                                        colorPickerVisible10 ? <div ref={chatTcColorPicker} className="fixed top-[90px] z-99"> <SketchPicker
-
-                                            color={bubbleBackground}
-                                            onChangeComplete={chatTitleColorFunc}
-                                            width={280}
-                                        />  </div> : null
-                                    }
-
-                                </div>
-                            </div>
-
-                            <div className="pl-4 pr-4  mt-3" >
-                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Start Button Color</h3>
-
-                                <div >
-
-
-
-                                    <div onClick={() => setColorPickerVisible12(!colorPickerVisible12)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
-                                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                            {chatStartButtonColor}
-                                        </div>
-                                        <div style={{ backgroundColor: chatStartButtonColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
-
-                                        </div>
-
-                                    </div>
-
-                                    {
-                                        colorPickerVisible12 ? <div ref={chatSbcColorPicker} className="fixed top-[90px] z-99"> <SketchPicker
-
-                                            color={bubbleBackground}
-                                            onChangeComplete={chatStartButtonColorFunc}
-                                            width={280}
-                                        /> </div> : null
-                                    }
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex  items-center  gap-8">
-
-                            <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Message Background</h3>
-
-                                <div >
-
-
-
-                                    <div onClick={() => setColorPickerVisible13(!colorPickerVisible13)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
-                                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                            {welMsgBgColor}
-                                        </div>
-                                        <div style={{ backgroundColor: welMsgBgColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
-
-                                        </div>
-
-                                    </div>
-
-                                    {
-                                        colorPickerVisible13 ? <div ref={chatMbcColorPicker} className="fixed top-[180px] z-99"> <SketchPicker
-
-                                            color={bubbleBackground}
-                                            onChangeComplete={welMsgBgColorFunc}
-                                            width={280}
-                                        />  </div> : null
-                                    }
-
-                                </div>
-                            </div>
-
-                            <div className="pl-4 pr-4  mt-3" >
-                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Message Color</h3>
-
-                                <div >
-
-
-
-                                    <div onClick={() => setColorPickerVisible14(!colorPickerVisible14)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
-                                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                            {welMsgTextColor}
-                                        </div>
-                                        <div style={{ backgroundColor: welMsgTextColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
-
-                                        </div>
-
-                                    </div>
-
-                                    {
-                                        colorPickerVisible14 ? <div ref={chatMcColorPicker} className="fixed top-[180px] z-99"> <SketchPicker
-
-                                            color={bubbleBackground}
-                                            onChangeComplete={welMsgTextColorFunc}
-                                            width={280}
-                                        /> </div> : null
-                                    }
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="flex  items-center  gap-8">
-
-                            <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Response Background</h3>
-
-                                <div >
-
-
-
-                                    <div onClick={() => setColorPickerVisible15(!colorPickerVisible15)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
-                                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                            {userResponseBgColor}
-                                        </div>
-                                        <div style={{ backgroundColor: userResponseBgColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
-
-                                        </div>
-
-                                    </div>
-
-                                    {
-                                        colorPickerVisible15 ? <div ref={chatRbColorPicker} className="fixed top-[260px] z-99"> <SketchPicker
-
-                                            color={bubbleBackground}
-                                            onChangeComplete={userResponseBgColorFunc}
-                                            width={280}
-                                        />  </div> : null
-                                    }
-
-                                </div>
-                            </div>
-
-                            <div className="pl-4 pr-4  mt-3 " >
-                                <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Response Color</h3>
-
-                                <div >
-
-
-
-                                    <div onClick={() => setColorPickerVisible16(!colorPickerVisible16)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
-                                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                                            {userResponseColor}
-                                        </div>
-                                        <div style={{ backgroundColor: userResponseColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
-
-                                        </div>
-
-                                    </div>
-
-                                    {
-                                        colorPickerVisible16 ? <div ref={chatRcColorPicker} className="fixed top-[260px] z-99"> <SketchPicker
-
-                                            color={userResponseColor}
-                                            onChangeComplete={userResponseColorFunc}
-                                            width={280}
-                                        /> </div> : null
-                                    }
-
-                                </div>
-                            </div>
-                          
-                        </div>
-                     <div className="pl-4 pr-4  mt-3 ">
-                        <button onClick={handleSubmit} className='px-[20px] py-[9px] rounded-[8px] border border-[#c4c2c5] bg-[#fff] shadow-md font-semibold text-[#888]'>Publish your bot</button>
-                         </div>
-
-                    </div> : null}
                     </div>
 
-                        <div className='mt-[20px] fixed right-0 '>
-                    <Preview poweredBy={poweredBy} bubbleIcon={bubbleIcon} logo={logo} iconColor={iconColor} userResponseColor={userResponseColor} userResponseBgColor={userResponseBgColor} welMsgTextColor={welMsgTextColor} welMsgBgColor={welMsgBgColor} chatTitleColor={chatTitleColor} chatBackground={chatBackground} screenBackground={screenBackground} startButtonColor= {startButtonColor} headerText={headerText} bubbleBackground={bubbleBackground} botName ={botName} headerBackground={headerBackground} description={description}chatHeaderBackground={chatHeaderBackground}/>
-                    </div>
-                </div>
+                    <div className="flex  items-center  gap-8">
 
-               
+                        <div className="pl-4 pr-4  mt-3 " >
+                            <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Message Background</h3>
+
+                            <div >
 
 
-            </div>
-            {settingVisible ? (
-              <div className="max-w-[710px] h-[460px] ml-6 border border-slate-200 mb-6">
-                {WIDGET_DATA.map((item: any, index: number) => {
-                  return (
-                    <div className="pl-4 pr-4  mt-3">
-                      <h3 className="text-[20px] dark:text-[#888]">
-                        {item.placeholder}
-                      </h3>
-                      <input
-                        type="text"
-                        onChange={(e) =>
-                          setGeneralSetting({
-                            ...generalSetting,
-                            [`${item.key}`]: e.target.value,
-                          })
-                        }
-                        className="min-w-[680px] mt-2 py-[8px] px-2 border rounded-[6px] border-zinc-300"
-                      />
-                    </div>
-                  );
-                })}
-                {/* <div className="pl-4 pr-4  mt-3">
-                  <h3 className="text-[20px] dark:text-[#888]">Bot Name</h3>
-                  <input
-                    type="text"
-                    value={botName}
-                    onChange={(e) => setBotName(e.target.value)}
-                    className="min-w-[680px] mt-2 py-[8px] px-2 border rounded-[6px] border-zinc-300"
-                  />
-                </div>
 
-                <div className="pl-4 mt-3">
-                  <h3 className="text-[20px] dark:text-[#888]">Description</h3>
-                  <input
-                    type="text"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="min-w-[680px] mt-2 px-2 py-[8px] border rounded-[6px] border-zinc-300"
-                  />
-                </div> */}
+                                <div onClick={() => setColorPickerVisible13(!colorPickerVisible13)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                    <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
+                                        {welMsgBgColor}
+                                    </div>
+                                    <div style={{ backgroundColor: welMsgBgColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
 
-                <div className="pl-4 mt-3">
-                  <h3 className="text-[20px] dark:text-[#888]">Powered by</h3>
-                  <input
-                    type="text"
-                    value={poweredBy}
-                    onChange={(e) => setPoweredBy(e.target.value)}
-                    className="min-w-[680px] mt-2 px-2 py-[8px] border rounded-[6px] border-zinc-300"
-                  />
-                </div>
+                                    </div>
 
-                <div className="pl-4 mt-3">
-                  <h3 className="text-[20px] dark:text-[#888]">Powered by</h3>
-                </div>
+                                </div>
 
-                <div className="pl-4 mt-3">
-                  <h3 className="text-[20px] mb-2 dark:text-[#888]">
-                    Bot Logo
-                  </h3>
-                  <input onChange={imgFilePreview} type="file" />
-                </div>
+                                {
+                                    colorPickerVisible13 ? <div ref={chatMbcColorPicker} className="fixed top-[180px] z-99"> <SketchPicker
 
-                <div className="pl-4 mt-3">
-                  <h3 className="text-[20px] mb-2">Bubble Icon</h3>
-                  <input onChange={bubblePreview} type="file" />
-                </div>
-              </div>
-            ) : null}
-
-            <div
-              onClick={() => setVisible(!visible)}
-              className=" flex items-center justify-between py-[22px] border max-w-[710px] ml-6 border-slate-200 px-4 mt-5 "
-            >
-              <div className="flex items-center">
-                <i className="fa-sharp fa-solid fa-pencil dark:text-[#555]  text-[#7451f8] text-[30px]"></i>
-                <h1 className="text-[19px] dark:text-[#888] font-semibold ml-6  ">
-                  Appearance
-                </h1>
-              </div>
-              <i className="fa-solid fa-angle-right text-[20px] dark:text-[#555]"></i>
-            </div>
-            {visible ? (
-              <div className="max-w-[710px] h-[1040px] ml-6 border border-slate-200 mb-6">
-                <h1 className="text-[21px] text-[#9ba6b3] pl-4 my-3 dark:text-[#555] ">
-                  MINIMIZED WIDGET
-                </h1>
-                <div className="flex  items-center  gap-8">
-                  {WIDGET_MINIMIZED.map((item: any, index: number) => {
-                    return (
-                      <div className="pl-4 pr-4  mt-3 ">
-                        <h3 className="text-[20px] text-[#516173] dark:text-[#555]">
-                          {item.placeholder}
-                        </h3>
-
-                        <div>
-                          <div
-                            onClick={() => setColorPickerVisible(item.key)}
-                            className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                          >
-                            <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                              {bubbleColor[item.key]
-                                ? bubbleColor[item.key]
-                                : "#fff"}
-                            </div>
-                            <div
-                              style={{ backgroundColor: bubbleColor[item.key] }}
-                              className="px-[16px] my-1 mx-1 rounded-[5px]"
-                            ></div>
-                          </div>
-
-                          {colorPickerVisible === item.key ? (
-                            <div
-                              ref={bubbleColorPicker}
-                              id="func"
-                              className="fixed top-[140px] z-99"
-                            >
-                              {" "}
-                              <SketchPicker
-                                color={
-                                  bubbleColor[item.key]
-                                    ? bubbleColor[item.key]
-                                    : "#fff"
+                                        color={bubbleBackground}
+                                        onChangeComplete={welMsgBgColorFunc}
+                                        width={280}
+                                    />  </div> : null
                                 }
-                                onChangeComplete={(color) =>
-                                  handleOnChange(color, item.key)
-                                }
-                                width={280}
-                              />{" "}
+
                             </div>
-                          ) : null}
                         </div>
-                      </div>
-                    );
-                  })}
-                  {/* <div className="pl-4 pr-4  mt-3 ">
-                    <h3 className="text-[20px] text-[#516173] dark:text-[#555]">
-                      Bubble Background
-                    </h3>
 
-                    <div>
-                      <div
-                        onClick={() =>
-                          setColorPickerVisible(!colorPickerVisible)
-                        }
-                        className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                      >
-                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                          {bubbleBackground}
-                        </div>
-                        <div
-                          style={{ backgroundColor: bubbleBackground }}
-                          className="px-[16px] my-1 mx-1 rounded-[5px]"
-                        ></div>
-                      </div>
+                        <div className="pl-4 pr-4  mt-3" >
+                            <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Message Color</h3>
 
-                      {colorPickerVisible ? (
-                        <div
-                          ref={bubbleColorPicker}
-                          id="func"
-                          className="fixed top-[140px] z-99"
-                        >
-                          {" "}
-                          <SketchPicker
-                            color={bubbleBackground}
-                            onChangeComplete={handleOnChange}
-                            width={280}
-                          />{" "}
+                            <div >
+
+
+
+                                <div onClick={() => setColorPickerVisible14(!colorPickerVisible14)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                    <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
+                                        {welMsgTextColor}
+                                    </div>
+                                    <div style={{ backgroundColor: welMsgTextColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
+
+                                    </div>
+
+                                </div>
+
+                                {
+                                    colorPickerVisible14 ? <div ref={chatMcColorPicker} className="fixed top-[180px] z-99"> <SketchPicker
+
+                                        color={bubbleBackground}
+                                        onChangeComplete={welMsgTextColorFunc}
+                                        width={280}
+                                    /> </div> : null
+                                }
+
+                            </div>
                         </div>
-                      ) : null}
                     </div>
-                  </div> */}
 
-                  {/* <div className="pl-4 pr-4  mt-3">
-                    <h3 className="text-[20px] text-[#516173] dark:text-[#555]">
-                      Icon color
-                    </h3>
+                    <div className="flex  items-center  gap-8">
 
-                    <div>
-                      <div
-                        onClick={() =>
-                          setColorPickerVisible2(!colorPickerVisible2)
-                        }
-                        className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                      >
-                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                          {iconColor}
+                        <div className="pl-4 pr-4  mt-3 " >
+                            <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Response Background</h3>
+
+                            <div >
+
+
+
+                                <div onClick={() => setColorPickerVisible15(!colorPickerVisible15)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                    <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
+                                        {userResponseBgColor}
+                                    </div>
+                                    <div style={{ backgroundColor: userResponseBgColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
+
+                                    </div>
+
+                                </div>
+
+                                {
+                                    colorPickerVisible15 ? <div ref={chatRbColorPicker} className="fixed top-[260px] z-99"> <SketchPicker
+
+                                        color={bubbleBackground}
+                                        onChangeComplete={userResponseBgColorFunc}
+                                        width={280}
+                                    />  </div> : null
+                                }
+
+                            </div>
                         </div>
-                        <div
-                          style={{ backgroundColor: iconColor }}
-                          className="px-[16px] my-1 mx-1 rounded-[5px]"
-                        ></div>
-                      </div>
 
-                      {colorPickerVisible2 ? (
-                        <div
-                          ref={iconColorPicker}
-                          className="fixed top-[140px] z-99"
-                        >
-                          {" "}
-                          <SketchPicker
-                            color={bubbleBackground}
-                            onChangeComplete={handleOnChange2}
-                            width={280}
-                          />{" "}
+                        <div className="pl-4 pr-4  mt-3" >
+                            <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Response Color</h3>
+
+                            <div >
+
+
+
+                                <div onClick={() => setColorPickerVisible16(!colorPickerVisible16)} className='flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]'>
+                                    <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
+                                        {userResponseColor}
+                                    </div>
+                                    <div style={{ backgroundColor: userResponseColor }} className="px-[16px] my-1 mx-1 rounded-[5px]">
+
+                                    </div>
+
+                                </div>
+
+                                {
+                                    colorPickerVisible16 ? <div ref={chatRcColorPicker} className="fixed top-[260px] z-99"> <SketchPicker
+
+                                        color={userResponseColor}
+                                        onChangeComplete={userResponseColorFunc}
+                                        width={280}
+                                    /> </div> : null
+                                }
+
+                            </div>
                         </div>
-                      ) : null}
                     </div>
-                  </div> */}
+
+                </div> : null}
                 </div>
 
-                {/* <h1 className="text-[21px] text-[#9ba6b3] dark:text-[#555] pl-4 mt-11">
-                  WELCOME SCREEN
-                </h1>
-
-                <div className="flex  items-center  gap-8">
-                  <div className="pl-4 pr-4  mt-3 ">
-                    <h3 className="text-[20px] dark:text-[#555] text-[#516173]">
-                      Header Background
-                    </h3>
-
-                    <div>
-                      <div
-                        onClick={() =>
-                          setColorPickerVisible3(!colorPickerVisible3)
-                        }
-                        className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                      >
-                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                          {headerBackground}
-                        </div>
-                        <div
-                          style={{ backgroundColor: headerBackground }}
-                          className="px-[16px] my-1 mx-1 rounded-[5px]"
-                        ></div>
-                      </div>
-
-                      {colorPickerVisible3 ? (
-                        <div
-                          ref={welHbColorPicker}
-                          className="fixed top-[300px] z-99"
-                        >
-                          {" "}
-                          <SketchPicker
-                            color={bubbleBackground}
-                            onChangeComplete={headerBackgroundFunc}
-                            width={280}
-                          />{" "}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-
-                  <div className="pl-4 pr-4  mt-3">
-                    <h3 className="text-[20px] dark:text-[#555] text-[#516173]">
-                      Header Text
-                    </h3>
-
-                    <div>
-                      <div
-                        onClick={() =>
-                          setColorPickerVisible4(!colorPickerVisible4)
-                        }
-                        className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                      >
-                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                          {headerText}
-                        </div>
-                        <div
-                          style={{ backgroundColor: headerText }}
-                          className="px-[16px] my-1 mx-1 rounded-[5px]"
-                        ></div>
-                      </div>
-
-                      {colorPickerVisible4 ? (
-                        <div
-                          ref={welHtColorPicker}
-                          className="fixed top-[300px] z-99"
-                        >
-                          {" "}
-                          <SketchPicker
-                            color={bubbleBackground}
-                            onChangeComplete={headerTextFunc}
-                            width={280}
-                          />{" "}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
+                    <div className='mt-[20px] fixed right-0 '>
+                <Preview bubbleIcon={bubbleIcon} logo={logo} iconColor={iconColor} userResponseColor={userResponseColor} userResponseBgColor={userResponseBgColor} welMsgTextColor={welMsgTextColor} welMsgBgColor={welMsgBgColor} chatTitleColor={chatTitleColor} chatBackground={chatBackground} screenBackground={screenBackground} startButtonColor= {startButtonColor} headerText={headerText} bubbleBackground={bubbleBackground} botName ={botName} headerBackground={headerBackground} description={description}chatHeaderBackground={chatHeaderBackground}/>
                 </div>
+            </div>
 
-                <div className="flex  items-center  gap-8">
-                  <div className="pl-4 pr-4  mt-3 ">
-                    <h3 className="text-[20px] dark:text-[#555] text-[#516173]">
-                      Screen Background
-                    </h3>
+           
 
-                    <div>
-                      <div
-                        onClick={() =>
-                          setColorPickerVisible5(!colorPickerVisible5)
-                        }
-                        className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                      >
-                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                          {screenBackground}
-                        </div>
-                        <div
-                          style={{ backgroundColor: screenBackground }}
-                          className="px-[16px] my-1 mx-1 rounded-[5px]"
-                        ></div>
-                      </div>
 
-                      {colorPickerVisible5 ? (
-                        <div
-                          ref={welSbColorPicker}
-                          className="fixed top-[340px] z-99"
-                        >
-                          {" "}
-                          <SketchPicker
-                            color={bubbleBackground}
-                            onChangeComplete={screenBackgroundFunc}
-                            width={280}
-                          />{" "}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-
-                  <div className="pl-4 pr-4  mt-3">
-                    <h3 className="text-[20px] dark:text-[#555] text-[#516173]">
-                      Title Color
-                    </h3>
-
-                    <div>
-                      <div
-                        onClick={() =>
-                          setColorPickerVisible6(!colorPickerVisible6)
-                        }
-                        className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                      >
-                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                          {titleColor}
-                        </div>
-                        <div
-                          style={{ backgroundColor: titleColor }}
-                          className="px-[16px] my-1 mx-1 rounded-[5px]"
-                        ></div>
-                      </div>
-
-                      {colorPickerVisible6 ? (
-                        <div
-                          ref={welTcColorPicker}
-                          className="fixed top-[390px] z-99"
-                        >
-                          {" "}
-                          <SketchPicker
-                            color={bubbleBackground}
-                            onChangeComplete={titleColorFunc}
-                            width={280}
-                          />{" "}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pl-4 pr-4  mt-3">
-                  <h3 className="text-[20px] dark:text-[#555] text-[#516173]">
-                    Start Button Color
-                  </h3>
-
-                  <div>
-                    <div
-                      onClick={() =>
-                        setColorPickerVisible7(!colorPickerVisible7)
-                      }
-                      className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                    >
-                      <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                        {startButtonColor}
-                      </div>
-                      <div
-                        style={{ backgroundColor: startButtonColor }}
-                        className="px-[16px] my-1 mx-1 rounded-[5px]"
-                      ></div>
-                    </div>
-
-                    {colorPickerVisible7 ? (
-                      <div
-                        ref={welSbcColorPicker}
-                        className="fixed top-[250px] z-99"
-                      >
-                        {" "}
-                        <SketchPicker
-                          color={bubbleBackground}
-                          onChangeComplete={startButtonColorFunc}
-                          width={280}
-                        />{" "}
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-
-                {/* Third */}
-
-                <h1 className="text-[21px] text-[#9ba6b3] dark:text-[#555] pl-4 mt-11 ">
-                  CHAT SCREEN
-                </h1>
-                <div className="flex  items-center  gap-8">
-                  <div className="pl-4 pr-4  mt-3 ">
-                    <h3 className="text-[20px] dark:text-[#555] text-[#516173]">
-                      Header Background
-                    </h3>
-
-                    <div>
-                      <div
-                        onClick={() =>
-                          setColorPickerVisible8(!colorPickerVisible8)
-                        }
-                        className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                      >
-                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                          {chatHeaderBackground}
-                        </div>
-                        <div
-                          style={{ backgroundColor: chatHeaderBackground }}
-                          className="px-[16px] my-1 mx-1 rounded-[5px]"
-                        ></div>
-                      </div>
-
-                      {colorPickerVisible8 ? (
-                        <div
-                          ref={chatHbColorPicker}
-                          className="fixed top-[330px] z-99"
-                        >
-                          {" "}
-                          <SketchPicker
-                            color={bubbleBackground}
-                            onChangeComplete={chatHeaderBackgroundFunc}
-                            width={280}
-                          />{" "}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-
-                  <div className="pl-4 pr-4  mt-3">
-                    <h3 className="text-[20px] dark:text-[#555] text-[#516173]">
-                      Background color
-                    </h3>
-
-                    <div>
-                      <div
-                        onClick={() =>
-                          setColorPickerVisible9(!colorPickerVisible9)
-                        }
-                        className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                      >
-                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                          {chatBackground}
-                        </div>
-                        <div
-                          style={{ backgroundColor: chatBackground }}
-                          className="px-[16px] my-1 mx-1 rounded-[5px]"
-                        ></div>
-                      </div>
-
-                      {colorPickerVisible9 ? (
-                        <div
-                          ref={chatBcColorPicker}
-                          className="fixed top-[330px] z-99"
-                        >
-                          {" "}
-                          <SketchPicker
-                            color={bubbleBackground}
-                            onChangeComplete={chatBackgroundFunc}
-                            width={280}
-                          />{" "}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex  items-center  gap-8">
-                  <div className="pl-4 pr-4  mt-3 ">
-                    <h3 className="text-[20px] dark:text-[#555] text-[#516173]">
-                      Title Color
-                    </h3>
-
-                    <div>
-                      <div
-                        onClick={() =>
-                          setColorPickerVisible10(!colorPickerVisible10)
-                        }
-                        className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                      >
-                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                          {chatTitleColor}
-                        </div>
-                        <div
-                          style={{ backgroundColor: chatTitleColor }}
-                          className="px-[16px] my-1 mx-1 rounded-[5px]"
-                        ></div>
-                      </div>
-
-                      {colorPickerVisible10 ? (
-                        <div
-                          ref={chatTcColorPicker}
-                          className="fixed top-[90px] z-99"
-                        >
-                          {" "}
-                          <SketchPicker
-                            color={bubbleBackground}
-                            onChangeComplete={chatTitleColorFunc}
-                            width={280}
-                          />{" "}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-
-                  <div className="pl-4 pr-4  mt-3">
-                    <h3 className="text-[20px] dark:text-[#555] text-[#516173]">
-                      Start Button Color
-                    </h3>
-
-                    <div>
-                      <div
-                        onClick={() =>
-                          setColorPickerVisible12(!colorPickerVisible12)
-                        }
-                        className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                      >
-                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                          {chatStartButtonColor}
-                        </div>
-                        <div
-                          style={{ backgroundColor: chatStartButtonColor }}
-                          className="px-[16px] my-1 mx-1 rounded-[5px]"
-                        ></div>
-                      </div>
-
-                      {colorPickerVisible12 ? (
-                        <div
-                          ref={chatSbcColorPicker}
-                          className="fixed top-[90px] z-99"
-                        >
-                          {" "}
-                          <SketchPicker
-                            color={bubbleBackground}
-                            onChangeComplete={chatStartButtonColorFunc}
-                            width={280}
-                          />{" "}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex  items-center  gap-8">
-                  <div className="pl-4 pr-4  mt-3 ">
-                    <h3 className="text-[20px] dark:text-[#555] text-[#516173]">
-                      Message Background
-                    </h3>
-
-                    <div>
-                      <div
-                        onClick={() =>
-                          setColorPickerVisible13(!colorPickerVisible13)
-                        }
-                        className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                      >
-                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                          {welMsgBgColor}
-                        </div>
-                        <div
-                          style={{ backgroundColor: welMsgBgColor }}
-                          className="px-[16px] my-1 mx-1 rounded-[5px]"
-                        ></div>
-                      </div>
-
-                      {colorPickerVisible13 ? (
-                        <div
-                          ref={chatMbcColorPicker}
-                          className="fixed top-[180px] z-99"
-                        >
-                          {" "}
-                          <SketchPicker
-                            color={bubbleBackground}
-                            onChangeComplete={welMsgBgColorFunc}
-                            width={280}
-                          />{" "}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-
-                  <div className="pl-4 pr-4  mt-3">
-                    <h3 className="text-[20px] dark:text-[#555] text-[#516173]">
-                      Message Color
-                    </h3>
-
-                    <div>
-                      <div
-                        onClick={() =>
-                          setColorPickerVisible14(!colorPickerVisible14)
-                        }
-                        className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                      >
-                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                          {welMsgTextColor}
-                        </div>
-                        <div
-                          style={{ backgroundColor: welMsgTextColor }}
-                          className="px-[16px] my-1 mx-1 rounded-[5px]"
-                        ></div>
-                      </div>
-
-                      {colorPickerVisible14 ? (
-                        <div
-                          ref={chatMcColorPicker}
-                          className="fixed top-[180px] z-99"
-                        >
-                          {" "}
-                          <SketchPicker
-                            color={bubbleBackground}
-                            onChangeComplete={welMsgTextColorFunc}
-                            width={280}
-                          />{" "}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex  items-center  gap-8">
-                  <div className="pl-4 pr-4  mt-3 ">
-                    <h3 className="text-[20px] dark:text-[#555] text-[#516173]">
-                      Response Background
-                    </h3>
-
-                    <div>
-                      <div
-                        onClick={() =>
-                          setColorPickerVisible15(!colorPickerVisible15)
-                        }
-                        className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                      >
-                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                          {userResponseBgColor}
-                        </div>
-                        <div
-                          style={{ backgroundColor: userResponseBgColor }}
-                          className="px-[16px] my-1 mx-1 rounded-[5px]"
-                        ></div>
-                      </div>
-
-                      {colorPickerVisible15 ? (
-                        <div
-                          ref={chatRbColorPicker}
-                          className="fixed top-[260px] z-99"
-                        >
-                          {" "}
-                          <SketchPicker
-                            color={bubbleBackground}
-                            onChangeComplete={userResponseBgColorFunc}
-                            width={280}
-                          />{" "}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-
-                  <div className="pl-4 pr-4  mt-3">
-                    <h3 className="text-[20px] dark:text-[#555] text-[#516173]">
-                      Response Color
-                    </h3>
-
-                    <div>
-                      <div
-                        onClick={() =>
-                          setColorPickerVisible16(!colorPickerVisible16)
-                        }
-                        className="flex h-[40px] w-[195px] border border-[#c8d0d8] mt-[12px]"
-                      >
-                        <div className="border h-[39px] pt-[8px] px-2 none min-w-[115px] border-r-[#c8d0d8] border-b-0 border-t-0">
-                          {userResponseColor}
-                        </div>
-                        <div
-                          style={{ backgroundColor: userResponseColor }}
-                          className="px-[16px] my-1 mx-1 rounded-[5px]"
-                        ></div>
-                      </div>
-
-                      {colorPickerVisible16 ? (
-                        <div
-                          ref={chatRcColorPicker}
-                          className="fixed top-[260px] z-99"
-                        >
-                          {" "}
-                          <SketchPicker
-                            color={userResponseColor}
-                            onChangeComplete={userResponseColorFunc}
-                            width={280}
-                          />{" "}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-                </div> */}
-                <div className="pl-4 pr-4  mt-3 ">
-                  <button
-                    onClick={handleSubmit}
-                    className="bg-[#242526] text-white px-[20px] py-[10px] rounded-[5px]"
-                  >
-                    Publish your bot
-                  </button>
-                </div>
-              </div>
-            ) : null}
-          </div>
-
-          <div className="mt-[20px] fixed right-0 ">
-            <Preview
-              poweredBy={poweredBy}
-              bubbleIcon={bubbleIcon}
-              logo={logo}
-              iconColor={iconColor}
-              userResponseColor={userResponseColor}
-              userResponseBgColor={userResponseBgColor}
-              welMsgTextColor={welMsgTextColor}
-              welMsgBgColor={welMsgBgColor}
-              chatTitleColor={chatTitleColor}
-              chatBackground={chatBackground}
-              screenBackground={screenBackground}
-              startButtonColor={startButtonColor}
-              headerText={headerText}
-              bubbleBackground={bubbleBackground}
-              botName={botName}
-              headerBackground={headerBackground}
-              description={description}
-              chatHeaderBackground={chatHeaderBackground}
-            />
-          </div>
         </div>
-      </div>
+
+
+
     </>
-  );
-};
+
+)
+}
 
 export default Widget;
+
