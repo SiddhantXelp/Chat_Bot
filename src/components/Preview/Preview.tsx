@@ -5,13 +5,13 @@ import 'react-tabs/style/react-tabs.css';
 
 
 
-const Preview = ({ bubbleIcon, iconColor, logo, userResponseColor, userResponseBgColor, welMsgTextColor, welMsgBgColor, chatTitleColor, chatBackground, screenBackground, startButtonColor, headerText, botName, description, chatHeaderBackground, headerBackground, bubbleBackground }) => {
+const Preview = ({poweredBy, bubbleIcon, iconColor, logo, userResponseColor, userResponseBgColor, welMsgTextColor, welMsgBgColor, chatTitleColor, chatBackground, screenBackground, startButtonColor, headerText, botName, description, chatHeaderBackground, headerBackground, bubbleBackground }) => {
     return (
         <>
             <div className=" w-[480px] ">
                 <div className="  h-48 lg:h-auto lg:w-48  flex-none bg-cover rounded-t lg:rounded-[15px]  text-center overflow-hidden"></div>
 
-                <Tabs className="dark:bg-black">
+                <Tabs defaultIndex={1} onSelect={index=> console.log(index)} className="dark:bg-black">
                     <TabList>
                         <Tab>Minimized Screen</Tab>
                         <Tab>Welcome Screen</Tab>
@@ -60,7 +60,7 @@ const Preview = ({ bubbleIcon, iconColor, logo, userResponseColor, userResponseB
                                         Start Chat
                                     </button>
                                     <p className=" mt-[50px] mb-1 text-center text-slate-500 text-xs ">
-                                        Powered by <b className="text-indigo-700 text-xs">Chatbot</b>
+                                        Powered by <b className="text-indigo-700 text-xs">{poweredBy}</b>
                                     </p>
                                 </div>
                             </div>

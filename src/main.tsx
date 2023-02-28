@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 import {ThemeProvider} from "./components/themeContext"
-import { store } from '../src/redux/store'
+import { store } from '../src/store/store'
 import { Provider } from 'react-redux'
 
 

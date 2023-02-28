@@ -2,15 +2,26 @@ import React, { useState,useEffect,useRef } from 'react'
 import { SketchPicker } from 'react-color'
 import Preview from '../../components/Preview/Preview';
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+//  import { postWidget } from "./widgetSlice";
 
-
+import {useDispatch} from "react-redux"
+import { postWidget } from './widgetSlice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 
 
 const Widget = () => {
 
+
+    const dispatch = useAppDispatch();
+
     const [visible, setVisible] = useState<boolean>(false);
     const [settingVisible, setSettingVisible] = useState(false);
+
+    const widgetResponse = useAppSelector(state => state.widgetPage.widgetResponse)
+
+    console.log("FGHJKLKJHGVFGHJKJHGVCVBN", widgetResponse);
+    
 
 
     const [colorPickerVisible, setColorPickerVisible] = useState(false)
@@ -56,6 +67,7 @@ const Widget = () => {
 
     const [botName, setBotName] = useState("Airbot");
     const [description, setDescription] = useState("Airbot is the powerfull chatbot");
+    const [poweredBy, setPoweredBy] = useState("AirBot");
     const [logo,setLogo] = useState("https://uselooper.com/assets/images/avatars/profile.jpg");
     const [bubbleIcon,setBubbleIcon] = useState("");
  
@@ -135,6 +147,7 @@ const Widget = () => {
 
     const welMsgTextColorFunc = (color) => {
         setWelMsgTextColor(color.hex)
+        // setObject({...Object, [`${key}`]: color.hex})
         console.log(bubbleBackground)
 
     }
@@ -266,13 +279,67 @@ const bubblePreview = (e) =>{
     }
 }
 
+const handleSubmit =  async () => {
+   
+
+    let data =  {
+        uuid: "234567hbfvlkfds",
+        title: botName,
+      description: description,
+        powered_by: poweredBy,
+        theme: {
+          minimizedWidget: {
+            bgColor: bubbleBackground,
+           iconColor:iconColor,
+          },
+          welcomeScreen: {
+           headerBackground: headerBackground,
+            headerText : headerText,
+            bgColor: screenBackground,
+            title: botName,
+            titleColor:titleColor,
+            startButtonColor:startButtonColor,
+          },
+          chatScreen: {
+            headerBackground: chatHeaderBackground,
+            headerText: botName,
+            bgColor: chatBackground,
+            titleColor: chatTitleColor,
+            startButtonColor: chatStartButtonColor,
+            welcomeMsgBgColor: welMsgBgColor,
+            welcomeMsgTextColor: welMsgTextColor,
+            userResponseBgColor: userResponseBgColor,
+            userResponseTextColor: userResponseColor,
+          },
+        },
+      };
+      
+
+    await dispatch(postWidget(data))
+   
+    // fetch("http://localhost:4012/widget", {
+    //     method: "POST",
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body:JSON.stringify(data)
+    //   }).then((resp)=>{
+      
+    //     resp.json().then((result)=>{
+    //       console.log("result",result)
+    //     })
+    //   })
+   
+  };
+
 
     return (
         <>
 
-            <div className=" w-full dark:bg-black min-h-screen mt-[60px]   ml-[228px] " >
+            <div className=" w-full dark:bg-black min-h-screen mt-[60px]  ml-[228px] " >
 
-                <div className="pl-[30px] mt-4 border py-4 border-slate-200 border-l-0">
+                <div className="pl-[30px] w-[full] mt-4 border py-4 border-slate-200 border-l-0 border-r-0">
                     <h1 className="text-[28px] dark:text-[#555] font-semi-bold">Chat Widget</h1>
                 </div>
 
@@ -302,6 +369,7 @@ const bubblePreview = (e) =>{
 
                         <div className="pl-4 mt-3">
                             <h3 className="text-[20px] dark:text-[#888]">Powered by</h3>
+                            <input type="text" value={poweredBy} onChange={(e) => setPoweredBy(e.target.value)} className="min-w-[680px] mt-2 px-2 py-[8px] border rounded-[6px] border-zinc-300" />
                         </div>
 
                         <div className="pl-4 mt-3">
@@ -325,7 +393,7 @@ const bubblePreview = (e) =>{
 
 
                     </div>
-                    {visible ? <div className="max-w-[710px] h-[990px] ml-6 border border-slate-200 mb-6">
+                    {visible ? <div className="max-w-[710px] h-[1040px] ml-6 border border-slate-200 mb-6">
                         <h1 className="text-[21px] text-[#9ba6b3] pl-4 my-3 dark:text-[#555] ">MINIMIZED WIDGET</h1>
                         <div className="flex  items-center  gap-8">
 
@@ -761,7 +829,7 @@ const bubblePreview = (e) =>{
                                 </div>
                             </div>
 
-                            <div className="pl-4 pr-4  mt-3" >
+                            <div className="pl-4 pr-4  mt-3 " >
                                 <h3 className="text-[20px] dark:text-[#555] text-[#516173]">Response Color</h3>
 
                                 <div >
@@ -789,13 +857,17 @@ const bubblePreview = (e) =>{
 
                                 </div>
                             </div>
+                          
                         </div>
+                     <div className="pl-4 pr-4  mt-3 ">
+                        <button onClick={handleSubmit} className='px-[20px] py-[9px] rounded-[8px] border border-[#c4c2c5] bg-[#fff] shadow-md font-semibold text-[#888]'>Publish your bot</button>
+                         </div>
 
                     </div> : null}
                     </div>
 
                         <div className='mt-[20px] fixed right-0 '>
-                    <Preview bubbleIcon={bubbleIcon} logo={logo} iconColor={iconColor} userResponseColor={userResponseColor} userResponseBgColor={userResponseBgColor} welMsgTextColor={welMsgTextColor} welMsgBgColor={welMsgBgColor} chatTitleColor={chatTitleColor} chatBackground={chatBackground} screenBackground={screenBackground} startButtonColor= {startButtonColor} headerText={headerText} bubbleBackground={bubbleBackground} botName ={botName} headerBackground={headerBackground} description={description}chatHeaderBackground={chatHeaderBackground}/>
+                    <Preview poweredBy={poweredBy} bubbleIcon={bubbleIcon} logo={logo} iconColor={iconColor} userResponseColor={userResponseColor} userResponseBgColor={userResponseBgColor} welMsgTextColor={welMsgTextColor} welMsgBgColor={welMsgBgColor} chatTitleColor={chatTitleColor} chatBackground={chatBackground} screenBackground={screenBackground} startButtonColor= {startButtonColor} headerText={headerText} bubbleBackground={bubbleBackground} botName ={botName} headerBackground={headerBackground} description={description}chatHeaderBackground={chatHeaderBackground}/>
                     </div>
                 </div>
 

@@ -15,7 +15,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="h-[61px] bg-white dark:bg-[#242526] fixed left-[229px] right-[0]  flex items-center text-[15px] text-[#555] border border-b-zinc-200 dark:border-[#555]">
+        <div className="h-[61px] bg-white dark:bg-[#242526] fixed left-[228px] right-[0]  flex items-center text-[15px] text-[#555] border border-b-zinc-200 dark:border-[#555]">
             <div className="flex items-center p-[20px] justify-between min-w-[100%]">
                 <div className="flex items-center border  border-zinc-300 p-[4px] rounded-[10px]  ">
                     <input type="text" className="outline-none bg-transparent min-w-[800px] h-7 my-[2px]  " placeholder="Search..." />
