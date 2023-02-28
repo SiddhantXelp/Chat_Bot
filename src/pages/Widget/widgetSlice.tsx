@@ -4,6 +4,9 @@ import index from "../../apis/index"
 import { createWidget } from '../../apis/widget.service'
 import { AppDispatch } from '../../store/store'
 
+export type WidgetStates = {
+  widgetResponse: WidgetStates;
+};
 
 export type WidgetState = {
   widgetLoading: boolean;
@@ -34,7 +37,8 @@ const widgetSlice = createSlice({
       },
      
     },
-})
+  },
+});
 
 export const { setWidgetResponse, setWidgetLoading, setWidgetAPIErrors } = widgetSlice.actions
 

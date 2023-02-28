@@ -17,7 +17,11 @@
     "@mui/styled-engine-sc": "^5.11.0",
     "@reduxjs/toolkit": "^1.9.2",
     "axios": "^1.3.3",
+<<<<<<< HEAD
     "framer-motion": "^10.0.0",
+=======
+    "framer-motion": "^9.0.7",
+>>>>>>> 16cdb631dccb871207f4597707a2253a64344a50
     "react": "^18.2.0",
     "react-color": "^2.19.3",
     "react-d3-tree": "^3.5.0",

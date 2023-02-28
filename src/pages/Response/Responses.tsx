@@ -5,7 +5,11 @@ import {
   TreeNodeDatum,
 } from "react-d3-tree/lib/types/types/common";
 
+<<<<<<< HEAD
 import NodeModal from "../../components/FamilyModal/AddFamilyModal";
+=======
+import NodeModal from "../../components/AddFamilyModal";
+>>>>>>> 16cdb631dccb871207f4597707a2253a64344a50
 import Tree from "react-d3-tree";
 import { useState } from "react";
 
@@ -109,8 +113,11 @@ export default function App() {
   };
 
   return (
+<<<<<<< HEAD
     <div className="mt-[60px] ml-[228px]">
   
+=======
+>>>>>>> 16cdb631dccb871207f4597707a2253a64344a50
     <Stack direction="row" spacing="md">
       <Box w="100vw" h="100vh">
         <Tree
@@ -132,6 +139,11 @@ export default function App() {
         />
       </Box>
     </Stack>
+<<<<<<< HEAD
     </div>
   );
 }
+=======
+  );
+}
+>>>>>>> 16cdb631dccb871207f4597707a2253a64344a50
