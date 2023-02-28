@@ -5,7 +5,7 @@ import {
   TreeNodeDatum,
 } from "react-d3-tree/lib/types/types/common";
 
-import NodeModal from "../../components/FamilyModal/AddFamilyModal";
+import NodeModal from "../../components/AddFamilyModal";
 import Tree from "react-d3-tree";
 import { useState } from "react";
 
@@ -109,8 +109,7 @@ export default function App() {
   };
 
   return (
-    <div className="mt-[60px] ml-[228px]">
-  
+    <div className="mt-[60px]   ml-[228px]">
     <Stack direction="row" spacing="md">
       <Box w="100vw" h="100vh">
         <Tree

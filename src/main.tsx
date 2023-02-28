@@ -5,20 +5,22 @@ import './index.css'
 import {ThemeProvider} from "./components/themeContext"
 import { store } from '../src/store/store'
 import { Provider } from 'react-redux'
+import { ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  
+
+
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   // <React.StrictMode>
   <Provider store={store}>
-  <ThemeProvider>
- 
-    <App />
-   
+    <ThemeProvider>
+      <ChakraProvider>
+        <App />
+      </ChakraProvider>
     </ThemeProvider>
-    </Provider>
+  </Provider>
 
   // </React.StrictMode>,
-)
+);
