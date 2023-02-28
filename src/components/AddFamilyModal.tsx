@@ -16,7 +16,7 @@ import React, { useState } from "react";
 interface AddFamilyModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (title: string, tags:any) => void;
+  onSubmit: (title: string, tags:string) => void;
 }
 
 const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
@@ -25,26 +25,26 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
   onSubmit,
 }) => {
   const [title, setTitle] = useState("");
-  // const [tags, setTags] = useState("");
-  const [tags, setTags] = useState([
-    {
-      res: "",
-    },
-  ]);
-  const addInputField = () => {
-    setTags([
-      ...tags,
-      {
-        res: "",
-      },
-    ]);
-  };
-  const handleChange = (index, evnt) => {
-    const { name, value } = evnt.target;
-    const list = [...tags];
-    list[index][name] = value;
-    setTags(list);
-  };
+  const [tags, setTags] = useState("");
+  // const [tags, setTags] = useState([
+  //   {
+  //     res: "",
+  //   },
+  // ]);
+  // const addInputField = () => {
+  //   setTags([
+  //     ...tags,
+  //     {
+  //       res: "",
+  //     },
+  //   ]);
+  // };
+  // const handleChange = (index, evnt) => {
+  //   const { name, value } = evnt.target;
+  //   const list = [...tags];
+  //   list[index][name] = value;
+  //   setTags(list);
+  // };
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -59,11 +59,11 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
               onChange={(event) => setTitle(event.target.value)}
             />
             <FormLabel>Tags</FormLabel>
-            <i
+            {/* <i
                   className="fa-solid fa-square-plus text-[#7451f8] text-[20px] ml-6 mt-2"
                   onClick={() => addInputField()}
-                ></i>
-            {tags.map((data, index) => {
+                ></i> */}
+            {/* {tags.map((data, index) => {
                 const { res } = data;
               console.log("data",{res})
 
@@ -77,11 +77,11 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
                     />
                   </div>
                 );
-              })}
-            {/* <Input
+              })} */}
+            <Input
               value={tags}
               onChange={(event) => setTags(event.target.value)}
-            /> */}
+            />
           </FormControl>
         </ModalBody>
         <ModalFooter>
