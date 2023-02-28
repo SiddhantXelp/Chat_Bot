@@ -16,7 +16,7 @@ import React, { useState } from "react";
 interface AddFamilyModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (title: string, tags: string) => void;
+  onSubmit: (title: string, tags:any) => void;
 }
 
 const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
@@ -25,8 +25,26 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
   onSubmit,
 }) => {
   const [title, setTitle] = useState("");
-  const [tags, setTags] = useState("");
-
+  // const [tags, setTags] = useState("");
+  const [tags, setTags] = useState([
+    {
+      res: "",
+    },
+  ]);
+  const addInputField = () => {
+    setTags([
+      ...tags,
+      {
+        res: "",
+      },
+    ]);
+  };
+  const handleChange = (index, evnt) => {
+    const { name, value } = evnt.target;
+    const list = [...tags];
+    list[index][name] = value;
+    setTags(list);
+  };
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -41,10 +59,29 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
               onChange={(event) => setTitle(event.target.value)}
             />
             <FormLabel>Tags</FormLabel>
-            <Input
+            <i
+                  className="fa-solid fa-square-plus text-[#7451f8] text-[20px] ml-6 mt-2"
+                  onClick={() => addInputField()}
+                ></i>
+            {tags.map((data, index) => {
+                const { res } = data;
+              console.log("data",{res})
+
+                return (
+                  <div className="flex justify-center py-[6px]" key={index}>
+                    <Input
+                      type="text"
+                      onChange={(evnt) => handleChange(index, evnt)}
+                      value={res}
+                      name="res"
+                    />
+                  </div>
+                );
+              })}
+            {/* <Input
               value={tags}
               onChange={(event) => setTags(event.target.value)}
-            />
+            /> */}
           </FormControl>
         </ModalBody>
         <ModalFooter>

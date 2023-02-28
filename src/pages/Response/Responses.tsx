@@ -82,7 +82,7 @@ export default function App() {
       tags: tags,
       parentId : parentId
     }
-    console.log("neetreeId",newTreeNode)
+    console.log("newtreeId",newTreeNode)
     fetch("http://localhost:4011/request", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -90,11 +90,30 @@ export default function App() {
     })
       .then(async (res) => {
         let result = await res.json();
-        console.log(result);
+        console.log("api result",result);
       })
       .catch((err) => {
         console.log(err.message);
       });
+      // var childRes = {
+      //   attributes: {
+      //     id: newId
+      //   },
+      //   parentId : parentId
+      // }
+      // console.log("result for childRes", childRes)
+    //   fetch("http://localhost:4011/requestchild", {
+    //   method: "POST",
+    //   headers: { "content-type": "application/json" },
+    //   body: JSON.stringify(childRes),
+    // })
+    //   .then(async (res) => {
+    //     let result = await res.json();
+    //     console.log("api result for childRes",result);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
     if (newTree) {
       setTree(newTree);
     }

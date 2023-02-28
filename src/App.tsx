@@ -5,6 +5,7 @@ import Root from "./Root";
 import Widget from "./pages/Widget/Widget";
 import Responses from "./pages/Response/Responses";
 import Profile from "./pages/Profile/Profile";
+import TableView from "./pages/Response/TableView"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/root/widget" element={<Widget />} />
           <Route path="/root/profile" element={<Profile />} />
           <Route path="/root/responses" element={<Responses />} />
+          <Route path="/root/tableview" element={<TableView />} />
         </Route>
         <Route path="/signup" element={<Signup />} />
       </Routes>
