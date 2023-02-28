@@ -29,7 +29,7 @@ const Preview = ({
       <div className=" w-[480px] ">
         <div className="  h-48 lg:h-auto lg:w-48  flex-none bg-cover rounded-t lg:rounded-[15px]  text-center overflow-hidden"></div>
 
-        <Tabs defaultIndex={1} className="dark:bg-black">
+        <Tabs className="dark:bg-black">
           <TabList>
             <Tab>Minimized Screen</Tab>
             <Tab>Welcome Screen</Tab>

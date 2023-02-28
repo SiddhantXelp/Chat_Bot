@@ -109,7 +109,6 @@ export default function App() {
   };
 
   return (
-    <div className="mt-[60px]   ml-[228px]">
     <Stack direction="row" spacing="md">
       <Box w="100vw" h="100vh">
         <Tree
@@ -131,6 +130,5 @@ export default function App() {
         />
       </Box>
     </Stack>
-    </div>
   );
 }
