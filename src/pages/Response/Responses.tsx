@@ -8,6 +8,8 @@ import {
 import NodeModal from "../../components/AddFamilyModal";
 import Tree from "react-d3-tree";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import {postResponse} from "./responseSlice"
 
 // import { v4 } from "uuid";
 
@@ -38,6 +40,7 @@ export function bfs(
 }
 
 export default function App() {
+  const dispatch = useDispatch();
   const [tree, setTree] = useState<RawNodeDatum | RawNodeDatum[]>({
     title: "Root",
     attributes: {
@@ -62,7 +65,7 @@ export default function App() {
     setNode(datum);
   };
 
-  const handleSubmit = (title: string, tags:string) => {
+  const handleSubmit =  (title: string,description:string, selectType:string, tags:string ) => {
     var newId = Math.random()
     console.log("parent",node?.attributes?.id)
     var parentId = node?.attributes?.id
@@ -71,49 +74,33 @@ export default function App() {
       attributes: {
         id: newId
       },
+      description: description,
+      selectType: selectType,
       tags: tags,
-      // children: [],
+      children: [],
     });
-    var newTreeNode = {
+    var newData = {
       title: title,
-      attributes: {
-        id: newId
-      },
       tags: tags,
+      description: description,
+      selectType: selectType,
       parentId : parentId
     }
-    console.log("newtreeId",newTreeNode)
-    fetch("http://localhost:4011/request", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(newTreeNode),
-    })
-      .then(async (res) => {
-        let result = await res.json();
-        console.log("api result",result);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-      // var childRes = {
-      //   attributes: {
-      //     id: newId
-      //   },
-      //   parentId : parentId
-      // }
-      // console.log("result for childRes", childRes)
-    //   fetch("http://localhost:4011/requestchild", {
+     dispatch(postResponse(newData));
+    console.log("newtreeId",newData)
+    // fetch("http://localhost:4011/request", {
     //   method: "POST",
     //   headers: { "content-type": "application/json" },
-    //   body: JSON.stringify(childRes),
+    //   body: JSON.stringify(newData),
     // })
     //   .then(async (res) => {
     //     let result = await res.json();
-    //     console.log("api result for childRes",result);
+    //     console.log("api result",result);
     //   })
     //   .catch((err) => {
     //     console.log(err.message);
     //   });
+   
     if (newTree) {
       setTree(newTree);
     }
@@ -138,7 +125,7 @@ export default function App() {
           fill={"white"}
           onClick={() => click(nodeDatum)}
         />
-        <text fill="#7451f8" strokeWidth="0.5" x="-40" y="1">
+        <text fill="#7451f8" strokeWidth="0.5" x="-40" y="1" onClick={() => click(nodeDatum)}>
           {nodeDatum.title}
         </text>
       </g>
@@ -161,7 +148,7 @@ export default function App() {
           }
         />
         <NodeModal
-          onSubmit={(title,tags) => handleSubmit(title,tags)}
+          onSubmit={(title,description,selectType,tags) => handleSubmit(title,description,selectType,tags)}
           onClose={close}
           isOpen={Boolean(node)}
         />

@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import widgetReducer from "../pages/Widget/widgetSlice"
+import responseReducer from "../pages/Response/responseSlice"
 
 
 
 export const store = configureStore({
   reducer: {
 
-   widgetPage:widgetReducer
+   widgetPage:widgetReducer,
+   responsePage: responseReducer
  
   },
 })
