@@ -81,25 +81,13 @@ export default function App() {
     });
     var newData = {
       title: title,
-      tags: tags,
+      // tags: tags,
       description: description,
       selectType: selectType,
       parentId : parentId
     }
      dispatch(postResponse(newData));
     console.log("newtreeId",newData)
-    // fetch("http://localhost:4011/request", {
-    //   method: "POST",
-    //   headers: { "content-type": "application/json" },
-    //   body: JSON.stringify(newData),
-    // })
-    //   .then(async (res) => {
-    //     let result = await res.json();
-    //     console.log("api result",result);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
    
     if (newTree) {
       setTree(newTree);

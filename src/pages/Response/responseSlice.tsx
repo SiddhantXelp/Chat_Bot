@@ -5,15 +5,11 @@ import { AppDispatch } from '../../store/store'
 
 export type responseState = {
   formRes: any;
-  // description:string; 
-  // selectType:string
 }
 
 
 const initialState: responseState = {
   formRes: [],
-  // description: '',
-  // selectType: ''
   
 }
 
@@ -24,12 +20,6 @@ const responseSlice = createSlice({
       setFormResponse: (state, action: PayloadAction<any>) => {
         state.formRes = action.payload;
       },
-      // setResponseDescription: (state, action: PayloadAction<string>) => {
-      //   state.description = action.payload;
-      // },
-      // setResponseType: (state, action: PayloadAction<string>) => {
-      //   state.selectType = action.payload;
-      // },
      
     },
   },

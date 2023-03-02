@@ -103,7 +103,7 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
                 </div>
               );
             })} */}
-            <Input
+            <Input isDisabled={true}
               value={tags}
               onChange={(event) => setTags(event.target.value)}
             />
