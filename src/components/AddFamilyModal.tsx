@@ -22,12 +22,19 @@ interface AddFamilyModalProps {
     selectType: string,
     tags: string
   ) => void;
+  onSubmitEdit: (
+    title: string,
+    description: string,
+    selectType: string,
+    tags: string
+  ) => void;
 }
 
 const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
   isOpen,
   onClose,
   onSubmit,
+  onSubmitEdit
 }) => {
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState("");
@@ -110,7 +117,7 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button
+          <Button mr={3}
             colorScheme="blue"
             // disabled={!title}
             onClick={() => {
@@ -119,6 +126,15 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
             }}
           >
             Add
+          </Button>
+          <Button
+            colorScheme="orange"
+            onClick={() => {
+              onSubmitEdit(title, description, selectType, tags);
+              onClose();
+            }}
+          >
+            Edit
           </Button>
         </ModalFooter>
       </ModalContent>
