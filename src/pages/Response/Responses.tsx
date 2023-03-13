@@ -14,7 +14,7 @@ import {postResponse} from "./responseSlice"
 import {putResponse} from "./responseEditSlice"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-// import { v4 } from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -28,7 +28,6 @@ export default function App() {
    setTree(data.data)
 
   }
-
  
   const [parentUUID, setParentUUID] = useState("")
   const [tree, setTree] = useState<RawNodeDatum | RawNodeDatum[]>(
@@ -65,22 +64,17 @@ export default function App() {
     node: RawNodeDatum
     )=> 
        {
-    console.count("bfs method fired")
-
       const queue: RawNodeDatum[] = [];
     
       queue.unshift(tree as RawNodeDatum);
       while (queue.length > 0) {
         const curNode: any = queue.pop();
         console.log(curNode._id,"curNode._id" )
-        setParentUUID(curNode._id)
         if (curNode.uuid === id) {
           console.log("curNodeID", curNode._id)
           var nodeId = curNode._id
-          // setParentUUID(nodeId)
           curNode.children.push(node);
-          console.log("from curnNode",node)
-          return {...tree,nodeId};
+          return [{...tree}, curNode]
         }
         const len = curNode.children.length;
         console.log("len",len)
@@ -88,28 +82,25 @@ export default function App() {
         for (let i = 0; i < len; i++) {
           queue.unshift(curNode.children[i]);
         }
+       
       }
     }
-    // console.log("parentUUID",parentUUID)
 
   const handleSubmit =  (title: string,description:string, selectType:string, tags:string ) => {
-    var newId = Math.random()
-    
-    // var parentId = node?.uuid;
-    // console.log("parentUUID ---- 116", parentId)
+    var newUuid = uuidv4()
 
-    const newTree = bfs(node?.uuid, tree, {
+    const [newTree, curNode] : any = bfs(node?.uuid, tree, {
       title: title,
-      uuid:newId,
+      uuid:newUuid,
       description: description,
       type: selectType,
       tags: tags,
       children: [],
     });
-    // console.log("bfs",newTree)
+    console.log("bfs-------->",newTree, curNode.uuid)
     var newData = {
       title: title,
-      uuid:newId,
+      uuid:curNode.uuid,
       description: description,
       type: selectType,
       // tags: tags,
@@ -126,7 +117,7 @@ export default function App() {
     console.count("handleSubmit fired")
   };
  const handleEdit = async(title: string,description:string, selectType:string, tags:string ) =>{
-
+//  var testUuid = uuidv4()
   const updatedData = {
    title: title,
    description : description,
@@ -144,31 +135,26 @@ export default function App() {
 
     return (
       <g>
-        <rect
-          x={"-50"}
-          y={"-15"}
-          width="100"
-          height="30"
-          rx="15"
-          fill={"white"}
-          onClick={() => click(nodeDatum)}
-        />
-        <text fill="#7451f8" strokeWidth="0.5" x="-30" y="1" onClick={() => click(nodeDatum)}>
-          {nodeDatum.title} 
-        </text>
-        {/* <image x="-20" href="https://static.vecteezy.com/system/resources/previews/000/554/223/original/plus-sign-vector-icon.jpg" height="35" width="20" 
-        onClick={() => click(nodeDatum)}  />
-        <image href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4SbeYl4bHvzG1PSGT5si1NWlMyexMTdOmahli2BMbqzs8EgiowWPYAVeblM2smDjyM6Q&usqp=CAU"
-        onClick={() => click(nodeDatum)}  
-        height="25" width="40" /> */}
-      </g>
+  <rect
+    x={"-20"}
+    y={"-15"}
+    width="125"
+    height="35"
+    rx="15"
+    fill={"#ccd7e3"}
+    onClick={() => click(nodeDatum)}
+  />
+<foreignObject x="-10" y="-17" width="125" height="40"  onClick={() => click(nodeDatum)}>
+<span xmlns="http://www.w3.org/1999/xhtml" style={{color:'black',fontWeight: 600,fontSize:"13px", wordWrap:'break-word'}}>{nodeDatum.title}</span>
+</foreignObject>
+</g>
     );
   };
 
   return (
     <div className="mt-[60px] ml-[214px]">
     <Stack direction="row" spacing="md">
-      <Box w="100vw" h="100vh">
+      <Box w="100vw" h="100vh" style={{backgroundColor:"#20344a"}}>
         <Tree
           data={tree}
           zoomable={true}
