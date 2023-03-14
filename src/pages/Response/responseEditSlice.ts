@@ -30,10 +30,10 @@ export const { setEditResponse} = responseEditSlice.actions
 export default responseEditSlice.reducer
 
 
-export const putResponse = (updatedData: any) => async (dispatch: any) => {
-
+export const putResponse = (updatedData: any, currentId: string) => async (dispatch: any) => {
+console.log("currentID from slice", currentId)
   try {
-    const editedResponse = await editResponse(updatedData)
+    const editedResponse = await editResponse(updatedData,currentId)
     console.log("POSTRES", editedResponse);
     dispatch(setEditResponse(editedResponse))
     

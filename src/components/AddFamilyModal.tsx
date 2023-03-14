@@ -59,7 +59,6 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
   //   list[index][name] = value;
   //   setTags(list);
   // };
-  console.log("type", selectType)
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />

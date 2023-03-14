@@ -1,12 +1,13 @@
 import axios from "axios";
 import apis from './index'
 
-export const editResponse = async (updatedData:any) => {
+export const editResponse = async (updatedData:any,currentId:string) => {
     console.log( updatedData, "iam  data from api call")
+    console.log( currentId, "iam  currentID from api call")
 
     let config = {
       method: 'PUT',
-      url: apis.responseEdit.upload,
+      url: apis.responseEdit.upload + currentId,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',

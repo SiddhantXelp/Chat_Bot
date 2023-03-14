@@ -12,7 +12,7 @@ import { useState,useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {postResponse} from "./responseSlice"
 import {putResponse} from "./responseEditSlice"
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import ResponsePreview from "../../components/ResponsePreview/responsePreview"
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -22,7 +22,7 @@ export default function App() {
  
   const dispatch = useDispatch();
   const getData = async() => {
-    const response = await fetch('http://localhost:4011/userRequest/6409ae59df721eb18c134e19')
+    const response = await fetch('http://localhost:4011/userRequest/3899ed86-1d3f-4694-a49c-90f99b829013')
     const data =  await response.json()
     // setGetNewTree(data.data)
    setTree(data.data)
@@ -117,19 +117,26 @@ export default function App() {
     console.count("handleSubmit fired")
   };
  const handleEdit = async(title: string,description:string, selectType:string, tags:string ) =>{
-//  var testUuid = uuidv4()
+  const [newTree, curNode] : any = bfs(node?.uuid, tree, {});
+  console.log("curnode form edit", newTree, curNode)
+ var currentId = curNode.uuid
+
   const updatedData = {
    title: title,
    description : description,
    type: selectType,
    tags: tags
   }
-// dispatch(putResponse(updatedData));
+// dispatch(putResponse(updatedData,currentId));
 
+ }
+ const getCurrentNodeData = ()=>{
+  const [newTree, curNode] : any = bfs(node?.uuid, tree, {});
+  console.log("from getCurrentNodeData", curNode)
  }
   const renderRectSvgNode = (
     customProps: CustomNodeElementProps,
-    click: (datum: TreeNodeDatum) => void
+    click: (datum: TreeNodeDatum,getCurrentNodeData:any) => void,
   ) => {
     const { nodeDatum } = customProps;
 
@@ -139,12 +146,12 @@ export default function App() {
     x={"-20"}
     y={"-15"}
     width="125"
-    height="35"
+    height="45"
     rx="15"
     fill={"#ccd7e3"}
-    onClick={() => click(nodeDatum)}
+    onClick={() => click(nodeDatum,getCurrentNodeData)}
   />
-<foreignObject x="-10" y="-17" width="125" height="40"  onClick={() => click(nodeDatum)}>
+<foreignObject x="-10" y="-17" width="125" height="45"  onClick={() => click(nodeDatum,getCurrentNodeData)}>
 <span xmlns="http://www.w3.org/1999/xhtml" style={{color:'black',fontWeight: 600,fontSize:"13px", wordWrap:'break-word'}}>{nodeDatum.title}</span>
 </foreignObject>
 </g>
@@ -153,6 +160,7 @@ export default function App() {
 
   return (
     <div className="mt-[60px] ml-[214px]">
+      <ResponsePreview/>
     <Stack direction="row" spacing="md">
       <Box w="100vw" h="100vh" style={{backgroundColor:"#20344a"}}>
         <Tree
@@ -164,7 +172,7 @@ export default function App() {
             y: 200,
           }}
           renderCustomNodeElement={(nodeInfo) =>
-            renderRectSvgNode(nodeInfo, handleNodeClick )
+            renderRectSvgNode(nodeInfo, handleNodeClick)
           }
         />
         <NodeModal

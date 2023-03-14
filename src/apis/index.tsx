@@ -9,6 +9,6 @@ export default {
     upload: `${BASE_URL}/userRequest`,
   },
   responseEdit: {
-    upload: `${BASE_URL}/userRequest/e08adc83-a5cc-4a6a-a84f-01b522af9935`,
+    upload: `${BASE_URL}/userRequest/`,
   }
 };
