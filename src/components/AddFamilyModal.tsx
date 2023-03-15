@@ -2,7 +2,8 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Input,Select,
+  Input,
+  Select,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -11,11 +12,12 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface AddFamilyModalProps {
   isOpen: boolean;
   onClose: () => void;
+  visible: boolean;
   onSubmit: (
     title: string,
     description: string,
@@ -28,18 +30,35 @@ interface AddFamilyModalProps {
     selectType: string,
     tags: string
   ) => void;
+  currData: any;
 }
 
 const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
   isOpen,
   onClose,
   onSubmit,
-  onSubmitEdit
+  onSubmitEdit,
+  currData,
+  visible,
 }) => {
+  const getData = async () => {
+    const param = currData.uuid;
+    const url = "http://localhost:4011/userRequest/" + param;
+    const response = await fetch(url);
+    const getRes = await response.json();
+    setTitle(getRes?.data?.title || "");
+    setTags(getRes?.data?.tags || '');
+    setDescription(getRes?.data?.description || "");
+    setSelectType(getRes?.data?.type || '');
+  };
+  useEffect(() => {
+    getData();
+  }, [visible]);
+
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState("");
   const [description, setDescription] = useState("");
-  const [selectType, setSelectType] = useState("Text");
+  const [selectType, setSelectType] = useState("");
   // const [tags, setTags] = useState([
   //   {
   //     res: "",
@@ -78,15 +97,14 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
               onChange={(event) => setDescription(event.target.value)}
             />
             <FormLabel>Types</FormLabel>
-            <Select  value={selectType} onChange={(event)=>setSelectType(event.target.value)}>
+            <Select
+              value={selectType}
+              onChange={(event) => setSelectType(event.target.value)}
+            >
               <option value="Text">Text</option>
               <option value="Button">Button </option>
               <option value="Voice">Voice </option>
             </Select>
-            {/* <Input
-              value={selectType}
-              onChange={(event) => setSelectType(event.target.value)}
-            /> */}
             <div className="flex">
               <FormLabel>Tags</FormLabel>
               {/* <i
@@ -109,28 +127,32 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
                 </div>
               );
             })} */}
-            <Input isDisabled={true}
+            <Input
+              isDisabled={true}
               value={tags}
               onChange={(event) => setTags(event.target.value)}
             />
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button mr={3}
+          <Button
+            mr={3}
             colorScheme="blue"
             // disabled={!title}
-            onClick={() => {
+            onClick={(event) => {
               onSubmit(title, description, selectType, tags);
               onClose();
+              event.preventDefault();
             }}
           >
             Add
           </Button>
           <Button
             colorScheme="orange"
-            onClick={() => {
+            onClick={(event) => {
               onSubmitEdit(title, description, selectType, tags);
               onClose();
+              event.preventDefault();
             }}
           >
             Edit
