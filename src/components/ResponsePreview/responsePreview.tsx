@@ -11,7 +11,7 @@ export default function ResponsePreview() {
   // const prevData: any = useRef();
   const [prevstate, setPrevstate]: any = useState([]);
   //const [game, setGame] = useState(false);
-  const [answer, setAnswer] = useState("");
+  const [answer, setAnswer] = useState<any[]>([]);
   useEffect(() => {
     console.count("hi");
     let flag1 = 1;
@@ -41,8 +41,9 @@ export default function ResponsePreview() {
       });
   }, [flag]);
 
-  const IdGenerator: any = (id: any, title: any) => {
-    setAnswer(title);
+  const IdGenerator: any = (id: any, title: string) => {
+    answer.push(title);
+    setAnswer(answer);
     // setPrevstate([...prevstate]);
     console.log("answer=>", answer);
     //setGame(true);
@@ -61,8 +62,10 @@ export default function ResponsePreview() {
       </div>
 
       {addData ? (
-        <div className="bg-red-500 ">
-          <div className="absolute overflow-scroll bg-red-500 right-8 mt-[10%] mr-[1%] dark:bg-black w-[350px] border-r border-b border-l border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white rounded-[15px] lg:rounded-[15px] ">
+        <div className="bg-red-500">
+          {/* chat screen */}
+
+          <div className="absolute right-8 mt-[8%]   w-[350px] h-[100px]    bg-slate-600  ">
             {/* </div><div className="absolute top-155 right-8 mt-[10%] mr-[1%] dark:bg-black w-[350px] border-r border-b border-l border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white rounded-[15px] lg:rounded-[15px] leading-normal overflow-hidden"> */}
             <div className="flex ">
               <div className="flex items-center m-[15px]">
@@ -77,44 +80,50 @@ export default function ResponsePreview() {
                 <p className="text-black-500  font-normal text-md">online</p>
               </div>
             </div>
-            {prevstate &&
-              prevstate.map((response: any) => (
-                <>
-                  <div className="flow-root ml-[5%]">
-                    <p className="text-xl text-base">
-                      <strong>{response.title}</strong>
-                    </p>
-                    <p className="text-xl text-base">
-                      <strong>{response.description}</strong>
-                    </p>
-                  </div>
-                  {/* <div className=" bg-white-500 max-w-[50%] rounded-[15px] p-2  my-2 mx-2 border-slate-500 border-[1.5px]">
+            {/* border nav */}
+
+            <div className="absolute overflow-y-scroll bg-white w-[100%] h-[350px]">
+              {prevstate &&
+                prevstate.map((response: any, i: number) => (
+                  <>
+                    <div className="mt-[7%] ml-[5%]">
+                      {/* <p className="text-xl text-base">
+                        <strong>{response.title}</strong>
+                      </p> */}
+                      <p className="text-xl text-base">
+                        <strong>{response.description}</strong>
+                      </p>
+                    </div>
+                    {/* <div className=" bg-white-500 max-w-[50%] rounded-[15px] p-2  my-2 mx-2 border-slate-500 border-[1.5px]">
                     <span className="text-base  font-normal">
                       {response.title}
                     </span>
                   </div> */}
-                  <div className="flow-root float-right ml-[5%] bg-orange-500 mt-40">
-                    <div
-                      // onClick={IdGenerator(child._id)}
-                      className="text-base pointer-events-auto hover:bg-gray-200 cursor-pointer font-normal"
-                    >
-                      {answer}
-                    </div>
-                  </div>
-                  {response.children.map((child: any) => (
-                    <div
-                      onClick={() => IdGenerator(child.uuid, child.title)}
-                      className="flow-root bg-orange-500 max-w-[50%] rounded-[8px] p-2  my-3 mx-3 border-slate-500 border-[1.9px]"
-                    >
-                      <span
-                        // onClick={IdGenerator(child._id)}
-                        className="text-base pointer-events-auto hover:bg-gray-200 cursor-pointer font-normal"
+
+                    {response.children.map((child: any) => (
+                      <div
+                        onClick={() => IdGenerator(child.uuid, child.title)}
+                        className="flow-root bg-indigo-700 max-w-[50%] hover:bg-gray-200  rounded-[8px] p-2  my-3 mx-3 border-slate-500 border-[1.9px] cursor-pointer"
                       >
-                        {child.title}
-                      </span>
+                        <span
+                          // onClick={IdGenerator(child._id)}
+                          className="text-white pointer-events-auto  cursor-pointer font-normal"
+                        >
+                          {child.title}
+                        </span>
+                      </div>
+                    ))}
+                    <div className="mt-[50px]"></div>
+                    <div className="flow-root float-right ml-[5%] bg-indigo-700">
+                      <div
+                        // onClick={IdGenerator(child._id)}
+                        className="text-base pointer-events-auto "
+                      >
+                        {answer[i]}
+                      </div>
                     </div>
-                  ))}
-                  {/* <div className="float-right ml-[5%] bg-red-500">
+                    <div className="mb-[100px]"></div>
+                    {/* <div className="float-right ml-[5%] bg-red-500">
                     <span
                       // onClick={IdGenerator(child._id)}
                       className="text-base pointer-events-auto hover:bg-gray-200 cursor-pointer font-normal"
@@ -122,20 +131,20 @@ export default function ResponsePreview() {
                       {answer}
                     </span>
                   </div> */}
-                </>
-              ))}
+                  </>
+                ))}
+            </div>
+
             {/* <div className=" text-left text-center bg-white-500 max-w-[50%] rounded-[15px] p-2  my-2 mx-2 border-slate-500 border-[1.5px]">
               <span className="text-base  font-normal">incoming message</span>
             </div> */}
             {/* <div className="text-center bg-white-500 max-w-[50%] rounded-[15px] p-2 my-2 mx-2 border-slate-500 border-[1.5px] float-right ">
               <span className="text-base  font-normal">sent msg</span>
             </div> */}
-
-            <div className="flex pt-[260px]">
-              <div className=" ">
-                <input
-                  type="text"
-                  className="
+            <div className="bg-white mt-[100%] h-[50px] ">
+              <input
+                type="text"
+                className="
               px-3
               py-1.5
               text-base
@@ -146,14 +155,13 @@ export default function ResponsePreview() {
               m-0
                focus:border-none focus:outline-none
               "
-                  id="exampleText0"
-                  placeholder="Type your message"
-                />
-              </div>
+                id="exampleText0"
+                placeholder="Type your message"
+              />
+              <p className="bg-white text-center text-slate-500 text-xs pt-[20px]">
+                Powered by <b className="text-indigo-700 text-xs">Chatbot</b>
+              </p>
             </div>
-            <p className=" mt-[22px] text-center text-slate-500 text-xs ">
-              Powered by <b className="text-indigo-700 text-xs">Chatbot</b>
-            </p>
           </div>
         </div>
       ) : null}
