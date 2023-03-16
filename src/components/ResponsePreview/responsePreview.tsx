@@ -52,78 +52,78 @@ export default function ResponsePreview() {
     setFlag(id);
     console.log("flag=>", flag);
   };
+  console.log(answer, "aaaaaaaaaaaaaaaaaa");
   //console.log("prevData=>", prevstate);
   return (
     <>
       <div onClick={() => setAddData(!addData)}>
-        <button className="absolute bg-red-500 hover:bg-red-700 top-20 right-5 text-white font-bold py-2 px-4 rounded-full">
+        <button className="absolute bg-red-500 hover:bg-red-700 top-20 right-5 text-white font-bold py-1 px-4 rounded-full">
           Test Your Bot
         </button>
       </div>
 
       {addData ? (
-        <div className="bg-red-500">
-          {/* chat screen */}
-
-          <div className="absolute right-8 mt-[8%]   w-[350px] h-[100px]    bg-slate-600  ">
-            {/* </div><div className="absolute top-155 right-8 mt-[10%] mr-[1%] dark:bg-black w-[350px] border-r border-b border-l border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white rounded-[15px] lg:rounded-[15px] leading-normal overflow-hidden"> */}
-            <div className="flex ">
-              <div className="flex items-center m-[15px]">
-                <img
-                  className="w-[50px] h-[50px] rounded-[50%]"
-                  src="https://uselooper.com/assets/images/avatars/profile.jpg"
-                  alt="img"
-                />
-              </div>
-              <div className="m-[15px]">
-                <p className=" text-lg  font-normal ">botname</p>
-                <p className="text-black-500  font-normal text-md">online</p>
-              </div>
+        <div className="absolute right-8 mt-[8%]   w-[350px] h-[100px]  rounded-[15px] bg-indigo-700 ">
+          {/* </div><div className="absolute top-155 right-8 mt-[10%] mr-[1%] dark:bg-black w-[350px] border-r border-b border-l border-gray-400 lg:border-l lg:border-t lg:border-gray-400 bg-white rounded-[15px] lg:rounded-[15px] leading-normal overflow-hidden"> */}
+          <div className="flex ">
+            <div className="flex items-center m-[15px]">
+              <img
+                className="w-[50px] h-[50px] rounded-[50%]"
+                src="https://uselooper.com/assets/images/avatars/profile.jpg"
+                alt="img"
+              />
             </div>
-            {/* border nav */}
+            <div className="m-[15px]">
+              <p className=" text-lg  font-normal text-white">Botname</p>
+              <p className="text-black-500  font-normal text-md text-white">
+                online
+              </p>
+            </div>
+          </div>
+          {/* border nav */}
 
-            <div className="absolute overflow-y-scroll bg-white w-[100%] h-[350px]">
-              {prevstate &&
-                prevstate.map((response: any, i: number) => (
-                  <>
-                    <div className="mt-[7%] ml-[5%]">
-                      {/* <p className="text-xl text-base">
+          <div className="absolute overflow-y-scroll bg-white dark:bg-slate-600  w-[100%] h-[350px]">
+            {prevstate &&
+              prevstate.map((response: any, i: number) => (
+                <>
+                  <div className="mt-[7%] ml-[5%]">
+                    {/* <p className="text-xl text-base">
                         <strong>{response.title}</strong>
                       </p> */}
-                      <p className="text-xl text-base">
-                        <strong>{response.description}</strong>
-                      </p>
-                    </div>
-                    {/* <div className=" bg-white-500 max-w-[50%] rounded-[15px] p-2  my-2 mx-2 border-slate-500 border-[1.5px]">
+                    <p className="text-xl text-base dark:text-white">
+                      <strong>{response.description}</strong>
+                    </p>
+                  </div>
+                  {/* <div className=" bg-white-500 max-w-[50%] rounded-[15px] p-2  my-2 mx-2 border-slate-500 border-[1.5px]">
                     <span className="text-base  font-normal">
                       {response.title}
                     </span>
                   </div> */}
 
-                    {response.children.map((child: any) => (
-                      <div
-                        onClick={() => IdGenerator(child.uuid, child.title)}
-                        className="flow-root bg-indigo-700 max-w-[50%] hover:bg-gray-200  rounded-[8px] p-2  my-3 mx-3 border-slate-500 border-[1.9px] cursor-pointer"
-                      >
-                        <span
-                          // onClick={IdGenerator(child._id)}
-                          className="text-white pointer-events-auto  cursor-pointer font-normal"
-                        >
-                          {child.title}
-                        </span>
-                      </div>
-                    ))}
-                    <div className="mt-[50px]"></div>
-                    <div className="flow-root float-right ml-[5%] bg-indigo-700">
-                      <div
+                  {response.children.map((child: any) => (
+                    <div
+                      onClick={() => IdGenerator(child.uuid, child.title)}
+                      className="flow-root bg-indigo-700 max-w-[50%] hover:bg-gray-200  rounded-[8px] p-2  my-3 mx-3 border-slate-500 border-[1.9px] cursor-pointer"
+                    >
+                      <span
                         // onClick={IdGenerator(child._id)}
-                        className="text-base pointer-events-auto "
+                        className="text-white pointer-events-auto  cursor-pointer font-normal"
                       >
-                        {answer[i]}
-                      </div>
+                        {child.title}
+                      </span>
                     </div>
-                    <div className="mb-[100px]"></div>
-                    {/* <div className="float-right ml-[5%] bg-red-500">
+                  ))}
+                  <div className="mt-[20px]"></div>
+                  <div className="flow-root float-right ml-[5%] bg-indigo-700 max-w-[50%] rounded-[8px] p-2   border-slate-500 ">
+                    <div
+                      // onClick={IdGenerator(child._id)}
+                      className="text-white pointer-events-auto  cursor-pointer font-normal"
+                    >
+                      {answer[i]}
+                    </div>
+                  </div>
+                  <div className="mb-[100px]"></div>
+                  {/* <div className="float-right ml-[5%] bg-red-500">
                     <span
                       // onClick={IdGenerator(child._id)}
                       className="text-base pointer-events-auto hover:bg-gray-200 cursor-pointer font-normal"
@@ -131,20 +131,20 @@ export default function ResponsePreview() {
                       {answer}
                     </span>
                   </div> */}
-                  </>
-                ))}
-            </div>
+                </>
+              ))}
+          </div>
 
-            {/* <div className=" text-left text-center bg-white-500 max-w-[50%] rounded-[15px] p-2  my-2 mx-2 border-slate-500 border-[1.5px]">
+          {/* <div className=" text-left text-center bg-white-500 max-w-[50%] rounded-[15px] p-2  my-2 mx-2 border-slate-500 border-[1.5px]">
               <span className="text-base  font-normal">incoming message</span>
             </div> */}
-            {/* <div className="text-center bg-white-500 max-w-[50%] rounded-[15px] p-2 my-2 mx-2 border-slate-500 border-[1.5px] float-right ">
+          {/* <div className="text-center bg-white-500 max-w-[50%] rounded-[15px] p-2 my-2 mx-2 border-slate-500 border-[1.5px] float-right ">
               <span className="text-base  font-normal">sent msg</span>
             </div> */}
-            <div className="bg-white mt-[100%] h-[50px] ">
-              <input
-                type="text"
-                className="
+          <div className="bg-white mt-[100%] h-[50px]  ">
+            <input
+              type="text"
+              className="
               px-3
               py-1.5
               text-base
@@ -155,13 +155,12 @@ export default function ResponsePreview() {
               m-0
                focus:border-none focus:outline-none
               "
-                id="exampleText0"
-                placeholder="Type your message"
-              />
-              <p className="bg-white text-center text-slate-500 text-xs pt-[20px]">
-                Powered by <b className="text-indigo-700 text-xs">Chatbot</b>
-              </p>
-            </div>
+              id="exampleText0"
+              placeholder="Type your message"
+            />
+            <p className="bg-white text-center text-slate-500 text-xs pt-[20px] rounded-[15px]">
+              Powered by <b className="text-indigo-700 text-xs">Chatbot</b>
+            </p>
           </div>
         </div>
       ) : null}

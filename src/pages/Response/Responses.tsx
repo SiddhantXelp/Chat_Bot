@@ -4,15 +4,14 @@ import {
   RawNodeDatum,
   TreeNodeDatum,
 } from "react-d3-tree/lib/types/types/common";
+import { useEffect, useState } from "react";
 
 import NodeModal from "../../components/AddFamilyModal";
+import ResponsePreview from "../../components/ResponsePreview/responsePreview";
 import Tree from "react-d3-tree";
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { postResponse } from "./responseSlice";
 import { putResponse } from "./responseEditSlice";
-import ResponsePreview from "../../components/ResponsePreview/responsePreview";
-
+import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
 export default function App() {
@@ -100,7 +99,7 @@ export default function App() {
       type: selectType,
       children: [],
     };
-    //  dispatch(postResponse(newData));
+     dispatch(postResponse(newData));
     if (newTree) {
       setTree(newTree);
     }
@@ -167,7 +166,10 @@ export default function App() {
 
   return (
     <div className="mt-[60px] ml-[214px]">
-      <ResponsePreview />
+      <div className="relative">
+        <ResponsePreview />
+      </div>
+      
       <Stack direction="row" spacing="md">
         <Box w="100vw" h="100vh" style={{ backgroundColor: "#20344a" }}>
           <Tree
