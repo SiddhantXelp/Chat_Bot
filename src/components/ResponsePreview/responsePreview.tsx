@@ -114,14 +114,16 @@ export default function ResponsePreview() {
                     </div>
                   ))}
                   <div className="mt-[20px]"></div>
-                  <div className="flow-root float-right ml-[5%] bg-indigo-700 max-w-[50%] rounded-[8px] p-2   border-slate-500 ">
-                    <div
-                      // onClick={IdGenerator(child._id)}
-                      className="text-white pointer-events-auto  cursor-pointer font-normal"
-                    >
-                      {answer[i]}
+                  {answer[i] ? (
+                    <div className="flow-root float-right ml-[5%] bg-white-700 max-w-[50%] rounded-[8px] p-2  border-slate-500  border-[1.9px]">
+                      <div
+                        // onClick={IdGenerator(child._id)}
+                        className="text-indigo-700 pointer-events-auto  cursor-pointer font-extrabold"
+                      >
+                        {answer[i]}
+                      </div>
                     </div>
-                  </div>
+                  ) : null}
                   <div className="mb-[100px]"></div>
                   {/* <div className="float-right ml-[5%] bg-red-500">
                     <span
