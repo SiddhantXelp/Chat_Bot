@@ -7,7 +7,7 @@ import axios from "axios";
 export default function ResponsePreview() {
   const [addData, setAddData] = useState(false);
   const [responses, setResponses] = useState<any[]>([]);
-  const [flag, setFlag] = useState("9593f6dc-7731-493b-b761-bb3eeebc1867");
+  const [flag, setFlag] = useState("080ba276-d3bc-4956-bf29-e9f9d0cdade4");
   // const prevData: any = useRef();
   const [prevstate, setPrevstate]: any = useState([]);
   //const [game, setGame] = useState(false);
@@ -86,11 +86,11 @@ export default function ResponsePreview() {
             {prevstate &&
               prevstate.map((response: any, i: number) => (
                 <>
-                  <div className="mt-[7%] ml-[5%]">
+                  <div className="mt-[7%]  flex flex-col flow-root bg-indigo-700 max-w-[70%]   rounded-[8px] pt-2 pb-2 pl-5 pr-5 my-3 mx-3 border-slate-500 border-[1.9px] ">
                     {/* <p className="text-xl text-base">
                         <strong>{response.title}</strong>
                       </p> */}
-                    <p className="text-xl text-base dark:text-white">
+                    <p className="text-sm text-base text-white">
                       <strong>{response.description}</strong>
                     </p>
                   </div>
@@ -99,23 +99,24 @@ export default function ResponsePreview() {
                       {response.title}
                     </span>
                   </div> */}
-
-                  {response.children.map((child: any) => (
-                    <div
-                      onClick={() => IdGenerator(child.uuid, child.title)}
-                      className="flow-root bg-indigo-700 max-w-[50%] hover:bg-gray-200  rounded-[8px] p-2  my-3 mx-3 border-slate-500 border-[1.9px] cursor-pointer"
-                    >
-                      <span
-                        // onClick={IdGenerator(child._id)}
-                        className="text-white pointer-events-auto  cursor-pointer font-normal"
+                  <div className="float-left max-w-full flex flex-wrap">
+                    {response.children.map((child: any) => (
+                      <div
+                        onClick={() => IdGenerator(child.uuid, child.title)}
+                        className="flex flex-col flow-root bg-indigo-700 max-w-[50%] hover:bg-gray-200  rounded-[8px] pt-2 pb-2 pl-5 pr-5 my-3 mx-3 border-slate-500 border-[1.9px] cursor-pointer"
                       >
-                        {child.title}
-                      </span>
-                    </div>
-                  ))}
+                        <span
+                          // onClick={IdGenerator(child._id)}
+                          className="text-white pointer-events-auto  cursor-pointer font-normal"
+                        >
+                          {child.title}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                   <div className="mt-[20px]"></div>
                   {answer[i] ? (
-                    <div className="flow-root float-right ml-[5%] bg-white-700 max-w-[50%] rounded-[8px] p-2  border-slate-500  border-[1.9px]">
+                    <div className="flow-root float-right ml-[5%] bg-white-700 max-w-[50%] rounded-[8px] p-2  border-slate-500  border-[1.9px] mt-[50px] ">
                       <div
                         // onClick={IdGenerator(child._id)}
                         className="text-indigo-700 pointer-events-auto  cursor-pointer font-extrabold"
