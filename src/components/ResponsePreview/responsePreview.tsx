@@ -13,7 +13,7 @@ export default function ResponsePreview() {
   //const [game, setGame] = useState(false);
   const [answer, setAnswer] = useState<any[]>([]);
   useEffect(() => {
-    console.count("hi");
+    // console.count("hi");
     let flag1 = 1;
     // prevData.current?.scrollIntoView({
     //   behaviour: "smooth",
@@ -21,15 +21,15 @@ export default function ResponsePreview() {
     //   inline: "start",
     // });
     // setPrevstate([...prevstate, ...responses]);
-    console.log("prevstate=>", prevstate);
+    // console.log("prevstate=>", prevstate);
 
     const url: string = "http://localhost:4011/userRequest/" + flag;
-    console.log(url);
+    // console.log(url);
     axios
       .get(url)
       .then(function (response) {
         // handle success
-        console.log("response is =>", response.data);
+        // console.log("response is =>", response.data);
         // setResponses([response.data.data]);
 
         setPrevstate([...prevstate, response.data.data]);
@@ -45,14 +45,13 @@ export default function ResponsePreview() {
     answer.push(title);
     setAnswer(answer);
     // setPrevstate([...prevstate]);
-    console.log("answer=>", answer);
+    // console.log("answer=>", answer);
     //setGame(true);
     //console.log("game=>", game);
-    console.log("idd", id);
+    // console.log("idd", id);
     setFlag(id);
-    console.log("flag=>", flag);
+    // console.log("flag=>", flag);
   };
-  console.log(answer, "aaaaaaaaaaaaaaaaaa");
   //console.log("prevData=>", prevstate);
   return (
     <>

@@ -7,21 +7,29 @@ import {
 import { useEffect, useState } from "react";
 
 import NodeModal from "../../components/AddFamilyModal";
+import EditFamilyModal from "../../components/EditFamilyModal";
 import ResponsePreview from "../../components/ResponsePreview/responsePreview";
 import Tree from "react-d3-tree";
 import { postResponse } from "./responseSlice";
 import { putResponse } from "./responseEditSlice";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import EditIcon from "@mui/icons-material/Edit";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 export default function App() {
   const dispatch = useDispatch();
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [editVisible, setEditVisible] = useState(false);
+  
+  
+  const [param, setParam] = useState("9593f6dc-7731-493b-b761-bb3eeebc1867");
+  const [add, setAdd] = useState("add")
+
   const getData = async () => {
-    const response = await fetch(
-      "http://localhost:4011/userRequest/3899ed86-1d3f-4694-a49c-90f99b829013"
-    );
+    const url = "http://localhost:4011/userRequest/" + param;
+    const response = await fetch(url);
     const data = await response.json();
     setTree(data.data);
   };
@@ -43,10 +51,13 @@ export default function App() {
   });
   useEffect(() => {
     getData();
-  }, []);
+  }, [modalVisible]);
 
   const [node, setNode] = useState<TreeNodeDatum | undefined>();
-  const close = () => setNode(undefined);
+  const close = () => {
+    // setModalVisible(false)
+    
+    setNode(undefined)};
 
   const bfs = (
     id: string,
@@ -73,8 +84,22 @@ export default function App() {
 
   const handleNodeClick = (datum: TreeNodeDatum) => {
     setNode(datum);
+    setAdd(add)
+    console.log("addddd",add)
     setModalVisible(!modalVisible);
     setCurrentNodeData(datum);
+    // setParam(datum.uuid)
+    // console.log("datum.uuid from response", datum.uuid);
+  };
+  const handleNodeClickEdit = (datum: TreeNodeDatum) => {
+    setNode(datum);
+    // setAdd(!add)
+    console.log("addddd",add)
+    setModalVisible(!modalVisible);
+    setEditVisible(!editVisible)
+    setCurrentNodeData(datum);
+    // setParam(datum.uuid)
+    // console.log("datum.uuid from response", datum.uuid);
   };
   const handleSubmit = (
     title: string,
@@ -101,9 +126,8 @@ export default function App() {
     };
      dispatch(postResponse(newData));
     if (newTree) {
-      setTree(newTree);
+      setTree([{ ...tree }, newTree]);
     }
-
     setNode(undefined);
   };
   const handleEdit = async (
@@ -121,15 +145,17 @@ export default function App() {
       type: selectType,
       tags: tags,
     };
-    // dispatch(putResponse(updatedData,currentId));
+    dispatch(putResponse(updatedData,currentId));
+    setModalVisible(!modalVisible);
   };
 
   const renderRectSvgNode = (
     customProps: CustomNodeElementProps,
-    click: (datum: TreeNodeDatum) => void
+    click: (datum: TreeNodeDatum) => void,
+    editClick :(datum: TreeNodeDatum) =>void
   ) => {
     const { nodeDatum } = customProps;
-
+// console.log("nodedatum",nodeDatum)
     return (
       <g>
         <rect
@@ -139,16 +165,10 @@ export default function App() {
           height="45"
           rx="15"
           fill={"#ccd7e3"}
-          onClick={() => click(nodeDatum)}
+          // onClick={() => {click(nodeDatum)}}
         />
-        <foreignObject
-          x="-10"
-          y="-17"
-          width="125"
-          height="45"
-          onClick={() => click(nodeDatum)}
-        >
-          <span
+        <foreignObject x="-10" y="-17" width="125" height="50" >
+          <span 
             xmlns="http://www.w3.org/1999/xhtml"
             style={{
               color: "black",
@@ -159,6 +179,17 @@ export default function App() {
           >
             {nodeDatum.title}
           </span>
+          <br />
+          <div>
+            <VisibilityIcon
+              className="mr-[10px]"
+            />
+            <AddCircleIcon className="mr-[10px]" 
+              onClick={() => {click(nodeDatum)}}
+              />
+            <EditIcon className="mr-[10px]"
+             onClick={() => {editClick(nodeDatum),editVisible}} />
+          </div>
         </foreignObject>
       </g>
     );
@@ -169,7 +200,6 @@ export default function App() {
       <div className="relative">
         <ResponsePreview />
       </div>
-      
       <Stack direction="row" spacing="md">
         <Box w="100vw" h="100vh" style={{ backgroundColor: "#20344a" }}>
           <Tree
@@ -181,12 +211,13 @@ export default function App() {
               y: 200,
             }}
             renderCustomNodeElement={(nodeInfo) =>
-              renderRectSvgNode(nodeInfo, handleNodeClick)
+              renderRectSvgNode(nodeInfo, handleNodeClick,handleNodeClickEdit)
             }
           />
-          <NodeModal
+          <NodeModal 
             currData={currentNodeData}
             visible={modalVisible}
+            editVisible = {editVisible}
             onSubmit={(title, description, selectType, tags) =>
               handleSubmit(title, description, selectType, tags)
             }
@@ -196,6 +227,17 @@ export default function App() {
             onClose={close}
             isOpen={Boolean(node)}
           />
+          {/* <EditFamilyModal
+            currData={currentNodeData}
+            visible={modalVisible}
+            // onSubmit={(title, description, selectType, tags) =>
+            //   handleSubmit(title, description, selectType, tags)
+            // }
+            onSubmitEdit={(title, description, selectType, tags) =>
+              handleEdit(title, description, selectType, tags)
+            }
+            onClose={close}
+            isOpen={Boolean(node)}/> */}
         </Box>
       </Stack>
     </div>

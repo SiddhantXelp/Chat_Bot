@@ -18,6 +18,7 @@ interface AddFamilyModalProps {
   isOpen: boolean;
   onClose: () => void;
   visible: boolean;
+  editVisible:boolean;
   onSubmit: (
     title: string,
     description: string,
@@ -40,25 +41,36 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
   onSubmitEdit,
   currData,
   visible,
+  editVisible
 }) => {
+  const [title, setTitle] = useState("");
+  const [tags, setTags] = useState("");
+  const [description, setDescription] = useState("");
+  const [selectType, setSelectType] = useState("");
   const getData = async () => {
     const param = currData.uuid;
     const url = "http://localhost:4011/userRequest/" + param;
     const response = await fetch(url);
     const getRes = await response.json();
+    if(!visible){
     setTitle(getRes?.data?.title || "");
-    setTags(getRes?.data?.tags || '');
+    setTags(getRes?.data?.tags || "");
     setDescription(getRes?.data?.description || "");
-    setSelectType(getRes?.data?.type || '');
+    setSelectType(getRes?.data?.type || "");
+    }
+    else{
+      setTitle("");
+    setTags("");
+    setDescription("");
+    setSelectType("");
+    }
+    console.log("visible", visible)
   };
   useEffect(() => {
     getData();
   }, [visible]);
 
-  const [title, setTitle] = useState("");
-  const [tags, setTags] = useState("");
-  const [description, setDescription] = useState("");
-  const [selectType, setSelectType] = useState("");
+ 
   // const [tags, setTags] = useState([
   //   {
   //     res: "",
@@ -82,7 +94,7 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add</ModalHeader>
+        <ModalHeader>Fill the Details</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <FormControl>
@@ -135,28 +147,31 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button
-            mr={3}
-            colorScheme="blue"
-            // disabled={!title}
-            onClick={(event) => {
-              onSubmit(title, description, selectType, tags);
-              onClose();
-              event.preventDefault();
-            }}
-          >
-            Add
-          </Button>
-          <Button
-            colorScheme="orange"
-            onClick={(event) => {
-              onSubmitEdit(title, description, selectType, tags);
-              onClose();
-              event.preventDefault();
-            }}
-          >
-            Edit
-          </Button>
+          {visible ? (
+            <Button
+              mr={3}
+              colorScheme="blue"
+              // disabled={!title}
+              onClick={(event) => {
+                onSubmit(title, description, selectType, tags);
+                onClose();
+                event.preventDefault();
+              }}
+            >
+              Submit
+            </Button>
+          ) : (
+            <Button
+              colorScheme="orange"
+              onClick={(event) => {
+                onSubmitEdit(title, description, selectType, tags);
+                onClose();
+                event.preventDefault();
+              }}
+            >
+              Edit
+            </Button>
+          )} 
         </ModalFooter>
       </ModalContent>
     </Modal>
