@@ -18,7 +18,7 @@ interface AddFamilyModalProps {
   isOpen: boolean;
   onClose: () => void;
   visible: boolean;
-  editVisible:boolean;
+  open: boolean;
   onSubmit: (
     title: string,
     description: string,
@@ -41,7 +41,7 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
   onSubmitEdit,
   currData,
   visible,
-  editVisible
+  open,
 }) => {
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState("");
@@ -52,25 +52,18 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
     const url = "http://localhost:4011/userRequest/" + param;
     const response = await fetch(url);
     const getRes = await response.json();
-    if(!visible){
-    setTitle(getRes?.data?.title || "");
-    setTags(getRes?.data?.tags || "");
-    setDescription(getRes?.data?.description || "");
-    setSelectType(getRes?.data?.type || "");
+    if (!open) {
+      setTitle(getRes?.data?.title || "");
+      setTags(getRes?.data?.tags || "");
+      setDescription(getRes?.data?.description || "");
+      setSelectType(getRes?.data?.type || "");
     }
-    else{
-      setTitle("");
-    setTags("");
-    setDescription("");
-    setSelectType("");
-    }
-    console.log("visible", visible)
+    console.log("open", open);
   };
   useEffect(() => {
     getData();
   }, [visible]);
-
- 
+console.log("visible", visible)
   // const [tags, setTags] = useState([
   //   {
   //     res: "",
@@ -147,7 +140,7 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          {visible ? (
+          {open ? (
             <Button
               mr={3}
               colorScheme="blue"
@@ -171,7 +164,7 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
             >
               Edit
             </Button>
-          )} 
+          )}
         </ModalFooter>
       </ModalContent>
     </Modal>

@@ -21,11 +21,10 @@ export default function App() {
   const dispatch = useDispatch();
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [editVisible, setEditVisible] = useState(false);
+  const [open, setOpen] = useState(false);
   
   
   const [param, setParam] = useState("9593f6dc-7731-493b-b761-bb3eeebc1867");
-  const [add, setAdd] = useState("add")
 
   const getData = async () => {
     const url = "http://localhost:4011/userRequest/" + param;
@@ -51,11 +50,11 @@ export default function App() {
   });
   useEffect(() => {
     getData();
-  }, [modalVisible]);
+  }, []);
 
   const [node, setNode] = useState<TreeNodeDatum | undefined>();
   const close = () => {
-    // setModalVisible(false)
+    setOpen(false)
     
     setNode(undefined)};
 
@@ -84,19 +83,16 @@ export default function App() {
 
   const handleNodeClick = (datum: TreeNodeDatum) => {
     setNode(datum);
-    setAdd(add)
-    console.log("addddd",add)
-    setModalVisible(!modalVisible);
-    setCurrentNodeData(datum);
+    // setModalVisible(!modalVisible);
+    setOpen(true)
+    // setCurrentNodeData(datum);
     // setParam(datum.uuid)
     // console.log("datum.uuid from response", datum.uuid);
   };
   const handleNodeClickEdit = (datum: TreeNodeDatum) => {
     setNode(datum);
-    // setAdd(!add)
-    console.log("addddd",add)
-    setModalVisible(!modalVisible);
-    setEditVisible(!editVisible)
+    // setModalVisible(false);
+    setOpen(false)
     setCurrentNodeData(datum);
     // setParam(datum.uuid)
     // console.log("datum.uuid from response", datum.uuid);
@@ -124,11 +120,12 @@ export default function App() {
       type: selectType,
       children: [],
     };
-     dispatch(postResponse(newData));
+    //  dispatch(postResponse(newData));
     if (newTree) {
       setTree([{ ...tree }, newTree]);
     }
     setNode(undefined);
+    setModalVisible(false)
   };
   const handleEdit = async (
     title: string,
@@ -145,7 +142,7 @@ export default function App() {
       type: selectType,
       tags: tags,
     };
-    dispatch(putResponse(updatedData,currentId));
+    // dispatch(putResponse(updatedData,currentId));
     setModalVisible(!modalVisible);
   };
 
@@ -188,7 +185,7 @@ export default function App() {
               onClick={() => {click(nodeDatum)}}
               />
             <EditIcon className="mr-[10px]"
-             onClick={() => {editClick(nodeDatum),editVisible}} />
+             onClick={() => {editClick(nodeDatum)}} />
           </div>
         </foreignObject>
       </g>
@@ -217,7 +214,7 @@ export default function App() {
           <NodeModal 
             currData={currentNodeData}
             visible={modalVisible}
-            editVisible = {editVisible}
+            open={open}
             onSubmit={(title, description, selectType, tags) =>
               handleSubmit(title, description, selectType, tags)
             }
