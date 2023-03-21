@@ -3,9 +3,11 @@ import React, { useEffect, useRef, useState } from "react";
 // import Popup from "reactjs-popup";
 // import { PostAddSharp } from "@mui/icons-material";
 import axios from "axios";
+import Loading from "../Loading/Loading";
 
 export default function ResponsePreview() {
   const [addData, setAddData] = useState(false);
+  const [isLoad, setIsLoad] = useState(false);
   const [responses, setResponses] = useState<any[]>([]);
   const [flag, setFlag] = useState("9593f6dc-7731-493b-b761-bb3eeebc1867");
   // const prevData: any = useRef();
@@ -49,7 +51,11 @@ export default function ResponsePreview() {
     //setGame(true);
     //console.log("game=>", game);
     // console.log("idd", id);
-    setFlag(id);
+    setTimeout(() => {
+      console.log("Delayed for 1 second.");
+      setFlag(id);
+      setIsLoad(isLoad);
+    }, 2000);
     // console.log("flag=>", flag);
   };
   //console.log("prevData=>", prevstate);
@@ -82,49 +88,67 @@ export default function ResponsePreview() {
           {/* border nav */}
 
           <div className="absolute overflow-y-scroll bg-white dark:bg-slate-600  w-[100%] h-[350px]">
-            {prevstate &&
-              prevstate.map((response: any, i: number) => (
-                <>
-                  <div className="mt-[7%] ml-[5%]">
-                    {/* <p className="text-xl text-base">
+            <div>
+              {prevstate &&
+                prevstate.map((response: any, i: number) => (
+                  <>
+          
+                    <div >
+
+                      {/* description chat right side*/}
+
+                      <div className="mt-[7%] ml-[5%]">
+                        {/* <p className="text-xl text-base">
                         <strong>{response.title}</strong>
-                      </p> */}
-                    <p className="text-xl text-base dark:text-white">
-                      <strong>{response ? response.description : "no child"}</strong>
-                    </p>
-                  </div>
-                  {/* <div className=" bg-white-500 max-w-[50%] rounded-[15px] p-2  my-2 mx-2 border-slate-500 border-[1.5px]">
+                       </p> */}
+                        <p className="text-xl text-base dark:text-white">
+                          <strong>
+                            {response ? response.description : "no child"}
+                          </strong>
+                        </p>
+                      </div>
+                      {/* <div className=" bg-white-500 max-w-[50%] rounded-[15px] p-2  my-2 mx-2 border-slate-500 border-[1.5px]">
                     <span className="text-base  font-normal">
                       {response.title}
                     </span>
                   </div> */}
 
-                  {response?.children.map((child: any) => (
-                    <div
-                      onClick={() => IdGenerator(child.uuid, child.title)}
-                      className="flow-root bg-indigo-700 max-w-[50%] hover:bg-gray-200  rounded-[8px] p-2  my-3 mx-3 border-slate-500 border-[1.9px] cursor-pointer"
-                    >
-                      <span
-                        // onClick={IdGenerator(child._id)}
-                        className="text-white pointer-events-auto  cursor-pointer font-normal"
-                      >
-                        {child ? child.title : null}
-                      </span>
+
+                          {/* Childrens left side */}
+                      {response?.children.map((child: any) => (
+                        <>
+                          <div
+                            onClick={() => {
+                              IdGenerator(child.uuid, child.title),
+                                setIsLoad(!isLoad);
+                            }}
+                            className="flow-root bg-indigo-700 max-w-[50%] hover:bg-gray-200  rounded-[8px] p-2  my-3 mx-3 border-slate-500 border-[1.9px] cursor-pointer"
+                          >
+                            <span
+                              // onClick={IdGenerator(child._id)}
+                              className="text-white pointer-events-auto  cursor-pointer font-normal"
+                            >
+                              {child ? child.title : null}
+                            </span>
+                          </div>
+                        </>
+                      ))}
                     </div>
-                  ))}
-                  <div className="mt-[20px]"></div>
-                  {answer[i] ? (
-                    <div className="flow-root float-right ml-[5%] bg-white-700 max-w-[50%] rounded-[8px] p-2  border-slate-500  border-[1.9px]">
-                      <div
-                        // onClick={IdGenerator(child._id)}
-                        className="text-indigo-700 pointer-events-auto  cursor-pointer font-extrabold"
-                      >
-                        {answer[i]}
+                    <div className="mt-[20px]"></div>
+                    {answer[i] ? (
+                      <div className="flow-root float-right ml-[5%] bg-white-700 max-w-[50%] rounded-[8px] p-2  border-slate-500  border-[1.9px]">
+                        <div
+                          // onClick={IdGenerator(child._id)}
+                          className="text-indigo-700 pointer-events-auto  cursor-pointer font-extrabold"
+                        >
+                          {answer[i]}
+                        </div>
                       </div>
-                    </div>
-                  ) : null}
-                  <div className="mb-[100px]"></div>
-                  {/* <div className="float-right ml-[5%] bg-red-500">
+                    ) : null}
+                    <div className="mb-[100px]"></div>
+
+                   {isLoad ? <Loading/> : null } 
+                    {/* <div className="float-right ml-[5%] bg-red-500">
                     <span
                       // onClick={IdGenerator(child._id)}
                       className="text-base pointer-events-auto hover:bg-gray-200 cursor-pointer font-normal"
@@ -132,8 +156,9 @@ export default function ResponsePreview() {
                       {answer}
                     </span>
                   </div> */}
-                </>
-              ))}
+                  </>
+                ))}
+            </div>
           </div>
 
           {/* <div className=" text-left text-center bg-white-500 max-w-[50%] rounded-[15px] p-2  my-2 mx-2 border-slate-500 border-[1.5px]">
