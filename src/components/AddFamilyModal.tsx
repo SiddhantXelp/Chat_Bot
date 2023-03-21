@@ -46,9 +46,10 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState("");
   const [description, setDescription] = useState("");
-  const [selectType, setSelectType] = useState("");
+  const [selectType, setSelectType] = useState("Text");
   const getData = async () => {
     const param = currData.uuid;
+    if(param){
     const url = "http://localhost:4011/userRequest/" + param;
     const response = await fetch(url);
     const getRes = await response.json();
@@ -56,8 +57,9 @@ const AddFamilyModal: React.FC<AddFamilyModalProps> = ({
       setTitle(getRes?.data?.title || "");
       setTags(getRes?.data?.tags || "");
       setDescription(getRes?.data?.description || "");
-      setSelectType(getRes?.data?.type || "");
+      setSelectType(getRes?.data?.type || "Text");
     }
+  }
     console.log("open", open);
   };
   useEffect(() => {

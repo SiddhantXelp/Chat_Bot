@@ -32,7 +32,7 @@ export default function ResponsePreview() {
         // console.log("response is =>", response.data);
         // setResponses([response.data.data]);
 
-        setPrevstate([...prevstate, response.data.data]);
+        setPrevstate([...prevstate, response.data[0]]);
         // console.log("prevstate=>", prevstate);
       })
       .catch(function (error) {
@@ -90,7 +90,7 @@ export default function ResponsePreview() {
                         <strong>{response.title}</strong>
                       </p> */}
                     <p className="text-xl text-base dark:text-white">
-                      <strong>{response.description}</strong>
+                      <strong>{response ? response.description : "no child"}</strong>
                     </p>
                   </div>
                   {/* <div className=" bg-white-500 max-w-[50%] rounded-[15px] p-2  my-2 mx-2 border-slate-500 border-[1.5px]">
@@ -99,7 +99,7 @@ export default function ResponsePreview() {
                     </span>
                   </div> */}
 
-                  {response.children.map((child: any) => (
+                  {response?.children.map((child: any) => (
                     <div
                       onClick={() => IdGenerator(child.uuid, child.title)}
                       className="flow-root bg-indigo-700 max-w-[50%] hover:bg-gray-200  rounded-[8px] p-2  my-3 mx-3 border-slate-500 border-[1.9px] cursor-pointer"
@@ -108,7 +108,7 @@ export default function ResponsePreview() {
                         // onClick={IdGenerator(child._id)}
                         className="text-white pointer-events-auto  cursor-pointer font-normal"
                       >
-                        {child.title}
+                        {child ? child.title : null}
                       </span>
                     </div>
                   ))}
